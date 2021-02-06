@@ -1,0 +1,20 @@
+USE [simpleproject-poc]
+GO
+
+/****** Object:  Table [dbo].[Project_method]    Script Date: 06.02.2021 17:02:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Project_method](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Method_name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Project_method] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
