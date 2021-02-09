@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using simpleproject_poc.ViewModels;
 
 namespace simpleproject_poc
 {
@@ -23,6 +24,7 @@ namespace simpleproject_poc
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new ProjectOverviewViewModel();
         }
     }
 }

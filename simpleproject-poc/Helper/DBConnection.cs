@@ -9,14 +9,9 @@ namespace simpleproject_poc.Helper
 {
     class DBConnection
     {
-        public DBConnection()
-        {
-            SetupDBConnection();
-        }
-
         public DataContext SetupDBConnection()
         {
-            DataContext dbConnection = new DataContext("Server=DESKTOP-35P8P5I\\SQLEXPRESS;Database=Librarysystem;Connection timeout=30;Integrated Security=True");
+            DataContext dbConnection = new DataContext("Server=DESKTOP-PQKO1OR\\SQLEXPRESS;Database=simpleproject-poc;Connection timeout=30;Integrated Security=True");
             return dbConnection;
         }
     }

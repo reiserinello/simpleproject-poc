@@ -11,7 +11,14 @@
             <Grid x:Name="grdProjectMethod" HorizontalAlignment="Left" Height="146" Margin="10,10,-1.667,0" VerticalAlignment="Top" Width="753">
                 <Button x:Name="btnNew" Content="Neu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,0,0,0"/>
                 <Button x:Name="btnOpen" Content="Öffnen" HorizontalAlignment="Left" Margin="107,0,0,0" VerticalAlignment="Top" Width="75"/>
-                <DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733"/>
+                <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
+                <ListView x:Name="lvReservation" HorizontalAlignment="Left" Height="115" Margin="10,21,0,0" VerticalAlignment="Top" Width="357" SelectionMode="Single" ItemsSource="{Binding dtagrdProjectMethod}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Method name" DisplayMemberBinding="{Binding MethodName}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </GroupBox>
     </Grid>

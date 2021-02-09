@@ -11,21 +11,46 @@ namespace simpleproject_poc.Models
 {
     class ProjectMethod
     {
-        public int PK { get; }
-        public string ProjectMethodName { get; }
+        public int Id { get; }
+        public string MethodName { get; }
 
         public ProjectMethod(int t_PK, string t_ProjectMethodName)
         {
-            PK = t_PK;
-            ProjectMethodName = t_ProjectMethodName;
+            Id = t_PK;
+            MethodName = t_ProjectMethodName;
         }
 
-        public void Create()
+        public ProjectMethod()
         {
-            DBConnection dbConnObj = new DBConnection();
+            //nothing
             
         }
 
+        public List<ProjectMethod> Get()
+        {
+            DBConnection dbConnObj = new DBConnection();
+            var dbConn = dbConnObj.SetupDBConnection();
+
+            Table<dbProjectMethod.mappingProjectMethod> tblProjectMethod = dbConn.GetTable<dbProjectMethod.mappingProjectMethod>();
+
+            var returnList = new List<ProjectMethod>();
+
+            var returnValue =
+                               from i_u in tblProjectMethod
+                               //where i_u.Username == t_username
+                               select i_u;
+
+            foreach (var i in returnValue)
+            {
+                var pm = new ProjectMethod(i.Id, i.Method_name);
+                returnList.Add(pm);
+            }
+
+            //Close DB connection
+            dbConn.Dispose();
+
+            return returnList;
+        }
     }
 
     class dbProjectMethod
@@ -35,8 +60,8 @@ namespace simpleproject_poc.Models
         public class mappingProjectMethod
         {
             //Mapper auf Primary Key
-            [Column(Name = "PKey", IsDbGenerated = true, IsPrimaryKey = true)]
-            public int Pkey_1
+            [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
+            public int Id
             {
                 get;
                 set;
@@ -44,7 +69,7 @@ namespace simpleproject_poc.Models
 
             //Mapper auf Feld Name der Gruppe
             [Column]
-            public string Project_method_name;
+            public string Method_name;
         }
     }
 }
