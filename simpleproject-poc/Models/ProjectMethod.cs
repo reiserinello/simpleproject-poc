@@ -28,6 +28,7 @@ namespace simpleproject_poc.Models
 
         public List<ProjectMethod> Get()
         {
+            /*
             DBConnection dbConnObj = new DBConnection();
             var dbConn = dbConnObj.SetupDBConnection();
 
@@ -50,7 +51,13 @@ namespace simpleproject_poc.Models
             dbConn.Dispose();
 
             return returnList;
+            */
+
+            DBGet dbGet = new DBGet();
+            var dbGetProjectMethod = dbGet.ProjectMethodGet();
+            return dbGetProjectMethod;
         }
+
     }
 
     class dbProjectMethod
