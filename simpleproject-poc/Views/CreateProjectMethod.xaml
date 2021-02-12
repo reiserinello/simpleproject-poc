@@ -8,8 +8,8 @@
         Title="CreateProjectMethod" Height="450" Width="800">
     <Grid>
         <Label Content="Vorgehensmodell Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="155,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" TextChanged="TextBox_TextChanged"/>
-        <Button Content="Erstellen" HorizontalAlignment="Left" Margin="313,42,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="txtModelName" HorizontalAlignment="Left" Height="23" Margin="155,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233"/>
+        <Button Content="Erstellen" HorizontalAlignment="Left" Margin="313,42,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateNewProjectMethod}" CommandParameter="{Binding Text, ElementName=txtModelName}"/>
 
     </Grid>
 </Window>

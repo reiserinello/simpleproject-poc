@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using simpleproject_poc.Helper;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 
 namespace simpleproject_poc.Models
 {
@@ -26,7 +29,7 @@ namespace simpleproject_poc.Models
             
         }
 
-        public List<ProjectMethod> Get()
+        public ObservableCollection<ProjectMethod> Get()
         {
             /*
             DBConnection dbConnObj = new DBConnection();
@@ -60,11 +63,11 @@ namespace simpleproject_poc.Models
 
     }
 
-    class dbProjectMethod
+    class DbProjectMethod
     {
         //SQL mapping
         [Table(Name = "Project_method")]
-        public class mappingProjectMethod
+        public class MappingProjectMethod
         {
             //Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]

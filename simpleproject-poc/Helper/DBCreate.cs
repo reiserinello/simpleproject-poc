@@ -17,9 +17,18 @@ namespace simpleproject_poc.Helper
             dbConn = dbConnObj.SetupDBConnection();
         }
 
-        public List<ProjectMethod> ProjectMethodCreate()
+        public void ProjectMethodCreate(string t_method_name)
         {
-            return null;
+            //return null;
+
+            DbProjectMethod.MappingProjectMethod newProjectMethod = new DbProjectMethod.MappingProjectMethod
+            {
+                Method_name = t_method_name
+            };
+
+            Table<DbProjectMethod.MappingProjectMethod> projectMethodTable = dbConn.GetTable<DbProjectMethod.MappingProjectMethod>();
+            projectMethodTable.InsertOnSubmit(newProjectMethod);
+            dbConn.SubmitChanges();
         }
     }
 }

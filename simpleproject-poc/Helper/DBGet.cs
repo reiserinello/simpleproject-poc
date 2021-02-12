@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Linq;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,19 @@ namespace simpleproject_poc.Helper
             dbConn = dbConnObj.SetupDBConnection();
         }
 
-        public List<ProjectMethod> ProjectMethodGet()
+        /*
+        Test Genereic returnlist
+        public List<T> CreateList<T>(params T[] elements)
         {
-            Table<dbProjectMethod.mappingProjectMethod> tblProjectMethod = dbConn.GetTable<dbProjectMethod.mappingProjectMethod>();
+            
+        }
+        */
 
-            var returnList = new List<ProjectMethod>();
+        public ObservableCollection<ProjectMethod> ProjectMethodGet()
+        {
+            Table<DbProjectMethod.MappingProjectMethod> tblProjectMethod = dbConn.GetTable<DbProjectMethod.MappingProjectMethod>();
+
+            var returnList = new ObservableCollection<ProjectMethod>();
 
             var returnValue =
                                from i_u in tblProjectMethod
