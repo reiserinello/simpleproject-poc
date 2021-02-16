@@ -12,27 +12,63 @@ using System.Collections.ObjectModel;
 
 namespace simpleproject_poc.Models
 {
-    class ProjectMethod
+    class ProjectMethod : INotifyPropertyChanged
     {
+        private int id;
+        private string methodName;
+        public int Id 
+        { 
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+        public string MethodName 
+        {
+            get
+            {
+                return methodName;
+            }
+            set
+            {
+                methodName = value;
+                OnPropertyChanged("MethodName");
+            }
+        }
+        /*
         public int Id { get; }
         public string MethodName { get; }
-
         public ProjectMethod(int t_PK, string t_ProjectMethodName)
         {
             Id = t_PK;
             MethodName = t_ProjectMethodName;
         }
-
+        */
+        /*
         public ProjectMethod()
         {
             //nothing
-        }
+        }*/
 
         public ObservableCollection<ProjectMethod> Get()
         {
             DBGet dbGet = new DBGet();
             var dbGetProjectMethod = dbGet.ProjectMethodGet();
             return dbGetProjectMethod;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 

@@ -15,7 +15,7 @@
                 <ListView x:Name="lvProjectMethod" HorizontalAlignment="Left" Height="115" Margin="10,26,0,0" VerticalAlignment="Top" Width="354" SelectionMode="Single" ItemsSource="{Binding dtagrdProjectMethod}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Vorgehensmodell" DisplayMemberBinding="{Binding MethodName}" Width="200"/>
+                            <GridViewColumn Header="Vorgehensmodell" DisplayMemberBinding="{Binding MethodName,Mode=TwoWay}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

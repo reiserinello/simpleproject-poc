@@ -39,7 +39,8 @@ namespace simpleproject_poc.Helper
 
             foreach (var i in returnValue)
             {
-                var pm = new ProjectMethod(i.Id, i.Method_name);
+                //var pm = new ProjectMethod(i.Id, i.Method_name);
+                var pm = new ProjectMethod { Id = i.Id, MethodName = i.Method_name };
                 returnList.Add(pm);
             }
 
