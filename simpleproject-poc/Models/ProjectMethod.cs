@@ -9,67 +9,42 @@ using simpleproject_poc.Helper;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using simpleproject_poc.ViewModels;
 
 namespace simpleproject_poc.Models
 {
-    class ProjectMethod : INotifyPropertyChanged
-    {
-        private int id;
-        private string methodName;
-        public int Id 
-        { 
-            get
-            {
-                return id;
-            }
-            set
-            {
-                id = value;
-                OnPropertyChanged("Id");
-            }
-        }
-        public string MethodName 
-        {
-            get
-            {
-                return methodName;
-            }
-            set
-            {
-                methodName = value;
-                OnPropertyChanged("MethodName");
-            }
-        }
-        /*
+    class ProjectMethod
+    {        
         public int Id { get; }
         public string MethodName { get; }
-        public ProjectMethod(int t_PK, string t_ProjectMethodName)
-        {
-            Id = t_PK;
-            MethodName = t_ProjectMethodName;
-        }
-        */
-        /*
-        public ProjectMethod()
-        {
-            //nothing
-        }*/
 
+        public ProjectMethod(string t_method_name, ProjectOverviewViewModel t_contextProjectOverviewModel) {
+            DBCreate dbCreate = new DBCreate();
+            dbCreate.ProjectMethodCreate(t_method_name, t_contextProjectOverviewModel);
+        }
+
+        public ProjectMethod(int t_Id, string t_MethodName)
+        {
+            Id = t_Id;
+            MethodName = t_MethodName;
+        }
+
+        /*
         public ObservableCollection<ProjectMethod> Get()
         {
             DBGet dbGet = new DBGet();
             var dbGetProjectMethod = dbGet.ProjectMethodGet();
             return dbGetProjectMethod;
         }
+        */
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
+        /*
+        public void Create(string t_method_name, ProjectOverviewViewModel t_contextProjectOverviewModel)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            DBCreate dbCreate = new DBCreate();
+            dbCreate.ProjectMethodCreate(t_method_name, t_contextProjectOverviewModel);
         }
+        */
     }
 
     class DbProjectMethod

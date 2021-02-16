@@ -13,8 +13,12 @@ using System.ComponentModel;
 
 namespace simpleproject_poc.ViewModels
 {
-    class CreateProjectMethodViewModel : INotifyPropertyChanged
+    class CreateProjectMethodViewModel : MainViewModel
     {
+        /* Kontext des ProjectOverviewViewModel
+         * Wird verwendet, um Daten auf vorheriger View zu aktualisieren
+         */
+
         ProjectOverviewViewModel _contextProjectOverViewModel;
 
         public ProjectOverviewViewModel contextProjectOverviewModel
@@ -33,30 +37,24 @@ namespace simpleproject_poc.ViewModels
         // Button neues Vorgehensmodell erstellen
         public ICommand btnCreateNewProjectMethod
         {
-            get { return new DelegateCommand<object>(CreateProjectMethod, FuncToEvaluate); }
+            get { return new DelegateCommand<object>(CreateProjectMethod); }
         }
 
         public void CreateProjectMethod(object context)
         {
-            //this is called when the button is clicked
-            DBCreate createProjectMethodObj = new DBCreate();
-            createProjectMethodObj.ProjectMethodCreate(context.ToString(), contextProjectOverviewModel);
+            // Neues Vorgehensmodell erstellen
+            ProjectMethod projectMethod = new ProjectMethod(context.ToString(), contextProjectOverviewModel);
         }
 
+        /*
+         * Beispiel einer Evaluation Funktion, kann, muss aber nicht verwendet werden
+         *
         private bool FuncToEvaluate(object context)
         {
-            //this is called to evaluate whether FuncToCall can be called
+            //this is called to evaluate whether CreateProjectMethod can be called
             //for example you can return true or false based on some validation logic
-            return true;
+            return false;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        */
     }
 }

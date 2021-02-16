@@ -10,12 +10,12 @@
         <GroupBox x:Name="grpbxProjectMethod" Header="Vorgehensmodell" HorizontalAlignment="Left" Height="188" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
             <Grid x:Name="grdProjectMethod" HorizontalAlignment="Left" Height="146" Margin="10,10,-1.667,0" VerticalAlignment="Top" Width="753">
                 <Button x:Name="btnNew" Content="Neu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,0,0,0" Command="{Binding btnNewProjectMethod}"/>
-                <Button x:Name="btnOpen" Content="Öffnen" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="btnOpen" Content="Öffnen" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenProjectMethod}" CommandParameter="{Binding SelectedItem,ElementName=lvProjectMethod}"/>
                 <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
                 <ListView x:Name="lvProjectMethod" HorizontalAlignment="Left" Height="115" Margin="10,26,0,0" VerticalAlignment="Top" Width="354" SelectionMode="Single" ItemsSource="{Binding dtagrdProjectMethod}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Vorgehensmodell" DisplayMemberBinding="{Binding MethodName,Mode=TwoWay}" Width="200"/>
+                            <GridViewColumn Header="Vorgehensmodell" DisplayMemberBinding="{Binding MethodName}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

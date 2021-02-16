@@ -72,6 +72,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ProjectMethodOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProjectOverview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,12 +87,17 @@
     <Compile Include="Helper\DBConnection.cs" />
     <Compile Include="Helper\DBCreate.cs" />
     <Compile Include="Helper\DBGet.cs" />
+    <Compile Include="Models\Phase.cs" />
     <Compile Include="Models\ProjectMethod.cs" />
     <Compile Include="ViewModels\CreateProjectMethodViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ProjectMethodOverviewViewModel.cs" />
     <Compile Include="ViewModels\ProjectOverviewViewModel.cs" />
     <Compile Include="Views\CreateProjectMethod.xaml.cs">
       <DependentUpon>CreateProjectMethod.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectMethodOverview.xaml.cs">
+      <DependentUpon>ProjectMethodOverview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectOverview.xaml.cs">
       <DependentUpon>ProjectOverview.xaml</DependentUpon>

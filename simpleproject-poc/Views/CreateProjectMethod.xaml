@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleproject_poc.Views"
         mc:Ignorable="d"
-        Title="CreateProjectMethod" Height="450" Width="800">
+        Title="CreateProjectMethod" Height="123.667" Width="420.312">
     <Grid>
         <Label Content="Vorgehensmodell Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtModelName" HorizontalAlignment="Left" Height="23" Margin="155,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233"/>

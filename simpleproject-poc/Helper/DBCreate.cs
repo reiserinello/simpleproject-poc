@@ -31,11 +31,10 @@ namespace simpleproject_poc.Helper
             projectMethodTable.InsertOnSubmit(newProjectMethod);
             dbConn.SubmitChanges();
 
-            // Get new project method list and set it on context ProjectOverviewViewModel
-            DBGet dbGetProjectMethod = new DBGet();
-            var dbGetPM = dbGetProjectMethod.ProjectMethodGet();
-
-            t_contextProjectOverviewModel.dtagrdProjectMethod = dbGetPM;
+            // Neue Projektmethode Liste holen und auf die Property in ProjectOverviewViewModel setzen
+            DBGet dbGetObj = new DBGet();
+            var dbProjectMethodGet = dbGetObj.ProjectMethodGet();
+            t_contextProjectOverviewModel.dtagrdProjectMethod = dbProjectMethodGet;
         }
     }
 }
