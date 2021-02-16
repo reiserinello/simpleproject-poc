@@ -14,14 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using simpleproject_poc.ViewModels;
 
-namespace simpleproject_poc
+namespace simpleproject_poc.Views
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProjectOverview : Window
     {
-        public MainWindow()
+        public ProjectOverview()
         {
             InitializeComponent();
             DataContext = new ProjectOverviewViewModel();

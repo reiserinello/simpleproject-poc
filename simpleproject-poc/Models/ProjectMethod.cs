@@ -26,41 +26,14 @@ namespace simpleproject_poc.Models
         public ProjectMethod()
         {
             //nothing
-            
         }
 
         public ObservableCollection<ProjectMethod> Get()
         {
-            /*
-            DBConnection dbConnObj = new DBConnection();
-            var dbConn = dbConnObj.SetupDBConnection();
-
-            Table<dbProjectMethod.mappingProjectMethod> tblProjectMethod = dbConn.GetTable<dbProjectMethod.mappingProjectMethod>();
-
-            var returnList = new List<ProjectMethod>();
-
-            var returnValue =
-                               from i_u in tblProjectMethod
-                               //where i_u.Username == t_username
-                               select i_u;
-
-            foreach (var i in returnValue)
-            {
-                var pm = new ProjectMethod(i.Id, i.Method_name);
-                returnList.Add(pm);
-            }
-
-            //Close DB connection
-            dbConn.Dispose();
-
-            return returnList;
-            */
-
             DBGet dbGet = new DBGet();
             var dbGetProjectMethod = dbGet.ProjectMethodGet();
             return dbGetProjectMethod;
         }
-
     }
 
     class DbProjectMethod
