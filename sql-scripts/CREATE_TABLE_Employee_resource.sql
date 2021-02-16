@@ -1,7 +1,7 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[Employee_resource]    Script Date: 16.02.2021 14:45:34 ******/
+/****** Object:  Table [dbo].[Employee_resource]    Script Date: 16.02.2021 21:20:48 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -22,17 +22,17 @@ CREATE TABLE [dbo].[Employee_resource](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Employee_resource]  WITH CHECK ADD  CONSTRAINT [FK_Personal_resource_Activity] FOREIGN KEY([Activity_id])
+ALTER TABLE [dbo].[Employee_resource]  WITH CHECK ADD  CONSTRAINT [FK_Employee_resource_Activity] FOREIGN KEY([Activity_id])
 REFERENCES [dbo].[Activity] ([Id])
 GO
 
-ALTER TABLE [dbo].[Employee_resource] CHECK CONSTRAINT [FK_Personal_resource_Activity]
+ALTER TABLE [dbo].[Employee_resource] CHECK CONSTRAINT [FK_Employee_resource_Activity]
 GO
 
-ALTER TABLE [dbo].[Employee_resource]  WITH CHECK ADD  CONSTRAINT [FK_Personal_resource_Function] FOREIGN KEY([Function_id])
+ALTER TABLE [dbo].[Employee_resource]  WITH CHECK ADD  CONSTRAINT [FK_Employee_resource_Function] FOREIGN KEY([Function_id])
 REFERENCES [dbo].[Function] ([Id])
 GO
 
-ALTER TABLE [dbo].[Employee_resource] CHECK CONSTRAINT [FK_Personal_resource_Function]
+ALTER TABLE [dbo].[Employee_resource] CHECK CONSTRAINT [FK_Employee_resource_Function]
 GO
 
