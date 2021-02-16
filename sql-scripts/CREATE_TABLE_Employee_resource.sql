@@ -1,14 +1,14 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[Personal_resource]    Script Date: 06.02.2021 17:03:18 ******/
+/****** Object:  Table [dbo].[Employee_resource]    Script Date: 16.02.2021 14:45:34 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Personal_resource](
+CREATE TABLE [dbo].[Employee_resource](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Budget_time] [int] NOT NULL,
 	[Effective_time] [int] NULL,
@@ -22,17 +22,17 @@ CREATE TABLE [dbo].[Personal_resource](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Personal_resource]  WITH CHECK ADD  CONSTRAINT [FK_Personal_resource_Activity] FOREIGN KEY([Activity_id])
+ALTER TABLE [dbo].[Employee_resource]  WITH CHECK ADD  CONSTRAINT [FK_Personal_resource_Activity] FOREIGN KEY([Activity_id])
 REFERENCES [dbo].[Activity] ([Id])
 GO
 
-ALTER TABLE [dbo].[Personal_resource] CHECK CONSTRAINT [FK_Personal_resource_Activity]
+ALTER TABLE [dbo].[Employee_resource] CHECK CONSTRAINT [FK_Personal_resource_Activity]
 GO
 
-ALTER TABLE [dbo].[Personal_resource]  WITH CHECK ADD  CONSTRAINT [FK_Personal_resource_Function] FOREIGN KEY([Function_id])
+ALTER TABLE [dbo].[Employee_resource]  WITH CHECK ADD  CONSTRAINT [FK_Personal_resource_Function] FOREIGN KEY([Function_id])
 REFERENCES [dbo].[Function] ([Id])
 GO
 
-ALTER TABLE [dbo].[Personal_resource] CHECK CONSTRAINT [FK_Personal_resource_Function]
+ALTER TABLE [dbo].[Employee_resource] CHECK CONSTRAINT [FK_Personal_resource_Function]
 GO
 
