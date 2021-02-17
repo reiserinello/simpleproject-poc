@@ -1,0 +1,31 @@
+﻿<Window x:Class="simpleproject_poc.Views.ProjectView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:simpleproject_poc.Views"
+        mc:Ignorable="d"
+        Title="ProjectView" Height="450" Width="800">
+    <Grid>
+        <GroupBox x:Name="grpbxProjectInformation" Header="Projektinformationen" HorizontalAlignment="Left" Height="188" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
+            <Grid x:Name="grdProjectInformation" HorizontalAlignment="Left" Height="146" Margin="10,10,-1.667,0" VerticalAlignment="Top" Width="753">
+                <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="grpbxPhaseView" Header="Phasen" HorizontalAlignment="Left" Height="198" Margin="10,213,0,0" VerticalAlignment="Top" Width="773">
+            <Grid x:Name="grdPhaseView" HorizontalAlignment="Left" Height="172" Margin="10,0,-2,0" VerticalAlignment="Top" Width="753">
+                <ListView HorizontalAlignment="Left" Height="117" Margin="10,35,0,0" VerticalAlignment="Top" Width="733">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Öffnen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button Content="Definieren" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="75"/>
+                <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

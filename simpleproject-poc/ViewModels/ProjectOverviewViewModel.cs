@@ -61,13 +61,24 @@ namespace simpleproject_poc.ViewModels
             get { return new DelegateCommand<object>(OpenProjectMethod); }
         }
 
-        private void OpenProjectMethod(object context)
+        public void OpenProjectMethod(object context)
         {
-            //this is called when the button is clicked
-            //var test = context;
+            // object context zu ProjectMethod casten
+            ProjectMethod selectedProjectMethod = (ProjectMethod)context;
+
+            // Windows ProjectMethodOverview instanzieren
             ProjectMethodOverview projectMethodOverview = new ProjectMethodOverview();
+
+            // DataContext auslesen und dort die selectedProjectMethod setzen
             var contextProjectMethodOverviewView = (ProjectMethodOverviewViewModel)projectMethodOverview.DataContext;
-            contextProjectMethodOverviewView.selectedProjectMethod = (ProjectMethod)context;
+            contextProjectMethodOverviewView.selectedProjectMethod = selectedProjectMethod;
+
+            // Phasen auslesen und auf die ListView setzen, da selectedProjectMethod beim instanzieren noch leer war (get)
+            var getPhase = contextProjectMethodOverviewView.GetPhase();
+            contextProjectMethodOverviewView.lvPhase = getPhase;
+
+            // Property lblProjectMethodName setzen, da selectedProjectMethod beim instanziern noch leer war (get)
+            contextProjectMethodOverviewView.lblProjectMethodName = selectedProjectMethod.MethodName;
             projectMethodOverview.Show();
         }
 

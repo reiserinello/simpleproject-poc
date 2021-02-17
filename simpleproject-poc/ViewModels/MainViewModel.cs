@@ -21,4 +21,9 @@ namespace simpleproject_poc.ViewModels
             }
         }
     }
+
+    interface ICloseWindows
+    {
+        Action Close { get; set; }
+    }
 }

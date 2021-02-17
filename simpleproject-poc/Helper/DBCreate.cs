@@ -36,5 +36,22 @@ namespace simpleproject_poc.Helper
             var dbProjectMethodGet = dbGetObj.ProjectMethodGet();
             t_contextProjectOverviewModel.dtagrdProjectMethod = dbProjectMethodGet;
         }
+
+        public void PhaseCreate(string t_Phase_name, int t_Project_method_id,ProjectMethodOverviewViewModel t_contextProjectMethodOverviewViewModel)
+        {
+            DbPhase.MappingPhase newPhase = new DbPhase.MappingPhase
+            {
+                Phase_name = t_Phase_name,
+                Project_method_id = t_Project_method_id
+            };
+
+            Table<DbPhase.MappingPhase> phaseTable = dbConn.GetTable<DbPhase.MappingPhase>();
+            phaseTable.InsertOnSubmit(newPhase);
+            dbConn.SubmitChanges();
+
+            DBGet dbGetObj = new DBGet();
+            var dbPhaseGet = dbGetObj.PhaseGet(t_Project_method_id);
+            t_contextProjectMethodOverviewViewModel.lvPhase = dbPhaseGet;
+        }
     }
 }

@@ -13,13 +13,14 @@ using System.ComponentModel;
 
 namespace simpleproject_poc.ViewModels
 {
-    class CreateProjectMethodViewModel : MainViewModel
+    class CreateProjectMethodViewModel : MainViewModel, ICloseWindows
     {
         /* Kontext des ProjectOverviewViewModel
          * Wird verwendet, um Daten auf vorheriger View zu aktualisieren
          */
 
         ProjectOverviewViewModel _contextProjectOverViewModel;
+        public Action Close { get; set; }
 
         public ProjectOverviewViewModel contextProjectOverviewModel
         {
@@ -44,6 +45,12 @@ namespace simpleproject_poc.ViewModels
         {
             // Neues Vorgehensmodell erstellen
             ProjectMethod projectMethod = new ProjectMethod(context.ToString(), contextProjectOverviewModel);
+
+            // Neuste ProjectMethod in List abgreifen und Phasenbearbeitung öffnen
+            var createdProjectMethod = contextProjectOverviewModel.dtagrdProjectMethod.Last();
+            contextProjectOverviewModel.OpenProjectMethod(createdProjectMethod);
+
+            Close?.Invoke();
         }
 
         /*
@@ -56,5 +63,7 @@ namespace simpleproject_poc.ViewModels
             return false;
         }
         */
+
+        
     }
 }

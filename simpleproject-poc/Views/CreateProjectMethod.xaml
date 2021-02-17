@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleproject_poc.Views"
         mc:Ignorable="d"
-        Title="CreateProjectMethod" Height="123.667" Width="420.312">
+        Title="CreateProjectMethod" Height="110.633" Width="495.312">
     <Grid>
         <Label Content="Vorgehensmodell Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtModelName" HorizontalAlignment="Left" Height="23" Margin="155,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233"/>
-        <Button Content="Erstellen" HorizontalAlignment="Left" Margin="313,42,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateNewProjectMethod}" CommandParameter="{Binding Text, ElementName=txtModelName}"/>
+        <TextBox x:Name="txtMethodName" HorizontalAlignment="Left" Height="23" Margin="155,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320"/>
+        <Button Content="Erstellen" HorizontalAlignment="Left" Margin="400,42,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateNewProjectMethod}" CommandParameter="{Binding Text, ElementName=txtMethodName}"/>
 
     </Grid>
 </Window>

@@ -8,17 +8,26 @@
         Title="ProjectMethodOverview" Height="227.895" Width="492.28">
     <Grid>
         <Label Content="Vorgehensmodell Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="141"/>
-        <Label x:Name="lblProjectMethodName" Content="Label" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" Width="346"/>
-        <ListView x:Name="lvProjectMethodOverview" HorizontalAlignment="Left" Height="100" Margin="10,41,0,0" VerticalAlignment="Top" Width="465" ItemsSource="{Binding lvPhase}">
+        <Label x:Name="lblProjectMethodName" Content="{Binding lblProjectMethodName}" HorizontalAlignment="Left" Margin="147,10,0,0" VerticalAlignment="Top" Width="327" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.14"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.421"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <ListView x:Name="lvPhaseOverview" HorizontalAlignment="Left" Height="100" Margin="10,41,0,0" VerticalAlignment="Top" Width="465" ItemsSource="{Binding lvPhase}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Phasen Name" DisplayMemberBinding="{Binding PhaseName}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="100,150,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="295"/>
+        <TextBox x:Name="txtNewPhase" HorizontalAlignment="Left" Height="23" Margin="100,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="295"/>
         <Label Content="Phasen Name:" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
-        <Button Content="Hinzufügen" HorizontalAlignment="Left" Margin="400,153,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnNewPhase" Content="Hinzufügen" HorizontalAlignment="Left" Margin="400,150,0,0" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding btnNewPhase}" CommandParameter="{Binding Text, ElementName=txtNewPhase}"/>
 
     </Grid>
 </Window>
