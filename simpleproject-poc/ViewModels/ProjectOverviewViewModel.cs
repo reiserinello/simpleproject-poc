@@ -18,9 +18,6 @@ namespace simpleproject_poc.ViewModels
         public ObservableCollection<ProjectMethod> _dtagrdProjectMethod;
         public ProjectOverviewViewModel ()
         {
-            /*ProjectMethod projectMethod = new ProjectMethod();
-            _dtagrdProjectMethod = projectMethod.Get();*/
-
             DBGet dbGet = new DBGet();
             _dtagrdProjectMethod = dbGet.ProjectMethodGet();
         }
@@ -81,6 +78,8 @@ namespace simpleproject_poc.ViewModels
             contextProjectMethodOverviewView.lblProjectMethodName = selectedProjectMethod.MethodName;
             projectMethodOverview.Show();
         }
+
+
 
         /*
         private bool FuncToEvaluate(object context)

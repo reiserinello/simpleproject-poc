@@ -23,10 +23,10 @@
         </GroupBox>
         <GroupBox x:Name="grpbxProjectOverview" Header="Projekte" HorizontalAlignment="Left" Height="208" Margin="10,203,0,0" VerticalAlignment="Top" Width="773">
             <Grid x:Name="grdProjectOverview" HorizontalAlignment="Left" Height="171" Margin="10,10,-1.667,0" VerticalAlignment="Top" Width="753">
-                <ListView x:Name="lvProjectOverview" HorizontalAlignment="Left" Height="125" Margin="10,36,0,0" VerticalAlignment="Top" Width="733">
+                <ListView x:Name="lvProjectOverview" HorizontalAlignment="Left" Height="125" Margin="10,36,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding lvProjectOverview}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="Projekttitel" DisplayMemberBinding="{Binding MethodName}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
