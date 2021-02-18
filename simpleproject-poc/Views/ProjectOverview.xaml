@@ -15,6 +15,7 @@
                 <ListView x:Name="lvProjectMethod" HorizontalAlignment="Left" Height="115" Margin="10,26,0,0" VerticalAlignment="Top" Width="354" SelectionMode="Single" ItemsSource="{Binding dtagrdProjectMethod}">
                     <ListView.View>
                         <GridView>
+                            <GridViewColumn Header="Nr." DisplayMemberBinding="{Binding Id}" Width="50"/>
                             <GridViewColumn Header="Vorgehensmodell" DisplayMemberBinding="{Binding MethodName}" Width="200"/>
                         </GridView>
                     </ListView.View>
@@ -26,7 +27,11 @@
                 <ListView x:Name="lvProjectOverview" HorizontalAlignment="Left" Height="125" Margin="10,36,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding lvProjectOverview}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Projekttitel" DisplayMemberBinding="{Binding MethodName}" Width="200"/>
+                            <GridViewColumn Header="Projektkey" DisplayMemberBinding="{Binding Id}" Width="100"/>
+                            <GridViewColumn Header="Projekttitel" DisplayMemberBinding="{Binding ProjectName}" Width="100"/>
+                            <GridViewColumn Header="Vorgehensmodell Nr." DisplayMemberBinding="{Binding ProjectMethodId}" Width="200"/>
+                            <GridViewColumn Header="Priorität" DisplayMemberBinding="{Binding Priority}" Width="100"/>
+                            <GridViewColumn Header="Fortschritt" DisplayMemberBinding="{Binding ProjectProgress,StringFormat={}{0}%}" Width="100"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

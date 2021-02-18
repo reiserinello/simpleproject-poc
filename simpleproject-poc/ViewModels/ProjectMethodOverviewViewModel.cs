@@ -13,7 +13,7 @@ namespace simpleproject_poc.ViewModels
 {
     class ProjectMethodOverviewViewModel : MainViewModel
     {
-        public ObservableCollection<Phase> _lvPhase;
+        public ObservableCollection<dynamic> _lvPhase;
         public string _lblProjectMethodName;
 
         public ProjectMethodOverviewViewModel()
@@ -36,13 +36,13 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        public ObservableCollection<Phase> GetPhase()
+        public ObservableCollection<dynamic> GetPhase()
         {
             DBGet dbGet = new DBGet();
-            return dbGet.PhaseGet(_selectedProjectMethod.Id);
+            return dbGet.GeneralGet("Phase",_selectedProjectMethod.Id);
         }
 
-        public ObservableCollection<Phase> lvPhase
+        public ObservableCollection<dynamic> lvPhase
         {
             get
             {

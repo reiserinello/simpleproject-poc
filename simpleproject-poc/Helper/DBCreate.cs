@@ -33,7 +33,7 @@ namespace simpleproject_poc.Helper
 
             // Neue Projektmethode Liste holen und auf die Property in ProjectOverviewViewModel setzen
             DBGet dbGetObj = new DBGet();
-            var dbProjectMethodGet = dbGetObj.ProjectMethodGet();
+            var dbProjectMethodGet = dbGetObj.GeneralGet("Project_method",0);
             t_contextProjectOverviewModel.dtagrdProjectMethod = dbProjectMethodGet;
         }
 
@@ -50,7 +50,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
 
             DBGet dbGetObj = new DBGet();
-            var dbPhaseGet = dbGetObj.PhaseGet(t_Project_method_id);
+            var dbPhaseGet = dbGetObj.GeneralGet("Phase",t_Project_method_id);
             t_contextProjectMethodOverviewViewModel.lvPhase = dbPhaseGet;
         }
     }

@@ -15,16 +15,18 @@ namespace simpleproject_poc.ViewModels
 {
     class ProjectOverviewViewModel : MainViewModel
     {
-        public ObservableCollection<ProjectMethod> _dtagrdProjectMethod;
+        public ObservableCollection<dynamic> _dtagrdProjectMethod;
+        public ObservableCollection<dynamic> _lvProjectOverview;
         public ProjectOverviewViewModel ()
         {
             DBGet dbGet = new DBGet();
-            _dtagrdProjectMethod = dbGet.ProjectMethodGet();
+            _dtagrdProjectMethod = dbGet.GeneralGet("Project_method",0);
+            _lvProjectOverview = dbGet.GeneralGet("Project", 0);
         }
 
         // Vorgehensmodell Listview
         
-        public ObservableCollection<ProjectMethod> dtagrdProjectMethod
+        public ObservableCollection<dynamic> dtagrdProjectMethod
         {
             get
             {
@@ -79,7 +81,18 @@ namespace simpleproject_poc.ViewModels
             projectMethodOverview.Show();
         }
 
-
+        public ObservableCollection<dynamic> lvProjectOverview
+        {
+            get
+            {
+                return _lvProjectOverview;
+            }
+            set
+            {
+                _lvProjectOverview = value;
+                OnPropertyChanged("lvProjectOverview");
+            }
+        }
 
         /*
         private bool FuncToEvaluate(object context)
