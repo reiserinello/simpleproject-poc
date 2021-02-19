@@ -94,6 +94,30 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Button Vorgehensmodell öffnen
+        public ICommand btnOpenProject
+        {
+            get { return new DelegateCommand<object>(OpenProject); }
+        }
+
+        public void OpenProject(object context)
+        {
+            // object context zu Project casten
+            Project selectedProject = (Project)context;
+
+            // Window ProjectView instanzieren
+            ProjectView projectView = new ProjectView();
+
+            // DataContext auslesen und dort die selectedProject setzen
+            var contextProjectMethodOverviewView = (ProjectViewViewModel)projectView.DataContext;
+            contextProjectMethodOverviewView.selectedProject = selectedProject;
+
+            // Methode ausführen, welches die Values neu setzt
+            contextProjectMethodOverviewView.SetProjectValues();
+
+            projectView.Show();
+        }
+
         /*
         private bool FuncToEvaluate(object context)
         {

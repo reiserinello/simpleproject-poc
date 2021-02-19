@@ -18,56 +18,7 @@ namespace simpleproject_poc.Helper
             dbConn = dbConnObj.SetupDBConnection();
         }
 
-        /*
-        public ObservableCollection<ProjectMethod> ProjectMethodGet()
-        {
-            Table<DbProjectMethod.MappingProjectMethod> tblProjectMethod = dbConn.GetTable<DbProjectMethod.MappingProjectMethod>();
-
-            var returnList = new ObservableCollection<ProjectMethod>();
-
-            var returnValue =
-                               from i_u in tblProjectMethod
-                                   //where i_u.Username == t_username
-                               select i_u;
-
-            foreach (var i in returnValue)
-            {
-                //var pm = new ProjectMethod(i.Id, i.Method_name);
-                var pm = new ProjectMethod(i.Id,i.Method_name);
-                returnList.Add(pm);
-            }
-
-            //Close DB connection
-            //dbConn.Dispose();
-
-            return returnList;
-        }
-
-        public ObservableCollection<Phase> PhaseGet(int t_ProjectMethodId)
-        {
-            Table<DbPhase.MappingPhase> tblPhase = dbConn.GetTable<DbPhase.MappingPhase>();
-
-            var returnList = new ObservableCollection<Phase>();
-
-            var returnValue =
-                               from i_u in tblPhase
-                               where i_u.Project_method_id == t_ProjectMethodId
-                               select i_u;
-
-            foreach (var i in returnValue)
-            {
-                //var pm = new ProjectMethod(i.Id, i.Method_name);
-                var pm = new Phase(i.Id, i.Phase_name, i.Project_method_id);
-                returnList.Add(pm);
-            }
-
-            //Close DB connection
-            //dbConn.Dispose();
-
-            return returnList;
-        }
-        */
-
+        // Allgemeine DBGet Funktion mit Datentyp dynamic
         public ObservableCollection<dynamic> GeneralGet(string t_table, int t_pkey_referencetable)
         {
             var obReturnList = new ObservableCollection<dynamic>();
@@ -77,8 +28,9 @@ namespace simpleproject_poc.Helper
             {
                 case "Project_method":
                     Table<DbProjectMethod.MappingProjectMethod> tblProjectMethod = dbConn.GetTable<DbProjectMethod.MappingProjectMethod>();
-                    filteredQuery = from i_u in tblProjectMethod
-                                      select i_u;
+                    filteredQuery = from entry in tblProjectMethod
+                                    select entry;
+                    
                     foreach (var i in filteredQuery)
                     {
                         var pm = new ProjectMethod(i.Id, i.Method_name);
@@ -106,20 +58,25 @@ namespace simpleproject_poc.Helper
                         obReturnList.Add(prj);
                     }
                     break;
-                /*
-                case "v_Project_Project_method":
-                    Table<VProjectProjectMethod.dbVProjectProjectMethod> tblVProjectProjectMethod = dbConn.GetTable<VProjectProjectMethod.dbVProjectProjectMethod>();
-                    filteredQuery = from entry in tblVProjectProjectMethod
-                                        select entry;
-                    foreach (var i in filteredQuery)
-                    {
-                        VProjectProjectMethod prj = new VProjectProjectMethod(i.Id, i.Project_name, i.Method_name, i.Priority, i.Project_progress);
-                        obReturnList.Add(prj);
-                    }
-                    break;
-                */
             }
 
+            return obReturnList;
+        }
+
+        // Spezielle Methode fürs Auslesen des spezifischen Vorgehensmodell für ein Projekt
+        public ObservableCollection<ProjectMethod> GetSpecificProjectMethod (int t_pkey)
+        {
+            var obReturnList = new ObservableCollection<ProjectMethod>();
+            Table<DbProjectMethod.MappingProjectMethod> tblProjectMethod = dbConn.GetTable<DbProjectMethod.MappingProjectMethod>();
+
+            var filteredQuery = from entry in tblProjectMethod
+                                where entry.Id == t_pkey
+                                select entry;
+            foreach (var i in filteredQuery)
+            {
+                var pm = new ProjectMethod(i.Id, i.Method_name);
+                obReturnList.Add(pm);
+            }
             return obReturnList;
         }
     }

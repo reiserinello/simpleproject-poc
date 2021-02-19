@@ -36,7 +36,7 @@
                     </ListView.View>
                 </ListView>
                 <Button Content="Neu" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button Content="Öffnen" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button Content="Öffnen" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenProject}" CommandParameter="{Binding SelectedItem,ElementName=lvProjectOverview}"/>
             </Grid>
         </GroupBox>
     </Grid>

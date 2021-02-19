@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using simpleproject_poc.ViewModels;
 
 namespace simpleproject_poc.Views
 {
@@ -22,6 +23,7 @@ namespace simpleproject_poc.Views
         public ProjectView()
         {
             InitializeComponent();
+            DataContext = new ProjectViewViewModel();
         }
     }
 }

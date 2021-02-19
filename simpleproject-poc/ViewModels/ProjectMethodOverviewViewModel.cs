@@ -21,7 +21,6 @@ namespace simpleproject_poc.ViewModels
             
         }
 
-
         ProjectMethod _selectedProjectMethod;
         public ProjectMethod selectedProjectMethod
         {
