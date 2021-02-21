@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using simpleproject_poc.Models;
 using simpleproject_poc.Helper;
+using System.Windows.Input;
+using Prism.Commands;
 
 namespace simpleproject_poc.ViewModels
 {
     class ProjectViewViewModel : MainViewModel
     {
+        #region Project
         public int _lblProjectKey;
         public string _lblProjectName;
         public string _lblPriority;
@@ -241,5 +244,73 @@ namespace simpleproject_poc.ViewModels
             txtProjectDocumentsLink = _selectedProject.ProjectDocumentsLink;
             txtbProjectDescription = _selectedProject.ProjectDescription;
         }
+
+        // Button Projekt freigeben
+        public ICommand btnReleaseProject
+        {
+            get { return new DelegateCommand<object>(ReleaseProject,IsProjectReleasedOne).ObservesProperty(() => lblApprovalDate); }
+        }
+
+        private void ReleaseProject(object context)
+        {
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetProjectApprovalDate(this);
+        }
+
+        // CanExecute Methode für btnOpenProjectPhase & btnCreateProjectPhase
+        private bool IsProjectReleasedOne(object context)
+        {
+            // Solange ApprovalDate des Projektes nicht gesetzt ist, kann keine ProjectPhase angelegt oder geöffnet werden
+            if (lblApprovalDate == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        #endregion
+
+        #region ProjectPhase
+        // Button Projekt Phase erstellen
+        public ICommand btnOpenProjectPhase
+        {
+            get { return new DelegateCommand<object>(OpenProjectPhase, IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            set { }
+        }
+
+        private void OpenProjectPhase(object context)
+        {
+            
+        }
+
+        // Button Projekt Phase öffnen
+        public ICommand btnCreateProjectPhase
+        {
+            get { return new DelegateCommand<object>(CreateProjectPhase, IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            set { }
+        }
+
+        private void CreateProjectPhase(object context)
+        {
+            
+        }
+
+        // CanExecute Methode für btnOpenProjectPhase & btnCreateProjectPhase
+        private bool IsProjectReleasedTwo(object context)
+        {
+            // Solange ApprovalDate des Projektes nicht gesetzt ist, kann keine ProjectPhase angelegt oder geöffnet werden
+            if (lblApprovalDate == null)
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
+            
+        }
+        #endregion
     }
 }

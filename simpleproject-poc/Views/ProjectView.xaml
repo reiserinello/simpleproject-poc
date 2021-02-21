@@ -37,9 +37,9 @@
                 <Label x:Name="lblEnddate" Content="{Binding lblEnddate}" HorizontalAlignment="Left" Margin="411,104,0,0" VerticalAlignment="Top" Width="150" Height="26"/>
                 <TextBox x:Name="txtProjectDocumentsLink" HorizontalAlignment="Left" Height="23" Margin="411,134,0,0" TextWrapping="Wrap" Text="{Binding txtProjectDocumentsLink}" VerticalAlignment="Top" Width="332" IsReadOnly="True"/>
                 <TextBlock x:Name="txtbProjectDescription" HorizontalAlignment="Left" Margin="411,161,0,0" TextWrapping="Wrap" Text="{Binding txtbProjectDescription}" VerticalAlignment="Top" Width="332" Height="65"/>
-                <Button Content="Freigeben" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button Content="Datum setzen" HorizontalAlignment="Left" Margin="99,205,0,0" VerticalAlignment="Top" Width="84"/>
-                <Button Content="Status setzen" HorizontalAlignment="Left" Margin="198,205,0,0" VerticalAlignment="Top" Width="84"/>
+                <Button x:Name="btnReleaseProject" Content="Freigeben" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnReleaseProject}"/>
+                <Button x:Name="btnSetDates" Content="Datum setzen" HorizontalAlignment="Left" Margin="99,205,0,0" VerticalAlignment="Top" Width="84"/>
+                <Button x:Name="btnSetStates" Content="Status setzen" HorizontalAlignment="Left" Margin="198,205,0,0" VerticalAlignment="Top" Width="84"/>
                 <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
             </Grid>
         </GroupBox>
@@ -52,8 +52,8 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button Content="Öffnen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button Content="Definieren" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="btnOpenProjectPhase" Content="Öffnen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenProjectPhase}"/>
+                <Button x:Name="btnCreateProjectPhase"  Content="Definieren" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateProjectPhase}"/>
                 <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
             </Grid>
         </GroupBox>
