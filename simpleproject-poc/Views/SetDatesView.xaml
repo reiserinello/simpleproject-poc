@@ -1,0 +1,17 @@
+﻿<Window x:Class="simpleproject_poc.Views.SetDatesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:simpleproject_poc.Views"
+        mc:Ignorable="d"
+        Title="Datum setzen" Height="126.655" Width="276.242">
+    <Grid>
+        <Label Content="Startdatum:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Enddatum:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datepickStartDate" HorizontalAlignment="Left" Margin="86,10,0,0" VerticalAlignment="Top" Height="26" Width="175" SelectedDate="{Binding datepickStartDate}"/>
+        <DatePicker x:Name="datepickEndDate" HorizontalAlignment="Left" Margin="86,36,0,0" VerticalAlignment="Top" Height="26" Width="175" SelectedDate="{Binding datepickEndDate}"/>
+        <Button x:Name="btnSetDates" Content="Setzen" HorizontalAlignment="Left" Margin="186,67,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnSetDates}" CommandParameter=""/>
+
+    </Grid>
+</Window>
