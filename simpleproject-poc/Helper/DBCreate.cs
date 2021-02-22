@@ -53,5 +53,26 @@ namespace simpleproject_poc.Helper
             var dbPhaseGet = dbGetObj.GeneralGet("Phase",t_Project_method_id);
             t_contextProjectMethodOverviewViewModel.lvPhase = dbPhaseGet;
         }
+
+        public void ProjectCreate(string t_projectname, Priority t_priority, string t_projectmanager, DateTime t_plannedstartdate, DateTime t_plannedenddate, string t_projectdocumentslink, string t_projectdescription, int t_projectmethodid)
+        {
+            Project.dbProject newProject = new Project.dbProject
+            {
+                Project_name = t_projectname,
+                Priority = t_priority.ToString(),
+                Project_state = "WaitingForRelease",
+                Project_manager = t_projectmanager,
+                Planned_startdate = t_plannedstartdate,
+                Planned_enddate = t_plannedenddate,
+                Project_progress = 0,
+                Project_documents_link = t_projectdocumentslink,
+                Project_description = t_projectdescription,
+                Project_method_id = t_projectmethodid
+            };
+
+            Table<Project.dbProject> tblProject = dbConn.GetTable<Project.dbProject>();
+            tblProject.InsertOnSubmit(newProject);
+            dbConn.SubmitChanges();
+        }
     }
 }

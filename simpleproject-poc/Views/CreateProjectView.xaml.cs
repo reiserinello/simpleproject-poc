@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace simpleproject_poc.Views
 {
     /// <summary>
-    /// Interaktionslogik für SetDatesView.xaml
+    /// Interaktionslogik für CreateProjectView.xaml
     /// </summary>
-    public partial class SetDatesView : Window
+    public partial class CreateProjectView : Window
     {
-        public SetDatesView()
+        public CreateProjectView()
         {
             InitializeComponent();
-            DataContext = new SetDatesViewViewModel();
+            DataContext = new CreateProjectViewViewModel();
         }
     }
 }

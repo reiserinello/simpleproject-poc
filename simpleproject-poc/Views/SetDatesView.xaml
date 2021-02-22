@@ -11,7 +11,7 @@
         <Label Content="Enddatum:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="datepickStartDate" HorizontalAlignment="Left" Margin="86,10,0,0" VerticalAlignment="Top" Height="26" Width="175" SelectedDate="{Binding datepickStartDate}"/>
         <DatePicker x:Name="datepickEndDate" HorizontalAlignment="Left" Margin="86,36,0,0" VerticalAlignment="Top" Height="26" Width="175" SelectedDate="{Binding datepickEndDate}"/>
-        <Button x:Name="btnSetDates" Content="Setzen" HorizontalAlignment="Left" Margin="186,67,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnSetDates}" CommandParameter=""/>
+        <Button x:Name="btnSetDates" Content="Setzen" HorizontalAlignment="Left" Margin="186,67,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnSetDates}" CommandParameter="{Binding SelectedDate,ElementName=datepickStartDate}"/>
 
     </Grid>
 </Window>

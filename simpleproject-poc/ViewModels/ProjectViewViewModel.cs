@@ -7,6 +7,7 @@ using simpleproject_poc.Models;
 using simpleproject_poc.Helper;
 using System.Windows.Input;
 using Prism.Commands;
+using simpleproject_poc.Views;
 
 namespace simpleproject_poc.ViewModels
 {
@@ -15,9 +16,9 @@ namespace simpleproject_poc.ViewModels
         #region Project
         public int _lblProjectKey;
         public string _lblProjectName;
-        public string _lblPriority;
+        public Priority _lblPriority;
         public string _lblProjectMethod;
-        public string _lblProjectState;
+        public State _lblProjectState;
         public int _lblProjectProgress;
         public string _lblProjectManager;
         public Nullable<DateTime> _lblApprovalDate;
@@ -68,7 +69,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        public string lblPriority
+        public Priority lblPriority
         {
             get
             {
@@ -94,7 +95,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        public string lblProjectState
+        public State lblProjectState
         {
             get
             {
@@ -253,8 +254,11 @@ namespace simpleproject_poc.ViewModels
 
         private void ReleaseProject(object context)
         {
-            DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetProjectApprovalDate(this);
+            /*DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetProjectApprovalDate(this);*/
+
+            Project projectObj = new Project();
+            projectObj.Release(this);
         }
 
         // CanExecute Methode für btnOpenProjectPhase & btnCreateProjectPhase
@@ -270,6 +274,36 @@ namespace simpleproject_poc.ViewModels
                 return false;
             }
 
+        }
+
+        // Button Projekt Datum setzen
+        public ICommand btnSetProjectDates
+        {
+            get { return new DelegateCommand<object>(SetProjectDates); }
+        }
+
+        private void SetProjectDates(object context)
+        {
+            SetDatesView setDatesView = new SetDatesView();
+            var contextSetDatesView = (SetDatesViewViewModel)setDatesView.DataContext;
+            contextSetDatesView.contextProjectViewViewModel = this;
+            contextSetDatesView.InitialDateSetter();
+            setDatesView.Show();
+        }
+
+        // Button Status setzen
+        public ICommand btnSetProjectState
+        {
+            get { return new DelegateCommand<object>(SetProjectState); }
+        }
+
+        private void SetProjectState(object context)
+        {
+            SetStateView setStateView = new SetStateView();
+            var contextSetStateView = (SetStateViewViewModel)setStateView.DataContext;
+            contextSetStateView.contextProjectViewViewModel = this;
+            contextSetStateView.InitialValuesSetter();
+            setStateView.Show();
         }
         #endregion
 

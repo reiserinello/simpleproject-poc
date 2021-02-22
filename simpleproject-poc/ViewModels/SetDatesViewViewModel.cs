@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using simpleproject_poc.Helper;
+using simpleproject_poc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,21 @@ namespace simpleproject_poc.ViewModels
 {
     class SetDatesViewViewModel : MainViewModel
     {
+        public ProjectViewViewModel _contextProjectViewViewModel;
+
+        public ProjectViewViewModel contextProjectViewViewModel
+        {
+            get
+            {
+                return _contextProjectViewViewModel;
+            }
+            set
+            {
+                _contextProjectViewViewModel = value;
+                OnPropertyChanged("contextProjectViewViewModel");
+            }
+        }
+
         public Nullable<DateTime> _datepickStartDate;
         public Nullable<DateTime> _datepickEndDate;
 
@@ -40,6 +56,14 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Initial date setter
+        public void InitialDateSetter()
+        {
+            datepickStartDate = contextProjectViewViewModel.lblStartdate;
+            datepickEndDate = contextProjectViewViewModel.lblEnddate;
+
+        }
+
         // Button Projekt freigeben
         public ICommand btnSetDates
         {
@@ -48,8 +72,10 @@ namespace simpleproject_poc.ViewModels
 
         private void SetDates(object context)
         {
-            DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetProjectApprovalDate(this);
+            //var test = context;
+
+            Project projectObj = new Project();
+            projectObj.SetDates(_contextProjectViewViewModel, _datepickStartDate, _datepickEndDate);
         }
     }
 }

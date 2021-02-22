@@ -94,7 +94,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // Button Vorgehensmodell öffnen
+        // Button Projekt öffnen
         public ICommand btnOpenProject
         {
             get { return new DelegateCommand<object>(OpenProject); }
@@ -116,6 +116,21 @@ namespace simpleproject_poc.ViewModels
             contextProjectMethodOverviewView.SetProjectValues();
 
             projectView.Show();
+        }
+
+        // Button Projekt öffnen
+        public ICommand btnCreateProjectForm
+        {
+            get { return new DelegateCommand<object>(CreateProjectForm); }
+        }
+
+        public void CreateProjectForm(object context)
+        {
+            CreateProjectView createProjectView = new CreateProjectView();
+            var contextCreateProjectView = (CreateProjectViewViewModel)createProjectView.DataContext;
+            contextCreateProjectView.lvProjectOverview = this.lvProjectOverview;
+            contextCreateProjectView.cmbbxProjectMethod = this.dtagrdProjectMethod;
+            createProjectView.Show();
         }
 
         /*

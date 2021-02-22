@@ -1,4 +1,6 @@
-﻿using System;
+﻿using simpleproject_poc.Helper;
+using simpleproject_poc.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data.Linq.Mapping;
 using System.Linq;
@@ -13,8 +15,8 @@ namespace simpleproject_poc.Models
         public string ProjectName { get; }
         public string ProjectDescription { get; }
         public Nullable<DateTime> ApprovalDate { get; }
-        public string Priority { get; }
-        public string ProjectState { get; }
+        public Priority Priority { get; }
+        public State ProjectState { get; }
         public DateTime PlannedStartdate { get; }
         public DateTime PlannedEnddate { get; }
         public Nullable<DateTime> Startdate { get; }
@@ -24,7 +26,7 @@ namespace simpleproject_poc.Models
         public string ProjectDocumentsLink { get; }
         public int ProjectMethodId { get; }
 
-        public Project (int t_Id, string t_ProjectName, string t_ProjectDescription, Nullable<DateTime> t_ApprovalDate, string t_Priority, string t_ProjectState, DateTime t_PlannedStartdate, DateTime t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, string t_ProjectManager, int t_ProjectProgress, string t_ProjectDocumentsLink, int t_ProjectMethodId)
+        public Project (int t_Id, string t_ProjectName, string t_ProjectDescription, Nullable<DateTime> t_ApprovalDate, Priority t_Priority, State t_ProjectState, DateTime t_PlannedStartdate, DateTime t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, string t_ProjectManager, int t_ProjectProgress, string t_ProjectDocumentsLink, int t_ProjectMethodId)
         {
             Id = t_Id;
             ProjectName = t_ProjectName;
@@ -40,6 +42,32 @@ namespace simpleproject_poc.Models
             ProjectProgress = t_ProjectProgress;
             ProjectDocumentsLink = t_ProjectDocumentsLink;
             ProjectMethodId = t_ProjectMethodId;
+        }
+
+        public Project () { }
+
+        public void SetDates(ProjectViewViewModel t_contextProjectViewViewModel, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
+        {
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetProjectDates(t_contextProjectViewViewModel,t_StartDate,t_EndDate);
+        }
+
+        public void Release(ProjectViewViewModel t_contextProjectViewViewModel)
+        {
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetProjectApprovalDate(t_contextProjectViewViewModel);
+        }
+
+        public void SetState(int t_pkey, int t_progress, State t_state, Priority t_priority)
+        {
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetProjectState(t_pkey, t_progress, t_state, t_priority);
+        }
+
+        public void CreateDBProject (string t_projectname, Priority t_priority, string t_projectmanager, DateTime t_plannedstartdate, DateTime t_plannedenddate, string t_projectdocumentslink, string t_projectdescription, int t_projectmethodid)
+        {
+            DBCreate dbCreateObj = new DBCreate();
+            dbCreateObj.ProjectCreate(t_projectname,t_priority,t_projectmanager,t_plannedstartdate,t_plannedenddate,t_projectdocumentslink,t_projectdescription,t_projectmethodid);
         }
 
         //SQL mapping

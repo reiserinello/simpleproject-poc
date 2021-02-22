@@ -70,17 +70,30 @@
     </ApplicationDefinition>
     <Compile Include="Helper\DBUpdate.cs" />
     <Compile Include="Helper\HelperModels.cs" />
+    <Compile Include="Helper\StateHelper.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectPhase.cs" />
+    <Compile Include="ViewModels\CreateProjectViewViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewViewModel.cs" />
     <Compile Include="ViewModels\SetDatesViewViewModel.cs" />
+    <Compile Include="ViewModels\SetStateViewViewModel.cs" />
+    <Compile Include="Views\CreateProjectView.xaml.cs">
+      <DependentUpon>CreateProjectView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SetDatesView.xaml.cs">
       <DependentUpon>SetDatesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SetStateView.xaml.cs">
+      <DependentUpon>SetStateView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\CreateProjectMethod.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SetDatesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SetStateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

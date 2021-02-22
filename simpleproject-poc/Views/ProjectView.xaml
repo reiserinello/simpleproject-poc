@@ -38,8 +38,8 @@
                 <TextBox x:Name="txtProjectDocumentsLink" HorizontalAlignment="Left" Height="23" Margin="411,134,0,0" TextWrapping="Wrap" Text="{Binding txtProjectDocumentsLink}" VerticalAlignment="Top" Width="332" IsReadOnly="True"/>
                 <TextBlock x:Name="txtbProjectDescription" HorizontalAlignment="Left" Margin="411,161,0,0" TextWrapping="Wrap" Text="{Binding txtbProjectDescription}" VerticalAlignment="Top" Width="332" Height="65"/>
                 <Button x:Name="btnReleaseProject" Content="Freigeben" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnReleaseProject}"/>
-                <Button x:Name="btnSetDates" Content="Datum setzen" HorizontalAlignment="Left" Margin="99,205,0,0" VerticalAlignment="Top" Width="84"/>
-                <Button x:Name="btnSetStates" Content="Status setzen" HorizontalAlignment="Left" Margin="198,205,0,0" VerticalAlignment="Top" Width="84"/>
+                <Button x:Name="btnSetProjectDates" Content="Datum setzen" HorizontalAlignment="Left" Margin="99,205,0,0" VerticalAlignment="Top" Width="84" Command="{Binding btnSetProjectDates}"/>
+                <Button x:Name="btnSetProjectState" Content="Status setzen" HorizontalAlignment="Left" Margin="198,205,0,0" VerticalAlignment="Top" Width="84" Command="{Binding btnSetProjectState}"/>
                 <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
             </Grid>
         </GroupBox>
