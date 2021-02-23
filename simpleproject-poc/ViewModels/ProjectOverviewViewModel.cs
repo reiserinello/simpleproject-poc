@@ -109,11 +109,11 @@ namespace simpleproject_poc.ViewModels
             ProjectView projectView = new ProjectView();
 
             // DataContext auslesen und dort die selectedProject setzen
-            var contextProjectMethodOverviewView = (ProjectViewViewModel)projectView.DataContext;
-            contextProjectMethodOverviewView.selectedProject = selectedProject;
+            var contextProjectView = (ProjectViewViewModel)projectView.DataContext;
+            contextProjectView.selectedProject = selectedProject;
 
             // Methode ausführen, welches die Values neu setzt
-            contextProjectMethodOverviewView.SetProjectValues();
+            contextProjectView.SetProjectValues();
 
             projectView.Show();
         }

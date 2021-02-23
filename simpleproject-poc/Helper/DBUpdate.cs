@@ -68,5 +68,21 @@ namespace simpleproject_poc.Helper
             }
             dbConn.SubmitChanges();
         }
+
+        public void DefineProjectPhase(int t_pkey, Nullable<DateTime> t_plannedstartdate, Nullable<DateTime> t_plannedenddate, Nullable<DateTime> t_plannedreviewdate, string t_phasedocumentslink)
+        {
+            Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
+            var selectedProjectPhase = from entry in tblProjectPhase
+                                  where entry.Id == t_pkey
+                                  select entry;
+            foreach (var i in selectedProjectPhase)
+            {
+                i.Planned_startdate = t_plannedstartdate;
+                i.Planned_enddate = t_plannedenddate;
+                i.Planned_reviewdate = t_plannedreviewdate;
+                i.Phase_documents_link = t_phasedocumentslink;
+            }
+            dbConn.SubmitChanges();
+        }
     }
 }

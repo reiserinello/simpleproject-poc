@@ -1,4 +1,5 @@
-﻿using System;
+﻿using simpleproject_poc.Helper;
+using System;
 using System.Collections.Generic;
 using System.Data.Linq.Mapping;
 using System.Linq;
@@ -40,6 +41,14 @@ namespace simpleproject_poc.Models
             PhaseDocumentsLink = t_PhaseDocumentsLink;
             ProjectId = t_ProjectId;
             PhaseId = t_PhaseId;
+        }
+
+        public ProjectPhase() { }
+
+        public void Define(int t_pkey, Nullable<DateTime> t_plannedstartdate, Nullable<DateTime> t_plannedenddate, Nullable<DateTime> t_plannedreviewdate, string t_phasedocumentslink)
+        {
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.DefineProjectPhase(t_pkey,t_plannedstartdate,t_plannedenddate,t_plannedreviewdate,t_phasedocumentslink);
         }
 
         //SQL mapping

@@ -25,7 +25,6 @@ namespace simpleproject_poc.ViewModels
                 OnPropertyChanged("contextProjectViewViewModel");
             }
         }
-
         
         private State _cmbbxState;
         public State cmbbxState
@@ -103,8 +102,9 @@ namespace simpleproject_poc.ViewModels
         {
             //var test = context;
 
-            Project projectObj = new Project();
-            projectObj.SetState(contextProjectViewViewModel.lblProjectKey, txtProgress, cmbbxState, cmbbxPriority);
+            //Project projectObj = new Project();
+            contextProjectViewViewModel.selectedProject.SetState(contextProjectViewViewModel.lblProjectKey, txtProgress, cmbbxState, cmbbxPriority);
+            //selectedProject.SetState(contextProjectViewViewModel.lblProjectKey, txtProgress, cmbbxState, cmbbxPriority);
             contextProjectViewViewModel.lblProjectProgress = txtProgress;
             contextProjectViewViewModel.lblProjectState = cmbbxState;
             contextProjectViewViewModel.lblPriority = cmbbxPriority;

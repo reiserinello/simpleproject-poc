@@ -54,8 +54,8 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button x:Name="btnOpenProjectPhase" Content="Öffnen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenProjectPhase}"/>
-                <Button x:Name="btnCreateProjectPhase"  Content="Definieren" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateProjectPhase}"/>
+                <Button x:Name="btnOpenProjectPhase" Content="Öffnen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenProjectPhase}" CommandParameter="{Binding SelectedItem,ElementName=lvProjectPhase}"/>
+                <Button x:Name="btnDefineProjectPhase"  Content="Definieren" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnDefineProjectPhase}" CommandParameter="{Binding SelectedItem,ElementName=lvProjectPhase}"/>
                 <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
             </Grid>
         </GroupBox>

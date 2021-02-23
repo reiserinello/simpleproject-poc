@@ -328,19 +328,24 @@ namespace simpleproject_poc.ViewModels
             
         }
 
-        // Button Projekt Phase öffnen
-        public ICommand btnCreateProjectPhase
+        // Button Projekt Phase definieren
+        public ICommand btnDefineProjectPhase
         {
-            get { return new DelegateCommand<object>(CreateProjectPhase, IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(DefineProjectPhase, IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
             set { }
         }
 
-        private void CreateProjectPhase(object context)
+        private void DefineProjectPhase(object context)
         {
-            
+            VProjectPhasePhase selectedProjectPhase = (VProjectPhasePhase)context;
+            DefinePhaseView definePhaseView = new DefinePhaseView();
+            var contextDefinePhaseView = (DefinePhaseViewViewModel)definePhaseView.DataContext;
+            contextDefinePhaseView.selectedProjectPhase = selectedProjectPhase;
+            contextDefinePhaseView.contextProjectViewViewModel = this;
+            definePhaseView.Show();
         }
 
-        // CanExecute Methode für btnOpenProjectPhase & btnCreateProjectPhase
+        // CanExecute Methode für btnOpenProjectPhase & btnDefineProjectPhase
         private bool IsProjectReleasedTwo(object context)
         {
             // Solange ApprovalDate des Projektes nicht gesetzt ist, kann keine ProjectPhase angelegt oder geöffnet werden
