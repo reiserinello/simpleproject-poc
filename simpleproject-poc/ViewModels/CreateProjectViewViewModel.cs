@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace simpleproject_poc.ViewModels
 {
-    class CreateProjectViewViewModel : MainViewModel
+    class CreateProjectViewViewModel : MainViewModel, ICloseWindows
     {
         /*
         public CreateProjectViewViewModel()
@@ -49,6 +49,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        public Action Close { get; set; }
         private string _txtProjectName;
         private Priority _cmbbxPriority;
         private string _txtProjectManager;
@@ -57,16 +58,16 @@ namespace simpleproject_poc.ViewModels
         private string _txtProjectDocumentsLink;
         private string _txtProjectDescripting;
 
-        private ObservableCollection<dynamic> _lvProjectOverview;
-        public ObservableCollection<dynamic> lvProjectOverview
+        private ProjectOverviewViewModel _contextProjectOverviewModel;
+        public ProjectOverviewViewModel contextProjectOverviewModel
         {
             get
             {
-                return _lvProjectOverview;
+                return _contextProjectOverviewModel;
             }
             set
             {
-                _lvProjectOverview = value;
+                _contextProjectOverviewModel = value;
                 OnPropertyChanged("lvProjectOverview");
             }
         }
@@ -184,7 +185,13 @@ namespace simpleproject_poc.ViewModels
 
             DBGet dbGetObj = new DBGet();
             var dbGetProjects = dbGetObj.GeneralGet("Project", 0);
-            lvProjectOverview = dbGetProjects;
+            contextProjectOverviewModel.lvProjectOverview = dbGetProjects;
+
+            // Neustes Project in List abgreifen und ProjektView öffnen
+            var createdProject = contextProjectOverviewModel.lvProjectOverview.Last();
+            contextProjectOverviewModel.OpenProject(createdProject);
+
+            Close?.Invoke();
         }
     }
 }

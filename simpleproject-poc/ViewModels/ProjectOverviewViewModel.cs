@@ -128,8 +128,8 @@ namespace simpleproject_poc.ViewModels
         {
             CreateProjectView createProjectView = new CreateProjectView();
             var contextCreateProjectView = (CreateProjectViewViewModel)createProjectView.DataContext;
-            contextCreateProjectView.lvProjectOverview = this.lvProjectOverview;
-            contextCreateProjectView.cmbbxProjectMethod = this.dtagrdProjectMethod;
+            contextCreateProjectView.contextProjectOverviewModel = this;
+            contextCreateProjectView.cmbbxProjectMethod = dtagrdProjectMethod;
             createProjectView.Show();
         }
 

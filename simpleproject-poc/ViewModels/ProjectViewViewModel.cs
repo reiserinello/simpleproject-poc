@@ -8,11 +8,17 @@ using simpleproject_poc.Helper;
 using System.Windows.Input;
 using Prism.Commands;
 using simpleproject_poc.Views;
+using System.Collections.ObjectModel;
 
 namespace simpleproject_poc.ViewModels
 {
     class ProjectViewViewModel : MainViewModel
     {
+        public ProjectViewViewModel ()
+        {
+            
+        }
+
         #region Project
         public int _lblProjectKey;
         public string _lblProjectName;
@@ -244,6 +250,8 @@ namespace simpleproject_poc.ViewModels
             lblEnddate = _selectedProject.Enddate;
             txtProjectDocumentsLink = _selectedProject.ProjectDocumentsLink;
             txtbProjectDescription = _selectedProject.ProjectDescription;
+
+            lvProjectPhase = dbGetObj.GeneralGet("v_Project_phase_Phase",_selectedProject.Id);
         }
 
         // Button Projekt freigeben
@@ -344,6 +352,21 @@ namespace simpleproject_poc.ViewModels
                 return true;
             }
             
+        }
+
+        // Listview Projektphase
+        private ObservableCollection<dynamic> _lvProjectPhase;
+        public ObservableCollection<dynamic> lvProjectPhase
+        {
+            get
+            {
+                return _lvProjectPhase;
+            }
+            set
+            {
+                _lvProjectPhase = value;
+                OnPropertyChanged("");
+            }
         }
         #endregion
     }

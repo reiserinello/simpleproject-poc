@@ -12,19 +12,19 @@ namespace simpleproject_poc.Models
         public int Id { get; }
         public string PhaseState { get; }
         public int PhaseProgress { get; }
-        public DateTime PlannedStartdate { get; }
-        public DateTime PlannedEnddate { get; }
+        public Nullable<DateTime> PlannedStartdate { get; }
+        public Nullable<DateTime> PlannedEnddate { get; }
         public Nullable<DateTime> Startdate { get; }
         public Nullable<DateTime> Enddate { get; }
         public Nullable<DateTime> ApprovalDate { get; }
         public string Visum { get; }
-        public DateTime PlannedReviewdate { get; }
+        public Nullable<DateTime> PlannedReviewdate { get; }
         public Nullable<DateTime> Reviewdate { get; }
         public string PhaseDocumentsLink { get; }
         public int ProjectId { get; }
         public int PhaseId { get; }
 
-        public ProjectPhase (int t_Id, string t_PhaseState, int t_PhaseProgress, DateTime t_PlannedStartdate, DateTime t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, Nullable<DateTime> t_ApprovalDate, string t_Visum, DateTime t_PlannedReviewdate, Nullable<DateTime> t_Reviewdate, string t_PhaseDocumentsLink, int t_ProjectId, int t_PhaseId)
+        public ProjectPhase (int t_Id, string t_PhaseState, int t_PhaseProgress, Nullable<DateTime> t_PlannedStartdate, Nullable<DateTime> t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, Nullable<DateTime> t_ApprovalDate, string t_Visum, Nullable<DateTime> t_PlannedReviewdate, Nullable<DateTime> t_Reviewdate, string t_PhaseDocumentsLink, int t_ProjectId, int t_PhaseId)
         {
             Id = t_Id;
             PhaseState = t_PhaseState;
@@ -44,7 +44,7 @@ namespace simpleproject_poc.Models
 
         //SQL mapping
         [Table(Name = "Project_phase")]
-        public class dbProject
+        public class dbProjectPhase
         {
             //Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
@@ -61,11 +61,11 @@ namespace simpleproject_poc.Models
             [Column]
             public int Phase_progress;
 
-            [Column]
-            public DateTime Planned_startdate;
+            [Column(CanBeNull = true)]
+            public Nullable<DateTime> Planned_startdate;
 
-            [Column]
-            public DateTime Planned_enddate;
+            [Column(CanBeNull = true)]
+            public Nullable<DateTime> Planned_enddate;
 
             [Column(CanBeNull = true)]
             public Nullable<DateTime> Startdate;
@@ -79,14 +79,14 @@ namespace simpleproject_poc.Models
             [Column]
             public string Visum;
 
-            [Column]
-            public DateTime Planned_reviewdate;
+            [Column(CanBeNull = true)]
+            public Nullable<DateTime> Planned_reviewdate;
 
             [Column(CanBeNull = true)]
             public Nullable<DateTime> Reviewdate;
 
             [Column]
-            public string Project_documents_link;
+            public string Phase_documents_link;
 
             [Column]
             public int Project_id;

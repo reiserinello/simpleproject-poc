@@ -24,6 +24,18 @@ namespace simpleproject_poc.Views
         {
             InitializeComponent();
             DataContext = new CreateProjectViewViewModel();
+            Loaded += CreateProjectView_Loaded;
+        }
+
+        private void CreateProjectView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ICloseWindows vm)
+            {
+                vm.Close += () =>
+                {
+                    this.Close();
+                };
+            }
         }
     }
 }

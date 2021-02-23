@@ -60,6 +60,17 @@ namespace simpleproject_poc.Helper
                         obReturnList.Add(prj);
                     }
                     break;
+                case "v_Project_phase_Phase":
+                    Table<VProjectPhasePhase.dbVProjectPhasePhase> tblProjectPhasePhase = dbConn.GetTable<VProjectPhasePhase.dbVProjectPhasePhase>();
+                    filteredQuery = from entry in tblProjectPhasePhase
+                                    where entry.Project_id == t_pkey_referencetable
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var projectphase = new VProjectPhasePhase(i.Id,i.Phase_state,i.Phase_progress,i.Planned_startdate,i.Planned_enddate,i.Startdate,i.Enddate,i.Approval_date,i.Visum,i.Planned_reviewdate,i.Reviewdate,i.Phase_documents_link,i.Project_id,i.Phase_id,i.Phase_name);
+                        obReturnList.Add(projectphase);
+                    }
+                    break;
             }
 
             return obReturnList;

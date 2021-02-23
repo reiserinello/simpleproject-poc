@@ -73,6 +73,25 @@ namespace simpleproject_poc.Helper
             Table<Project.dbProject> tblProject = dbConn.GetTable<Project.dbProject>();
             tblProject.InsertOnSubmit(newProject);
             dbConn.SubmitChanges();
+
+            DBGet dbGetObj = new DBGet();
+            var dbGetPhase = dbGetObj.GeneralGet("Phase", t_projectmethodid);
+            var dbGetProject = dbGetObj.GeneralGet("Project", 0).Last();
+
+            foreach (var i in dbGetPhase)
+            {
+                ProjectPhase.dbProjectPhase newProjectPhase = new ProjectPhase.dbProjectPhase
+                {
+                    Phase_progress = 0,
+                    Phase_state = "WaitingForRelease",
+                    Project_id = dbGetProject.Id,
+                    Phase_id = i.Id
+                };
+
+                Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
+                tblProjectPhase.InsertOnSubmit(newProjectPhase);
+                dbConn.SubmitChanges();
+            }
         }
     }
 }

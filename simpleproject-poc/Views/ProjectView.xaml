@@ -45,10 +45,12 @@
         </GroupBox>
         <GroupBox x:Name="grpbxPhaseView" Header="Phasen" HorizontalAlignment="Left" Height="198" Margin="10,287,0,0" VerticalAlignment="Top" Width="773">
             <Grid x:Name="grdPhaseView" HorizontalAlignment="Left" Height="172" Margin="10,0,-2,0" VerticalAlignment="Top" Width="753">
-                <ListView HorizontalAlignment="Left" Height="117" Margin="10,35,0,0" VerticalAlignment="Top" Width="733">
+                <ListView x:Name="lvProjectPhase" HorizontalAlignment="Left" Height="117" Margin="10,35,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding lvProjectPhase}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="Phase" DisplayMemberBinding="{Binding PhaseName}" Width="150"/>
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding PhaseState}" Width="150"/>
+                            <GridViewColumn Header="Fortschritt" DisplayMemberBinding="{Binding PhaseProgress,StringFormat={}{0}%}" Width="150"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
