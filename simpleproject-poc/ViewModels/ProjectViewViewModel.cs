@@ -9,14 +9,30 @@ using System.Windows.Input;
 using Prism.Commands;
 using simpleproject_poc.Views;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace simpleproject_poc.ViewModels
 {
     class ProjectViewViewModel : MainViewModel
     {
+        private DBGet _dbGetObj;
         public ProjectViewViewModel ()
         {
-            
+            _dbGetObj = new DBGet();
+        }
+
+        private ProjectOverviewViewModel _contextProjectOverviewViewModel;
+        public ProjectOverviewViewModel contextProjectOverviewViewModel
+        {
+            get
+            {
+                return _contextProjectOverviewViewModel;
+            }
+            set
+            {
+                _contextProjectOverviewViewModel = value;
+                OnPropertyChanged("contextProjectOverviewViewModel");
+            }
         }
 
         #region Project
@@ -233,8 +249,8 @@ namespace simpleproject_poc.ViewModels
 
         public void SetProjectValues()
         {
-            DBGet dbGetObj = new DBGet();
-            var dbGetProjectMethod = dbGetObj.GetSpecificProjectMethod(_selectedProject.ProjectMethodId);
+            //DBGet dbGetObj = new DBGet();
+            var dbGetProjectMethod = _dbGetObj.GetSpecificProjectMethod(_selectedProject.ProjectMethodId);
 
             lblProjectKey = _selectedProject.Id;
             lblProjectName = _selectedProject.ProjectName;
@@ -251,7 +267,12 @@ namespace simpleproject_poc.ViewModels
             txtProjectDocumentsLink = _selectedProject.ProjectDocumentsLink;
             txtbProjectDescription = _selectedProject.ProjectDescription;
 
-            lvProjectPhase = dbGetObj.GeneralGet("v_Project_phase_Phase",_selectedProject.Id);
+            lvProjectPhase = _dbGetObj.GeneralGet("v_Project_phase_Phase",_selectedProject.Id);
+        }
+
+        public void UpdateProjectOverview()
+        {
+            contextProjectOverviewViewModel.lvProjectOverview = _dbGetObj.GeneralGet("Project", 0);
         }
 
         // Button Projekt freigeben
@@ -262,14 +283,20 @@ namespace simpleproject_poc.ViewModels
 
         private void ReleaseProject(object context)
         {
-            /*DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetProjectApprovalDate(this);*/
+            // Today as approvaldate
+            DateTime thisDay = DateTime.Today;
 
+            selectedProject.Release(thisDay);
+
+            lblApprovalDate = thisDay;
+            /*
             Project projectObj = new Project();
-            projectObj.Release(this);
+            projectObj.Release(this);*/
+
+            UpdateProjectOverview();
         }
 
-        // CanExecute Methode für btnOpenProjectPhase & btnCreateProjectPhase
+        // CanExecute Methode für btnReleaseProject
         private bool IsProjectReleasedOne(object context)
         {
             // Solange ApprovalDate des Projektes nicht gesetzt ist, kann keine ProjectPhase angelegt oder geöffnet werden
@@ -320,19 +347,32 @@ namespace simpleproject_poc.ViewModels
         public ICommand btnOpenProjectPhase
         {
             get { return new DelegateCommand<object>(OpenProjectPhase, IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
-            set { }
+            //set { }
         }
 
         private void OpenProjectPhase(object context)
         {
-            
+            VProjectPhasePhase selectedProjectPhase = (VProjectPhasePhase)context;
+            if (selectedProjectPhase.PlannedStartdate == null || selectedProjectPhase.PlannedEnddate == null || selectedProjectPhase.PlannedReviewdate == null)
+            {
+                MessageBox.Show("Phase muss zuerst definiert & die drei Werte Startdatum geplant, Enddatum geplant und Reviewdatum geplant gesetzt werden.","Phase öffnen");
+            }
+            else
+            {
+                PhaseView phaseView = new PhaseView();
+                var contextPhaseView = (PhaseViewViewModel)phaseView.DataContext;
+                contextPhaseView.contextPhaseViewViewModel = this;
+                contextPhaseView.selectedVProjectPhasePhase = selectedProjectPhase;
+                contextPhaseView.SetPhaseValues();
+                phaseView.Show();
+            }
         }
 
         // Button Projekt Phase definieren
         public ICommand btnDefineProjectPhase
         {
             get { return new DelegateCommand<object>(DefineProjectPhase, IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
-            set { }
+            //set { }
         }
 
         private void DefineProjectPhase(object context)
@@ -340,8 +380,9 @@ namespace simpleproject_poc.ViewModels
             VProjectPhasePhase selectedProjectPhase = (VProjectPhasePhase)context;
             DefinePhaseView definePhaseView = new DefinePhaseView();
             var contextDefinePhaseView = (DefinePhaseViewViewModel)definePhaseView.DataContext;
-            contextDefinePhaseView.selectedProjectPhase = selectedProjectPhase;
             contextDefinePhaseView.contextProjectViewViewModel = this;
+            contextDefinePhaseView.selectedVProjectPhasePhase = selectedProjectPhase;
+            contextDefinePhaseView.SetPhaseValues();
             definePhaseView.Show();
         }
 

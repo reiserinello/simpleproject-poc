@@ -10,8 +10,10 @@ using System.Windows.Input;
 
 namespace simpleproject_poc.ViewModels
 {
-    class SetDatesViewViewModel : MainViewModel
+    class SetDatesViewViewModel : MainViewModel, ICloseWindows
     {
+        public Action Close { get; set; }
+
         public ProjectViewViewModel _contextProjectViewViewModel;
 
         public ProjectViewViewModel contextProjectViewViewModel
@@ -74,8 +76,19 @@ namespace simpleproject_poc.ViewModels
         {
             //var test = context;
 
+
+            /*
             Project projectObj = new Project();
-            projectObj.SetDates(_contextProjectViewViewModel, _datepickStartDate, _datepickEndDate);
+            projectObj.SetDates(datepickStartDate, datepickEndDate);
+            */
+            contextProjectViewViewModel.selectedProject.SetDates(datepickStartDate, datepickEndDate);
+
+            contextProjectViewViewModel.lblStartdate = datepickStartDate;
+            contextProjectViewViewModel.lblEnddate = datepickEndDate;
+
+            contextProjectViewViewModel.UpdateProjectOverview();
+
+            Close?.Invoke();
         }
     }
 }

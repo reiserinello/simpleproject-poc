@@ -46,22 +46,22 @@ namespace simpleproject_poc.Models
 
         public Project () { }
 
-        public void SetDates(ProjectViewViewModel t_contextProjectViewViewModel, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
+        public void SetDates(Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetProjectDates(t_contextProjectViewViewModel,t_StartDate,t_EndDate);
+            dbUpdateObj.SetProjectDates(Id,t_StartDate,t_EndDate);
         }
 
-        public void Release(ProjectViewViewModel t_contextProjectViewViewModel)
+        public void Release(Nullable<DateTime> t_approvaldate)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetProjectApprovalDate(t_contextProjectViewViewModel);
+            dbUpdateObj.SetProjectApprovalDate(Id,t_approvaldate);
         }
 
-        public void SetState(int t_pkey, int t_progress, State t_state, Priority t_priority)
+        public void SetState(int t_progress, State t_state, Priority t_priority)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetProjectState(t_pkey, t_progress, t_state, t_priority);
+            dbUpdateObj.SetProjectState(Id, t_progress, t_state, t_priority);
         }
 
         public void CreateDBProject (string t_projectname, Priority t_priority, string t_projectmanager, DateTime t_plannedstartdate, DateTime t_plannedenddate, string t_projectdocumentslink, string t_projectdescription, int t_projectmethodid)

@@ -67,7 +67,8 @@ namespace simpleproject_poc.Helper
                                     select entry;
                     foreach (var i in filteredQuery)
                     {
-                        var projectphase = new VProjectPhasePhase(i.Id,i.Phase_state,i.Phase_progress,i.Planned_startdate,i.Planned_enddate,i.Startdate,i.Enddate,i.Approval_date,i.Visum,i.Planned_reviewdate,i.Reviewdate,i.Phase_documents_link,i.Project_id,i.Phase_id,i.Phase_name);
+                        State phaseState = (State)Enum.Parse(typeof(State), i.Phase_state);
+                        var projectphase = new VProjectPhasePhase(i.Id, phaseState, i.Phase_progress,i.Planned_startdate,i.Planned_enddate,i.Startdate,i.Enddate,i.Approval_date,i.Visum,i.Planned_reviewdate,i.Reviewdate,i.Phase_documents_link,i.Project_id,i.Phase_id,i.Phase_name);
                         obReturnList.Add(projectphase);
                     }
                     break;

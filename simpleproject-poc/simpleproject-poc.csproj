@@ -79,6 +79,7 @@
     <Compile Include="ViewModels\ProjectViewViewModel.cs" />
     <Compile Include="ViewModels\SetDatesViewViewModel.cs" />
     <Compile Include="ViewModels\SetStateViewViewModel.cs" />
+    <Compile Include="ViewModels\SetVisumViewViewModel.cs" />
     <Compile Include="Views\CreateProjectView.xaml.cs">
       <DependentUpon>CreateProjectView.xaml</DependentUpon>
     </Compile>
@@ -96,6 +97,9 @@
     </Compile>
     <Compile Include="Views\SetStateView.xaml.cs">
       <DependentUpon>SetStateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SetVisumView.xaml.cs">
+      <DependentUpon>SetVisumView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\CreateProjectMethod.xaml">
       <SubType>Designer</SubType>
@@ -153,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SetStateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SetVisumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

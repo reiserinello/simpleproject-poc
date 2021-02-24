@@ -5,14 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Prism.Commands;
+using simpleproject_poc.Views;
 
 namespace simpleproject_poc.ViewModels
 {
     class PhaseViewViewModel : MainViewModel
     {
         // Context PhaseViewViewModel
-        private PhaseViewViewModel _contextPhaseViewViewModel;
-        public PhaseViewViewModel contextPhaseViewViewModel
+        private ProjectViewViewModel _contextPhaseViewViewModel;
+        public ProjectViewViewModel contextPhaseViewViewModel
         {
             get
             {
@@ -60,6 +63,19 @@ namespace simpleproject_poc.ViewModels
             // Eigenschaften von selectedVProjectPhasePhase and selectedProjectPhase zuweisen
             ProjectPhase convertToProjectPhase = new ProjectPhase(selectedVProjectPhasePhase.Id,selectedVProjectPhasePhase.PhaseState,selectedVProjectPhasePhase.PhaseProgress,selectedVProjectPhasePhase.PlannedStartdate,selectedVProjectPhasePhase.PlannedEnddate,selectedVProjectPhasePhase.Startdate,selectedVProjectPhasePhase.Enddate,selectedVProjectPhasePhase.ApprovalDate,selectedVProjectPhasePhase.Visum,selectedVProjectPhasePhase.PlannedReviewdate,selectedVProjectPhasePhase.Reviewdate,selectedVProjectPhasePhase.PhaseDocumentsLink,selectedVProjectPhasePhase.ProjectId,selectedVProjectPhasePhase.PhaseId);
             selectedProjectPhase = convertToProjectPhase;
+
+            lblPhaseName = selectedVProjectPhasePhase.PhaseName;
+            lblPhaseState = selectedProjectPhase.PhaseState;
+            lblPhaseProgress = selectedProjectPhase.PhaseProgress;
+            lblApprovalDate = selectedProjectPhase.ApprovalDate;
+            lblStartdatePlanned = selectedProjectPhase.PlannedStartdate;
+            lblEnddatePlanned = selectedProjectPhase.PlannedEnddate;
+            lblStartdate = selectedProjectPhase.Startdate;
+            lblEnddate = selectedProjectPhase.Enddate;
+            txtPhaseDocumentsLink = selectedProjectPhase.PhaseDocumentsLink;
+            lblVisum = selectedProjectPhase.Visum;
+            lblReviewdatePlanned = selectedProjectPhase.PlannedReviewdate;
+            lblReviewdate = selectedProjectPhase.Reviewdate;
         }
 
         #region Phaseninformationen
@@ -229,6 +245,37 @@ namespace simpleproject_poc.ViewModels
                 _lblReviewdate = value;
                 OnPropertyChanged("lblReviewdate");
             }
+        }
+
+        // Button Phase freigeben
+        public ICommand btnReleasePhase
+        {
+            get { return new DelegateCommand<object>(ReleasePhase, IsPhaseReleasedOne).ObservesProperty(() => lblApprovalDate); }
+        }
+
+        private void ReleasePhase(object context)
+        {
+            SetVisumView setVisumView = new SetVisumView();
+            var contextSetVisumView = (SetVisumViewViewModel)setVisumView.DataContext;
+            contextSetVisumView.contextPhaseViewViewModel = this;
+            setVisumView.Show();
+
+            //selectedProjectPhase.Release(selectedProjectPhase.Id,lblApprovalDate,lblVisum);
+        }
+
+        // CanExecute Methode für btnReleasePhase
+        private bool IsPhaseReleasedOne(object context)
+        {
+            // Solange ApprovalDate der Phase nicht gesetzt ist, kann die Phase freigegeben werden
+            if (lblApprovalDate == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         #endregion

@@ -10,8 +10,10 @@ using simpleproject_poc.Models;
 
 namespace simpleproject_poc.ViewModels
 {
-    class SetStateViewViewModel : MainViewModel
+    class SetStateViewViewModel : MainViewModel, ICloseWindows
     {
+        public Action Close { get; set; }
+
         ProjectViewViewModel _contextProjectViewViewModel;
         public ProjectViewViewModel contextProjectViewViewModel
         {
@@ -108,6 +110,10 @@ namespace simpleproject_poc.ViewModels
             contextProjectViewViewModel.lblProjectProgress = txtProgress;
             contextProjectViewViewModel.lblProjectState = cmbbxState;
             contextProjectViewViewModel.lblPriority = cmbbxPriority;
+
+            contextProjectViewViewModel.UpdateProjectOverview();
+
+            Close?.Invoke();
         }
     }
 

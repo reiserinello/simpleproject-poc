@@ -16,26 +16,14 @@ using System.Windows.Shapes;
 namespace simpleproject_poc.Views
 {
     /// <summary>
-    /// Interaktionslogik für SetState.xaml
+    /// Interaktionslogik für SetVisumView.xaml
     /// </summary>
-    public partial class SetStateView : Window
+    public partial class SetVisumView : Window
     {
-        public SetStateView()
+        public SetVisumView()
         {
             InitializeComponent();
-            DataContext = new SetStateViewViewModel();
-            Loaded += SetStateView_Loaded;
-        }
-
-        private void SetStateView_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is ICloseWindows vm)
-            {
-                vm.Close += () =>
-                {
-                    this.Close();
-                };
-            }
+            DataContext = new SetVisumViewViewModel();
         }
     }
 }

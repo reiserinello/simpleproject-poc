@@ -53,7 +53,7 @@ namespace simpleproject_poc.Helper
     class VProjectPhasePhase
     {
         public int Id { get; }
-        public string PhaseState { get; }
+        public State PhaseState { get; }
         public int PhaseProgress { get; }
         public Nullable<DateTime> PlannedStartdate { get; }
         public Nullable<DateTime> PlannedEnddate { get; }
@@ -68,7 +68,7 @@ namespace simpleproject_poc.Helper
         public int PhaseId { get; }
         public string PhaseName { get; }
 
-        public VProjectPhasePhase(int t_Id, string t_PhaseState, int t_PhaseProgress, Nullable<DateTime> t_PlannedStartdate, Nullable<DateTime> t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, Nullable<DateTime> t_ApprovalDate, string t_Visum, Nullable<DateTime> t_PlannedReviewdate, Nullable<DateTime> t_Reviewdate, string t_PhaseDocumentsLink, int t_ProjectId, int t_PhaseId, string t_PhaseName)
+        public VProjectPhasePhase(int t_Id, State t_PhaseState, int t_PhaseProgress, Nullable<DateTime> t_PlannedStartdate, Nullable<DateTime> t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, Nullable<DateTime> t_ApprovalDate, string t_Visum, Nullable<DateTime> t_PlannedReviewdate, Nullable<DateTime> t_Reviewdate, string t_PhaseDocumentsLink, int t_ProjectId, int t_PhaseId, string t_PhaseName)
         {
             Id = t_Id;
             PhaseState = t_PhaseState;

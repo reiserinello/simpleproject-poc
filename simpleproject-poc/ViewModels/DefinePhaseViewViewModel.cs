@@ -14,6 +14,7 @@ namespace simpleproject_poc.ViewModels
     {
         public Action Close { get; set; }
 
+        // Context PhaseViewViewModel
         private ProjectViewViewModel _contextProjectViewViewModel;
         public ProjectViewViewModel contextProjectViewViewModel
         {
@@ -28,8 +29,24 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        private VProjectPhasePhase _selectedProjectPhase;
-        public VProjectPhasePhase selectedProjectPhase
+        // Ausgewählte Projektphase des VProjectPhasePhase Objektes (spezielle SQL View)
+        private VProjectPhasePhase _selectedVProjectPhasePhase;
+        public VProjectPhasePhase selectedVProjectPhasePhase
+        {
+            get
+            {
+                return _selectedVProjectPhasePhase;
+            }
+            set
+            {
+                _selectedVProjectPhasePhase = value;
+                OnPropertyChanged("selectedProjectPhase");
+            }
+        }
+
+        // Ausgwählte Projektphase als richtiges Objekt (für Convert von VProjectPhasePhase)
+        private ProjectPhase _selectedProjectPhase;
+        public ProjectPhase selectedProjectPhase
         {
             get
             {
@@ -40,6 +57,17 @@ namespace simpleproject_poc.ViewModels
                 _selectedProjectPhase = value;
                 OnPropertyChanged("selectedProjectPhase");
             }
+        }
+
+        public void SetPhaseValues()
+        {
+            ProjectPhase convertToProjectPhase = new ProjectPhase(selectedVProjectPhasePhase.Id, selectedVProjectPhasePhase.PhaseState, selectedVProjectPhasePhase.PhaseProgress, selectedVProjectPhasePhase.PlannedStartdate, selectedVProjectPhasePhase.PlannedEnddate, selectedVProjectPhasePhase.Startdate, selectedVProjectPhasePhase.Enddate, selectedVProjectPhasePhase.ApprovalDate, selectedVProjectPhasePhase.Visum, selectedVProjectPhasePhase.PlannedReviewdate, selectedVProjectPhasePhase.Reviewdate, selectedVProjectPhasePhase.PhaseDocumentsLink, selectedVProjectPhasePhase.ProjectId, selectedVProjectPhasePhase.PhaseId);
+            selectedProjectPhase = convertToProjectPhase;
+
+            datepickPlannedStartdate = selectedProjectPhase.PlannedStartdate;
+            datepickPlannedEnddate = selectedProjectPhase.PlannedEnddate;
+            datepickPlannedReviewdate = selectedProjectPhase.PlannedReviewdate;
+            txtPhaseDocumentsLink = selectedProjectPhase.PhaseDocumentsLink;
         }
 
         private Nullable<DateTime> _datepickPlannedStartdate;
@@ -106,8 +134,13 @@ namespace simpleproject_poc.ViewModels
 
         private void DefinePhase(object context)
         {
-            ProjectPhase projectPhase = new ProjectPhase();
-            projectPhase.Define(selectedProjectPhase.Id,datepickPlannedStartdate,datepickPlannedEnddate,datepickPlannedReviewdate,txtPhaseDocumentsLink);
+            selectedProjectPhase.Define(datepickPlannedStartdate,datepickPlannedEnddate,datepickPlannedReviewdate,txtPhaseDocumentsLink);
+
+            DBGet dbGetObj = new DBGet();
+            var dbGetVProjectPhasePhase = dbGetObj.GeneralGet("v_Project_phase_Phase",contextProjectViewViewModel.lblProjectKey);
+            contextProjectViewViewModel.lvProjectPhase = dbGetVProjectPhasePhase;
+
+            Close?.Invoke();
         }
     }
 }

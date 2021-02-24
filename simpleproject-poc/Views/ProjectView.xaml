@@ -50,7 +50,9 @@
                         <GridView>
                             <GridViewColumn Header="Phase" DisplayMemberBinding="{Binding PhaseName}" Width="150"/>
                             <GridViewColumn Header="Status" DisplayMemberBinding="{Binding PhaseState}" Width="150"/>
-                            <GridViewColumn Header="Fortschritt" DisplayMemberBinding="{Binding PhaseProgress,StringFormat={}{0}%}" Width="150"/>
+                            <GridViewColumn Header="Fortschritt" DisplayMemberBinding="{Binding PhaseProgress,StringFormat={}{0}%}" Width="120"/>
+                            <GridViewColumn Header="Startdatum geplant" DisplayMemberBinding="{Binding PlannedStartdate}" Width="145"/>
+                            <GridViewColumn Header="Enddatum geplant" DisplayMemberBinding="{Binding PlannedEnddate}" Width="145"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

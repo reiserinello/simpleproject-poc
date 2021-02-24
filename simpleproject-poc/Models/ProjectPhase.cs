@@ -11,7 +11,7 @@ namespace simpleproject_poc.Models
     class ProjectPhase
     {
         public int Id { get; }
-        public string PhaseState { get; }
+        public State PhaseState { get; }
         public int PhaseProgress { get; }
         public Nullable<DateTime> PlannedStartdate { get; }
         public Nullable<DateTime> PlannedEnddate { get; }
@@ -25,7 +25,7 @@ namespace simpleproject_poc.Models
         public int ProjectId { get; }
         public int PhaseId { get; }
 
-        public ProjectPhase (int t_Id, string t_PhaseState, int t_PhaseProgress, Nullable<DateTime> t_PlannedStartdate, Nullable<DateTime> t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, Nullable<DateTime> t_ApprovalDate, string t_Visum, Nullable<DateTime> t_PlannedReviewdate, Nullable<DateTime> t_Reviewdate, string t_PhaseDocumentsLink, int t_ProjectId, int t_PhaseId)
+        public ProjectPhase (int t_Id, State t_PhaseState, int t_PhaseProgress, Nullable<DateTime> t_PlannedStartdate, Nullable<DateTime> t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, Nullable<DateTime> t_ApprovalDate, string t_Visum, Nullable<DateTime> t_PlannedReviewdate, Nullable<DateTime> t_Reviewdate, string t_PhaseDocumentsLink, int t_ProjectId, int t_PhaseId)
         {
             Id = t_Id;
             PhaseState = t_PhaseState;
@@ -45,10 +45,26 @@ namespace simpleproject_poc.Models
 
         public ProjectPhase() { }
 
-        public void Define(int t_pkey, Nullable<DateTime> t_plannedstartdate, Nullable<DateTime> t_plannedenddate, Nullable<DateTime> t_plannedreviewdate, string t_phasedocumentslink)
+        public void Define(Nullable<DateTime> t_plannedstartdate, Nullable<DateTime> t_plannedenddate, Nullable<DateTime> t_plannedreviewdate, string t_phasedocumentslink)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.DefineProjectPhase(t_pkey,t_plannedstartdate,t_plannedenddate,t_plannedreviewdate,t_phasedocumentslink);
+            dbUpdateObj.DefineProjectPhase(Id,t_plannedstartdate,t_plannedenddate,t_plannedreviewdate,t_phasedocumentslink);
+        }
+
+        public void Release(Nullable<DateTime> t_approvaldate, string t_visum)
+        {
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetPhaseApprovalDate(Id, t_approvaldate, t_visum);
+        }
+
+        public void SetDates()
+        {
+
+        }
+
+        public void SetState()
+        {
+
         }
 
         //SQL mapping
