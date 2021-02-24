@@ -11,6 +11,8 @@ namespace simpleproject_poc.Models
 {
     class Project
     {
+        private DBUpdate _dbUpdateObj;
+
         public int Id { get; }
         public string ProjectName { get; }
         public string ProjectDescription { get; }
@@ -42,26 +44,28 @@ namespace simpleproject_poc.Models
             ProjectProgress = t_ProjectProgress;
             ProjectDocumentsLink = t_ProjectDocumentsLink;
             ProjectMethodId = t_ProjectMethodId;
+
+            _dbUpdateObj = new DBUpdate();
         }
 
         public Project () { }
 
         public void SetDates(Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
         {
-            DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetProjectDates(Id,t_StartDate,t_EndDate);
+            //DBUpdate dbUpdateObj = new DBUpdate();
+            _dbUpdateObj.SetProjectDates(Id,t_StartDate,t_EndDate);
         }
 
         public void Release(Nullable<DateTime> t_approvaldate)
         {
-            DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetProjectApprovalDate(Id,t_approvaldate);
+            //DBUpdate dbUpdateObj = new DBUpdate();
+            _dbUpdateObj.SetProjectApprovalDate(Id,t_approvaldate);
         }
 
         public void SetState(int t_progress, State t_state, Priority t_priority)
         {
-            DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetProjectState(Id, t_progress, t_state, t_priority);
+            //DBUpdate dbUpdateObj = new DBUpdate();
+            _dbUpdateObj.SetProjectState(Id, t_progress, t_state, t_priority);
         }
 
         public void CreateDBProject (string t_projectname, Priority t_priority, string t_projectmanager, DateTime t_plannedstartdate, DateTime t_plannedenddate, string t_projectdocumentslink, string t_projectdescription, int t_projectmethodid)

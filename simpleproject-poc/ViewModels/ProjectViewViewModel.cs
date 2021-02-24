@@ -15,10 +15,10 @@ namespace simpleproject_poc.ViewModels
 {
     class ProjectViewViewModel : MainViewModel
     {
-        private DBGet _dbGetObj;
+        //private DBGet _dbGetObj;
         public ProjectViewViewModel ()
         {
-            _dbGetObj = new DBGet();
+            //_dbGetObj = new DBGet();
         }
 
         private ProjectOverviewViewModel _contextProjectOverviewViewModel;
@@ -249,8 +249,8 @@ namespace simpleproject_poc.ViewModels
 
         public void SetProjectValues()
         {
-            //DBGet dbGetObj = new DBGet();
-            var dbGetProjectMethod = _dbGetObj.GetSpecificProjectMethod(_selectedProject.ProjectMethodId);
+            DBGet dbGetObj = new DBGet();
+            var dbGetProjectMethod = dbGetObj.GetSpecificProjectMethod(_selectedProject.ProjectMethodId);
 
             lblProjectKey = _selectedProject.Id;
             lblProjectName = _selectedProject.ProjectName;
@@ -267,12 +267,13 @@ namespace simpleproject_poc.ViewModels
             txtProjectDocumentsLink = _selectedProject.ProjectDocumentsLink;
             txtbProjectDescription = _selectedProject.ProjectDescription;
 
-            lvProjectPhase = _dbGetObj.GeneralGet("v_Project_phase_Phase",_selectedProject.Id);
+            lvProjectPhase = dbGetObj.GeneralGet("v_Project_phase_Phase",_selectedProject.Id);
         }
 
         public void UpdateProjectOverview()
         {
-            contextProjectOverviewViewModel.lvProjectOverview = _dbGetObj.GeneralGet("Project", 0);
+            DBGet dbGetObj = new DBGet();
+            contextProjectOverviewViewModel.lvProjectOverview = dbGetObj.GeneralGet("Project", 0);
         }
 
         // Button Projekt freigeben

@@ -111,6 +111,11 @@ namespace simpleproject_poc.ViewModels
             contextProjectViewViewModel.lblProjectState = cmbbxState;
             contextProjectViewViewModel.lblPriority = cmbbxPriority;
 
+            //DBGet dbGetObj = new DBGet();
+            //var dbGetProject = dbGetObj.GeneralGet("Project", 0);
+
+            //contextProjectViewViewModel.contextProjectOverviewViewModel.lvProjectOverview = dbGetProject;
+
             contextProjectViewViewModel.UpdateProjectOverview();
 
             Close?.Invoke();

@@ -78,6 +78,13 @@ namespace simpleproject_poc.ViewModels
             lblReviewdate = selectedProjectPhase.Reviewdate;
         }
 
+        // Methode um Phasenliste zu updaten auf der Projektansicht
+        public void UpdatePhaseOverview()
+        {
+            DBGet dbGetObj = new DBGet();
+            contextPhaseViewViewModel.lvProjectPhase = dbGetObj.GeneralGet("v_Project_phase_Phase",contextPhaseViewViewModel.selectedProject.Id);
+        }
+
         #region Phaseninformationen
         private string _lblPhaseName;
         private State _lblPhaseState;
