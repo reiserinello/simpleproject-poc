@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleproject_poc.Views"
         mc:Ignorable="d"
-        Title="ProjectView" Height="524.041" Width="800">
+        Title="SimpleProject - Projektansicht" Height="524.041" Width="800">
     <Grid>
         <GroupBox x:Name="grpbxProjectInformation" Header="Projektinformationen" HorizontalAlignment="Left" Height="272" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
             <Grid x:Name="grdProjectInformation" HorizontalAlignment="Left" Height="236" Margin="10,10,-1.667,0" VerticalAlignment="Top" Width="753">

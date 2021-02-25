@@ -134,7 +134,7 @@ namespace simpleproject_poc.ViewModels
 
         private void DefinePhase(object context)
         {
-            selectedProjectPhase.Define(datepickPlannedStartdate,datepickPlannedEnddate,datepickPlannedReviewdate,txtPhaseDocumentsLink);
+            selectedProjectPhase.Define(datepickPlannedStartdate,datepickPlannedEnddate,datepickPlannedReviewdate,txtPhaseDocumentsLink,selectedVProjectPhasePhase.PhaseName);
 
             DBGet dbGetObj = new DBGet();
             var dbGetVProjectPhasePhase = dbGetObj.GeneralGet("v_Project_phase_Phase",contextProjectViewViewModel.lblProjectKey);

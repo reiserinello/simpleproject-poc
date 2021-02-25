@@ -27,7 +27,21 @@ namespace simpleproject_poc.ViewModels
                 OnPropertyChanged("contextProjectViewViewModel");
             }
         }
-        
+
+        PhaseViewViewModel _contextPhaseViewViewModel;
+        public PhaseViewViewModel contextPhaseViewViewModel
+        {
+            get
+            {
+                return _contextPhaseViewViewModel;
+            }
+            set
+            {
+                _contextPhaseViewViewModel = value;
+                OnPropertyChanged("contextPhaseViewViewModel");
+            }
+        }
+
         private State _cmbbxState;
         public State cmbbxState
         {
@@ -90,9 +104,41 @@ namespace simpleproject_poc.ViewModels
 
         public void InitialValuesSetter()
         {
-            _cmbbxPriority = contextProjectViewViewModel.lblPriority;
-            _cmbbxState = contextProjectViewViewModel.lblProjectState;
-            _txtProgress = contextProjectViewViewModel.lblProjectProgress;
+            if (contextProjectViewViewModel != null)
+            {
+                cmbbxPriority = contextProjectViewViewModel.lblPriority;
+                cmbbxState = contextProjectViewViewModel.lblProjectState;
+                txtProgress = contextProjectViewViewModel.lblProjectProgress;
+
+                PriorityIsEnabled = true;
+            }
+            
+            if (contextPhaseViewViewModel != null)
+            {
+                cmbbxState = contextPhaseViewViewModel.lblPhaseState;
+                txtProgress = contextPhaseViewViewModel.lblPhaseProgress;
+
+                PriorityIsEnabled = false;
+            }
+
+            
+        }
+
+        private bool _PriorityIsEnabled;
+        public bool PriorityIsEnabled
+        {
+            get { return _PriorityIsEnabled; }
+
+            set
+            {
+                if (_PriorityIsEnabled == value)
+                {
+                    return;
+                }
+
+                _PriorityIsEnabled = value;
+                OnPropertyChanged("PriorityIsEnabled");
+            }
         }
 
         public ICommand btnSetState
@@ -102,21 +148,25 @@ namespace simpleproject_poc.ViewModels
 
         private void SetState(object context)
         {
-            //var test = context;
 
-            //Project projectObj = new Project();
-            contextProjectViewViewModel.selectedProject.SetState(txtProgress, cmbbxState, cmbbxPriority);
-            //selectedProject.SetState(contextProjectViewViewModel.lblProjectKey, txtProgress, cmbbxState, cmbbxPriority);
-            contextProjectViewViewModel.lblProjectProgress = txtProgress;
-            contextProjectViewViewModel.lblProjectState = cmbbxState;
-            contextProjectViewViewModel.lblPriority = cmbbxPriority;
+            if (contextProjectViewViewModel != null)
+            {
+                contextProjectViewViewModel.selectedProject.SetState(txtProgress, cmbbxState, cmbbxPriority);
+                contextProjectViewViewModel.lblProjectProgress = txtProgress;
+                contextProjectViewViewModel.lblProjectState = cmbbxState;
+                contextProjectViewViewModel.lblPriority = cmbbxPriority;
 
-            //DBGet dbGetObj = new DBGet();
-            //var dbGetProject = dbGetObj.GeneralGet("Project", 0);
+                contextProjectViewViewModel.UpdateProjectOverview();
+            }
 
-            //contextProjectViewViewModel.contextProjectOverviewViewModel.lvProjectOverview = dbGetProject;
+            if (contextPhaseViewViewModel != null)
+            {
+                contextPhaseViewViewModel.selectedProjectPhase.SetState(txtProgress,cmbbxState);
+                contextPhaseViewViewModel.lblPhaseProgress = txtProgress;
+                contextPhaseViewViewModel.lblPhaseState = cmbbxState;
 
-            contextProjectViewViewModel.UpdateProjectOverview();
+                contextPhaseViewViewModel.UpdatePhaseOverview();
+            }
 
             Close?.Invoke();
         }

@@ -72,6 +72,29 @@ namespace simpleproject_poc.Helper
                         obReturnList.Add(projectphase);
                     }
                     break;
+                case "Milestone":
+                    Table<Milestone.dbMilestone> tblMilestone = dbConn.GetTable<Milestone.dbMilestone>();
+                    filteredQuery = from entry in tblMilestone
+                                    where entry.Project_phase_id == t_pkey_referencetable
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var ms = new Milestone(i.Id,i.Milestone_name,i.Date,i.Project_phase_id);
+                        obReturnList.Add(ms);
+                    }
+                    break;
+                case "Activity":
+                    Table<Activity.dbActivity> tblActivity = dbConn.GetTable<Activity.dbActivity>();
+                    filteredQuery = from entry in tblActivity
+                                    where entry.Project_phase_id == t_pkey_referencetable
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var activity = new Activity(i.Id,i.Activity_name,i.Planned_startdate,i.Planned_enddate,i.Startdate,i.Enddate,i.Activity_progress,i.Activity_documents_link,i.Project_phase_id,i.Employee_id);
+                        obReturnList.Add(activity);
+                    }
+                    break;
+
             }
 
             return obReturnList;

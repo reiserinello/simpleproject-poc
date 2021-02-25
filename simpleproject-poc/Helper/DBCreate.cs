@@ -93,5 +93,19 @@ namespace simpleproject_poc.Helper
                 dbConn.SubmitChanges();
             }
         }
+
+        public void MilestoneCreate(string t_milestonename, Nullable<DateTime> t_date, int t_projectphaseid)
+        {
+            Milestone.dbMilestone newMilestone = new Milestone.dbMilestone
+            {
+                Milestone_name = t_milestonename,
+                Date = t_date,
+                Project_phase_id = t_projectphaseid
+            };
+
+            Table<Milestone.dbMilestone> tblMilestone = dbConn.GetTable<Milestone.dbMilestone>();
+            tblMilestone.InsertOnSubmit(newMilestone);
+            dbConn.SubmitChanges();
+        }
     }
 }

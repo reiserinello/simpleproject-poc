@@ -14,7 +14,7 @@ namespace simpleproject_poc.ViewModels
     {
         public Action Close { get; set; }
 
-        public ProjectViewViewModel _contextProjectViewViewModel;
+        private ProjectViewViewModel _contextProjectViewViewModel;
 
         public ProjectViewViewModel contextProjectViewViewModel
         {
@@ -26,6 +26,20 @@ namespace simpleproject_poc.ViewModels
             {
                 _contextProjectViewViewModel = value;
                 OnPropertyChanged("contextProjectViewViewModel");
+            }
+        }
+
+        private PhaseViewViewModel _contextPhaseViewViewModel;
+        public PhaseViewViewModel contextPhaseViewViewModel
+        {
+            get
+            {
+                return _contextPhaseViewViewModel;
+            }
+            set
+            {
+                _contextPhaseViewViewModel = value;
+                OnPropertyChanged("contextPhaseViewViewModel");
             }
         }
 
@@ -61,9 +75,17 @@ namespace simpleproject_poc.ViewModels
         // Initial date setter
         public void InitialDateSetter()
         {
-            datepickStartDate = contextProjectViewViewModel.lblStartdate;
-            datepickEndDate = contextProjectViewViewModel.lblEnddate;
-
+            if (contextProjectViewViewModel != null)
+            {
+                datepickStartDate = contextProjectViewViewModel.lblStartdate;
+                datepickEndDate = contextProjectViewViewModel.lblEnddate;
+            }
+            
+            if (contextPhaseViewViewModel != null)
+            {
+                datepickStartDate = contextPhaseViewViewModel.lblStartdate;
+                datepickEndDate = contextPhaseViewViewModel.lblEnddate;
+            }
         }
 
         // Button Projekt freigeben
@@ -81,12 +103,26 @@ namespace simpleproject_poc.ViewModels
             Project projectObj = new Project();
             projectObj.SetDates(datepickStartDate, datepickEndDate);
             */
-            contextProjectViewViewModel.selectedProject.SetDates(datepickStartDate, datepickEndDate);
 
-            contextProjectViewViewModel.lblStartdate = datepickStartDate;
-            contextProjectViewViewModel.lblEnddate = datepickEndDate;
+            if (contextProjectViewViewModel != null)
+            {
+                contextProjectViewViewModel.selectedProject.SetDates(datepickStartDate, datepickEndDate);
 
-            contextProjectViewViewModel.UpdateProjectOverview();
+                contextProjectViewViewModel.lblStartdate = datepickStartDate;
+                contextProjectViewViewModel.lblEnddate = datepickEndDate;
+
+                contextProjectViewViewModel.UpdateProjectOverview();
+            }
+
+            if (contextPhaseViewViewModel != null)
+            {
+                contextPhaseViewViewModel.selectedProjectPhase.SetDates(datepickStartDate,datepickEndDate);
+
+                contextPhaseViewViewModel.lblStartdate = datepickStartDate;
+                contextPhaseViewViewModel.lblEnddate = datepickEndDate;
+
+                contextPhaseViewViewModel.UpdatePhaseOverview();
+            }
 
             Close?.Invoke();
         }

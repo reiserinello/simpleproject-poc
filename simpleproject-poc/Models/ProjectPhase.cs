@@ -45,10 +45,24 @@ namespace simpleproject_poc.Models
 
         public ProjectPhase() { }
 
-        public void Define(Nullable<DateTime> t_plannedstartdate, Nullable<DateTime> t_plannedenddate, Nullable<DateTime> t_plannedreviewdate, string t_phasedocumentslink)
+        public void Define(Nullable<DateTime> t_plannedstartdate, Nullable<DateTime> t_plannedenddate, Nullable<DateTime> t_plannedreviewdate, string t_phasedocumentslink, string t_phasename)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
             dbUpdateObj.DefineProjectPhase(Id,t_plannedstartdate,t_plannedenddate,t_plannedreviewdate,t_phasedocumentslink);
+
+            DBGet dbGetObj = new DBGet();
+            var checkMilestone = dbGetObj.GeneralGet("Milestone", Id);
+
+            if (checkMilestone.Count == 0)
+            {
+                if (t_plannedenddate != null)
+                {
+                    string milestoneName = t_phasename + " Ende";
+
+                    DBCreate dbCreateObj = new DBCreate();
+                    dbCreateObj.MilestoneCreate(milestoneName, t_plannedenddate,Id);
+                }
+            }
         }
 
         public void Release(Nullable<DateTime> t_approvaldate, string t_visum)
@@ -57,14 +71,16 @@ namespace simpleproject_poc.Models
             dbUpdateObj.SetPhaseApprovalDate(Id, t_approvaldate, t_visum);
         }
 
-        public void SetDates()
+        public void SetDates(Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
         {
-
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetPhaseDates(Id,t_StartDate,t_EndDate);
         }
 
-        public void SetState()
+        public void SetState(int t_progress, State t_phasestate)
         {
-
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetPhaseState(Id,t_progress,t_phasestate);
         }
 
         //SQL mapping

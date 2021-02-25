@@ -75,6 +75,10 @@ namespace simpleproject_poc.Helper
                 i.Planned_reviewdate = t_plannedreviewdate;
                 i.Phase_documents_link = t_phasedocumentslink;
             }
+
+            // Milestone create
+            
+
             dbConn.SubmitChanges();
         }
 
@@ -91,6 +95,40 @@ namespace simpleproject_poc.Helper
             {
                 i.Approval_date = t_approvaldate;
                 i.Visum = t_visum;
+            }
+            dbConn.SubmitChanges();
+        }
+
+        public void SetPhaseDates(int t_pkey, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
+        {
+            // Current date
+            //DateTime thisDay = DateTime.Today;
+
+            Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
+            var selectedProjectPhase = from entry in tblProjectPhase
+                                       where entry.Id == t_pkey
+                                       select entry;
+            foreach (var i in selectedProjectPhase)
+            {
+                i.Startdate = t_StartDate;
+                i.Enddate = t_EndDate;
+            }
+            dbConn.SubmitChanges();
+        }
+
+        public void SetPhaseState(int t_pkey, int t_progress, State t_state)
+        {
+            // Current date
+            //DateTime thisDay = DateTime.Today;
+
+            Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
+            var selectedProjectPhase = from entry in tblProjectPhase
+                                       where entry.Id == t_pkey
+                                       select entry;
+            foreach (var i in selectedProjectPhase)
+            {
+                i.Phase_progress = t_progress;
+                i.Phase_state = t_state.ToString();
             }
             dbConn.SubmitChanges();
         }
