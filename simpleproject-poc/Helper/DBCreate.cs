@@ -125,5 +125,34 @@ namespace simpleproject_poc.Helper
             tblActivity.InsertOnSubmit(newActivity);
             dbConn.SubmitChanges();
         }
+
+        public void DepartmentCreate(string t_departmentname)
+        {
+            Department.dbDepartment newDepartment = new Department.dbDepartment
+            {
+                Department_name = t_departmentname
+            };
+
+            Table<Department.dbDepartment> tblDepartment = dbConn.GetTable<Department.dbDepartment>();
+            tblDepartment.InsertOnSubmit(newDepartment);
+            dbConn.SubmitChanges();
+        }
+
+        public void EmployeeCreate(string t_name, string t_surname, int t_employeenumber, int t_workload, string t_functions, int t_departmentid)
+        {
+            Employee.dbEmployee newEmployee = new Employee.dbEmployee
+            {
+                Name = t_name,
+                Surname = t_surname,
+                Employee_number = t_employeenumber,
+                Workload = t_workload,
+                Functions = t_functions,
+                Department_id = t_departmentid
+            };
+
+            Table<Employee.dbEmployee> tblEmployee = dbConn.GetTable<Employee.dbEmployee>();
+            tblEmployee.InsertOnSubmit(newEmployee);
+            dbConn.SubmitChanges();
+        }
     }
 }

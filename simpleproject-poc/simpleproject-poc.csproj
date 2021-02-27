@@ -79,6 +79,7 @@
     <Compile Include="Models\ProjectPhase.cs" />
     <Compile Include="ViewModels\ActivityViewViewModel.cs" />
     <Compile Include="ViewModels\CreateActivityViewViewModel.cs" />
+    <Compile Include="ViewModels\CreateEmployeeViewViewModel.cs" />
     <Compile Include="ViewModels\CreateProjectViewViewModel.cs" />
     <Compile Include="ViewModels\DefinePhaseViewViewModel.cs" />
     <Compile Include="ViewModels\PhaseViewViewModel.cs" />
@@ -91,6 +92,9 @@
     </Compile>
     <Compile Include="Views\CreateActivityView.xaml.cs">
       <DependentUpon>CreateActivityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateEmployeeView.xaml.cs">
+      <DependentUpon>CreateEmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateProjectView.xaml.cs">
       <DependentUpon>CreateProjectView.xaml</DependentUpon>
@@ -118,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateActivityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

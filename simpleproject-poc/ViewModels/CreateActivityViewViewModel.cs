@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using simpleproject_poc.Helper;
 using simpleproject_poc.Models;
+using simpleproject_poc.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -114,7 +115,11 @@ namespace simpleproject_poc.ViewModels
 
         private void OpenCreateEmployeeView(object context)
         {
-
+            CreateEmployeeView createEmployeeView = new CreateEmployeeView();
+            var contextCreateEmployeeView = (CreateEmployeeViewViewModel)createEmployeeView.DataContext;
+            contextCreateEmployeeView.contextCreateActivityViewViewModel = this;
+            contextCreateEmployeeView.SetDepartments();
+            createEmployeeView.Show();
         }
 
         // Button Mitarbeiter-hinzufügen-Form öffnen
