@@ -1,0 +1,62 @@
+﻿<Window x:Class="simpleproject_poc.Views.ActivityView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:simpleproject_poc.Views"
+        mc:Ignorable="d"
+        Title="SimpleProject - Aktivitätsansicht" Height="635.52" Width="800">
+    <Grid>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Startdatum geplant:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <Label Content="Enddatum geplant:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <Label Content="Startdatum:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+        <Label Content="Enddatum:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fortschritt:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+        <Label Content="Dokumentablage:" HorizontalAlignment="Left" Margin="335,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblActivityName" Content="{Binding lblActivityName}" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label x:Name="lblPlannedStartdate" Content="{Binding lblPlannedStartdate}" HorizontalAlignment="Left" Margin="130,36,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label x:Name="lblPlannedEnddate" Content="{Binding lblPlannedEnddate}" HorizontalAlignment="Left" Margin="130,62,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label x:Name="lblStartdate" Content="{Binding lblStartdate}" HorizontalAlignment="Left" Margin="130,88,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label x:Name="lblEnddate" Content="{Binding lblEnddate}" HorizontalAlignment="Left" Margin="130,114,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label x:Name="lblActivityProgress" Content="{Binding lblActivityProgress}" HorizontalAlignment="Left" Margin="130,140,0,0" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="txtActivityDocumentsLink" HorizontalAlignment="Left" Height="26" Margin="444,10,0,0" TextWrapping="Wrap" Text="{Binding txtActivityDocumentsLink}" VerticalAlignment="Top" Width="338"/>
+        <Label Content="Verantwortlicher &#xD;&#xA;Mitarbeiter:" HorizontalAlignment="Left" Margin="335,36,0,0" VerticalAlignment="Top" Width="104" Height="52"/>
+        <ListView x:Name="lvActivityEmployee" HorizontalAlignment="Left" Height="74" Margin="444,40,0,0" VerticalAlignment="Top" Width="338" ItemsSource="{Binding lvActivityEmployee}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btnSetActivityDates" Content="Datum setzen" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Width="85" Command="{Binding btnSetActivityDates}"/>
+        <Button x:Name="btnSetActivityState" Content="Fortschritt setzen" HorizontalAlignment="Left" Margin="110,176,0,0" VerticalAlignment="Top" Width="103" Command="{Binding btnSetActivityState}"/>
+        <GroupBox Header="Externe Kosten" HorizontalAlignment="Left" Height="193" Margin="10,201,0,0" VerticalAlignment="Top" Width="772">
+            <Grid HorizontalAlignment="Left" Height="157" Margin="10,10,-2,0" VerticalAlignment="Top" Width="752">
+                <Button x:Name="btnNewExternalCost" Content="Neu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding btnNewExternalCost}"/>
+                <Button x:Name="btnOpenExternalCost" Content="Öffnen" HorizontalAlignment="Left" Margin="91,0,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenExternalCost}"/>
+                <ListView x:Name="lvExternalCost" HorizontalAlignment="Left" Margin="0,25,0,0" Width="742" ItemsSource="{Binding lvExternalCost}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Personelle Ressourcen" HorizontalAlignment="Left" Height="193" Margin="10,399,0,0" VerticalAlignment="Top" Width="772">
+            <Grid HorizontalAlignment="Left" Height="160" Margin="10,10,-2,0" VerticalAlignment="Top" Width="752">
+                <Button x:Name="btnNewEmployeeResource" Content="Neu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding btnNewEmployeeResource}"/>
+                <Button x:Name="btnOpenEmployeeResource" Content="Öffnen" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenEmployeeResource}"/>
+                <ListView x:Name="lvEmployeeResource" HorizontalAlignment="Left" Height="135" Margin="0,25,0,0" VerticalAlignment="Top" Width="742" ItemsSource="{Binding lvEmployeeResource}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

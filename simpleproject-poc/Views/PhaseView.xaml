@@ -64,7 +64,7 @@
                     </ListView.View>
                 </ListView>
                 <Button x:Name="btnOpenActivity" Content="Öffnen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenActivity}" CommandParameter="{Binding SelectedItem,ElementName=lvActivity}"/>
-                <Button x:Name="btnCreateActivity"  Content="Erstellen" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateActivity}" CommandParameter="{Binding SelectedItem,ElementName=lvActivity}"/>
+                <Button x:Name="btnCreateActivity"  Content="Erstellen" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateActivity}" />
                 <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
             </Grid>
         </GroupBox>

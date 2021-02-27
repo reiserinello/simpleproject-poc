@@ -426,7 +426,15 @@ namespace simpleproject_poc.ViewModels
 
         private void OpenActivity(object context)
         {
-            
+            var selectedActivity = (Activity)context;
+
+            ActivityView activityView = new ActivityView();
+
+            var contextActivityView = (ActivityViewViewModel)activityView.DataContext;
+            contextActivityView.contextPhaseViewViewModel = this;
+            contextActivityView.selectedActivity = selectedActivity;
+            contextActivityView.SetActivityValues();
+            activityView.Show();
         }
 
         // Button Aktivität öffnen
