@@ -7,49 +7,6 @@ using System.Threading.Tasks;
 
 namespace simpleproject_poc.Helper
 {
-    class VProjectProjectMethod
-    {
-        public int Id { get; }
-        public string ProjectName { get; }
-        public string MethodName { get; }
-        public string Priority { get; }
-        public int ProjectProgress { get; }
-
-        public VProjectProjectMethod (int t_Id, string t_ProjectName, string t_MethodName, string t_Priority, int t_ProjectProgress)
-        {
-            Id = t_Id;
-            ProjectName = t_ProjectName;
-            MethodName = t_MethodName;
-            Priority = t_Priority;
-            ProjectProgress = t_ProjectProgress;
-        }
-
-        [Table(Name = "v_Project_Project_method")]
-        public class dbVProjectProjectMethod
-        {
-            //Mapper auf Primary Key
-            [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
-            public int Id
-            {
-                get;
-                set;
-            }
-
-            //Mapper auf Feld Name der Gruppe
-            [Column]
-            public string Project_name;
-
-            [Column]
-            public string Method_name;
-
-            [Column]
-            public string Priority;
-
-            [Column]
-            public int Project_progress;
-        }
-    }
-
     class VProjectPhasePhase
     {
         public int Id { get; }
@@ -141,6 +98,60 @@ namespace simpleproject_poc.Helper
 
             [Column]
             public string Phase_name;
+        }
+    }
+
+    class VEmployeeDepartment
+    {
+        public int Id { get; }
+        public int EmployeeNumber { get; }
+        public string Name { get; }
+        public string Surname { get; }
+        public int Workload { get; }
+        public string Functions { get; }
+        public string DepartmentName { get; }
+
+        public VEmployeeDepartment(int t_Id, int t_EmployeeNumber, string t_Name, string t_Surname, int t_Workload, string t_Functions, string t_DepartmentName)
+        {
+            Id = t_Id;
+            EmployeeNumber = t_EmployeeNumber;
+            Name = t_Name;
+            Surname = t_Surname;
+            Workload = t_Workload;
+            Functions = t_Functions;
+            DepartmentName = t_DepartmentName;
+        }
+
+        //SQL mapping
+        [Table(Name = "v_Employee_Department")]
+        public class dbVEmployeeDepartment
+        {
+            //Mapper auf Primary Key
+            [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
+            public int Id
+            {
+                get;
+                set;
+            }
+
+            //Mapper auf Eigenschaftsname
+            [Column]
+            public int Employee_number;
+
+            [Column]
+            public string Name;
+
+            [Column]
+            public string Surname;
+
+            [Column]
+            public int Workload;
+
+            [Column]
+            public string Functions;
+
+            [Column]
+            public string Department_name;
         }
     }
 }

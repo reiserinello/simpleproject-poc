@@ -94,7 +94,37 @@ namespace simpleproject_poc.Helper
                         obReturnList.Add(activity);
                     }
                     break;
-
+                case "Employee":
+                    Table<Employee.dbEmployee> tblEmployee = dbConn.GetTable<Employee.dbEmployee>();
+                    filteredQuery = from entry in tblEmployee
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var employee = new Employee(i.Id,i.Employee_number,i.Name,i.Surname,i.Workload,i.Functions,i.Department_id);
+                        obReturnList.Add(employee);
+                    }
+                    break;
+                case "v_Employee_Department":
+                    Table<VEmployeeDepartment.dbVEmployeeDepartment> tblAssignedEmployeeDepartment = dbConn.GetTable<VEmployeeDepartment.dbVEmployeeDepartment>();
+                    filteredQuery = from entry in tblAssignedEmployeeDepartment
+                                    where entry.Id == t_pkey_referencetable
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var employee = new VEmployeeDepartment(i.Id, i.Employee_number, i.Name, i.Surname, i.Workload, i.Functions, i.Department_name);
+                        obReturnList.Add(employee);
+                    }
+                    break;
+                case "Department":
+                    Table<Department.dbDepartment> tblDepartment = dbConn.GetTable<Department.dbDepartment>();
+                    filteredQuery = from entry in tblDepartment
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var department = new Department(i.Id,i.Department_name);
+                        obReturnList.Add(department);
+                    }
+                    break;
             }
 
             return obReturnList;

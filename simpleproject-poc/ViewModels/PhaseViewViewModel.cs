@@ -102,6 +102,12 @@ namespace simpleproject_poc.ViewModels
             lvActivity = dbGetObj.GeneralGet("Activity",selectedProjectPhase.Id);
         }
 
+        public void OpenNewestActivity()
+        {
+            var newestActivity = lvActivity.Last();
+            OpenActivity(newestActivity);
+        }
+
         #region Phaseninformationen
         private string _lblPhaseName;
         private State _lblPhaseState;
@@ -445,7 +451,11 @@ namespace simpleproject_poc.ViewModels
 
         private void CreateActivity(object context)
         {
-
+            CreateActivityView createActivityView = new CreateActivityView();
+            var contextCreateActivityView = (CreateActivityViewViewModel)createActivityView.DataContext;
+            contextCreateActivityView.contextPhaseViewViewModel = this;
+            contextCreateActivityView.SetEmployeeValues();
+            createActivityView.Show();
         }
 
         // CanExecute Methode für btnOpenActivity & btnCreateActivity

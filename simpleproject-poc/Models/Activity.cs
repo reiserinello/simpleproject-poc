@@ -34,6 +34,8 @@ namespace simpleproject_poc.Models
             EmployeeId = t_EmployeeId;
         }
 
+        
+
         //SQL mapping
         [Table(Name = "Activity")]
         public class dbActivity

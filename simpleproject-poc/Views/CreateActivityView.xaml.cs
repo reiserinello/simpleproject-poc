@@ -24,6 +24,18 @@ namespace simpleproject_poc.Views
         {
             InitializeComponent();
             DataContext = new CreateActivityViewViewModel();
+            Loaded += CreateActivityView_Loaded;
+        }
+
+        private void CreateActivityView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ICloseWindows vm)
+            {
+                vm.Close += () =>
+                {
+                    this.Close();
+                };
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Prism.Commands;
+using simpleproject_poc.Helper;
 using simpleproject_poc.Models;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,9 @@ namespace simpleproject_poc.ViewModels
 
         public void SetActivityValues()
         {
+            DBGet dbGetObj = new DBGet();
+            lvActivityEmployee = dbGetObj.GeneralGet("v_Employee_Department",selectedActivity.EmployeeId);
+
             lblActivityName = selectedActivity.ActivityName;
             lblPlannedStartdate = selectedActivity.PlannedStartdate;
             lblPlannedEnddate = selectedActivity.PlannedEnddate;

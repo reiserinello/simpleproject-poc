@@ -1,16 +1,21 @@
 ﻿using Prism.Commands;
+using simpleproject_poc.Helper;
+using simpleproject_poc.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace simpleproject_poc.ViewModels
 {
-    class CreateActivityViewViewModel : MainViewModel
+    class CreateActivityViewViewModel : MainViewModel, ICloseWindows
     {
+        public Action Close { get; set; }
+
         private PhaseViewViewModel _contextPhaseViewViewModel;
         public PhaseViewViewModel contextPhaseViewViewModel
         {
@@ -27,7 +32,8 @@ namespace simpleproject_poc.ViewModels
 
         public void SetEmployeeValues()
         {
-
+            DBGet dbGetObj = new DBGet();
+            lvEmployee = dbGetObj.GeneralGet("Employee",0);
         }
 
         private string _txtActivityName;
@@ -119,7 +125,23 @@ namespace simpleproject_poc.ViewModels
 
         private void CreateActivity(object context)
         {
+            var selectedEmployee = (Employee)context;
 
+            if (txtActivityName == null || datepickPlannedStartdate == null || datepickPlannedEnddate == null || selectedEmployee == null)
+            {
+                MessageBox.Show("Bitte Felder Name, geplantes Startdatum, geplantes Enddatum ausfüllen und einen Mitarbeiter auswählen.", "Aktivität erstellen");
+            } 
+            else
+            {
+                DBCreate dbCreateObj = new DBCreate();
+                dbCreateObj.ActivityCreate(txtActivityName,datepickPlannedStartdate,datepickPlannedEnddate,txtActivityDocumentsLink,contextPhaseViewViewModel.selectedProjectPhase.Id,selectedEmployee.Id);
+
+                contextPhaseViewViewModel.SetActivityView();
+
+                contextPhaseViewViewModel.OpenNewestActivity();
+
+                Close?.Invoke();
+            }
         }
 
     }

@@ -25,7 +25,12 @@
         <ListView x:Name="lvActivityEmployee" HorizontalAlignment="Left" Height="74" Margin="444,40,0,0" VerticalAlignment="Top" Width="338" ItemsSource="{Binding lvActivityEmployee}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="100"/>
+                    <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Surname}" Width="100"/>
+                    <GridViewColumn Header="Mitarbeiternummer" DisplayMemberBinding="{Binding EmployeeNumber}" Width="120"/>
+                    <GridViewColumn Header="Pensum" DisplayMemberBinding="{Binding Workload}" Width="100"/>
+                    <GridViewColumn Header="Funktionen" DisplayMemberBinding="{Binding Functions}" Width="100"/>
+                    <GridViewColumn Header="Abteilung" DisplayMemberBinding="{Binding DepartmentName}" Width="100"/>
                 </GridView>
             </ListView.View>
         </ListView>

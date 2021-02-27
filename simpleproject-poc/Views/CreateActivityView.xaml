@@ -15,20 +15,23 @@
         <DatePicker x:Name="datepickPlannedStartdate" HorizontalAlignment="Left" Margin="130,36,0,0" VerticalAlignment="Top" Width="200" Height="26" SelectedDate="{Binding datepickPlannedStartdate}"/>
         <DatePicker x:Name="datepickPlannedEnddate" HorizontalAlignment="Left" Margin="130,62,0,0" VerticalAlignment="Top" Width="200" Height="26" SelectedDate="{Binding datepickPlannedEnddate}"/>
         <TextBox x:Name="txtActivityDocumentsLink" HorizontalAlignment="Left" Height="26" Margin="130,88,0,0" TextWrapping="Wrap" Text="{Binding txtActivityDocumentsLink}" VerticalAlignment="Top" Width="200"/>
-        <GroupBox Header="Mitarbeiter" HorizontalAlignment="Left" Height="152" Margin="335,10,0,0" VerticalAlignment="Top" Width="447">
+        <GroupBox Header="Verantwortlicher Mitarbeiter" HorizontalAlignment="Left" Height="152" Margin="335,10,0,0" VerticalAlignment="Top" Width="447">
             <Grid HorizontalAlignment="Left" Height="127" VerticalAlignment="Top" Width="437" Margin="0,0,-2,0">
                 <ListView x:Name="lvEmployee" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="437" ItemsSource="{Binding lvEmployee}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="100"/>
+                            <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Surname}" Width="100"/>
+                            <GridViewColumn Header="Funktionen" DisplayMemberBinding="{Binding Functions}" Width="100"/>
+                            <GridViewColumn Header="Pensum" DisplayMemberBinding="{Binding Workload}" Width="100"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button x:Name="btnOpenCreateEmployeeView" Content="Hinzufügen" HorizontalAlignment="Left" Margin="352,105,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenCreateEmployeeView}"/>
+                <Button x:Name="btnOpenCreateEmployeeView" Content="Hinzufügen" HorizontalAlignment="Left" Margin="362,105,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenCreateEmployeeView}"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="btnCreateActivity" Content="Erstellen" HorizontalAlignment="Left" Margin="693,167,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateActivity}"/>
-        
+        <Button x:Name="btnCreateActivity" Content="Erstellen" HorizontalAlignment="Left" Margin="703,167,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateActivity}" CommandParameter="{Binding SelectedItem,ElementName=lvEmployee}"/>
+
 
     </Grid>
 </Window>

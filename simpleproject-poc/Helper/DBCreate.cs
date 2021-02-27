@@ -107,5 +107,23 @@ namespace simpleproject_poc.Helper
             tblMilestone.InsertOnSubmit(newMilestone);
             dbConn.SubmitChanges();
         }
+
+        public void ActivityCreate(string t_activityname, DateTime t_plannedstartdate, DateTime t_plannedenddate, string t_activitydocumentslink, int t_projectphaseid, int t_employeeid)
+        {
+            Activity.dbActivity newActivity = new Activity.dbActivity
+            {
+                Activity_name = t_activityname,
+                Planned_startdate = t_plannedstartdate,
+                Planned_enddate = t_plannedenddate,
+                Activity_documents_link = t_activitydocumentslink,
+                Activity_progress = 0,
+                Project_phase_id = t_projectphaseid,
+                Employee_id = t_employeeid
+            };
+
+            Table<Activity.dbActivity> tblActivity = dbConn.GetTable<Activity.dbActivity>();
+            tblActivity.InsertOnSubmit(newActivity);
+            dbConn.SubmitChanges();
+        }
     }
 }
