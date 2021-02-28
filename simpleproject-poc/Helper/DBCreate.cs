@@ -154,5 +154,57 @@ namespace simpleproject_poc.Helper
             tblEmployee.InsertOnSubmit(newEmployee);
             dbConn.SubmitChanges();
         }
+
+        public void CostTypeCreate(string t_costtypename)
+        {
+            CostType.dbCostType newCostType = new CostType.dbCostType
+            {
+                Cost_type_name = t_costtypename
+            };
+
+            Table<CostType.dbCostType> tblCostType = dbConn.GetTable<CostType.dbCostType>();
+            tblCostType.InsertOnSubmit(newCostType);
+            dbConn.SubmitChanges();
+        }
+
+        public void ExternalCostCreate(int t_budgetcost, int t_costtypeid, int t_activityid)
+        {
+            ExternalCost.dbExternalCost newExternalCost = new ExternalCost.dbExternalCost
+            {
+                Budget_cost = t_budgetcost,
+                Cost_type_id = t_costtypeid,
+                Activity_id = t_activityid
+            };
+
+            Table<ExternalCost.dbExternalCost> tblExternalCost = dbConn.GetTable<ExternalCost.dbExternalCost>();
+            tblExternalCost.InsertOnSubmit(newExternalCost);
+            dbConn.SubmitChanges();
+        }
+
+        public void FunctionCreate(string t_functionname)
+        {
+            Function.dbFunction newFunction = new Function.dbFunction
+            {
+                Function_name = t_functionname
+            };
+
+            Table<Function.dbFunction> tblFunction = dbConn.GetTable<Function.dbFunction>();
+            tblFunction.InsertOnSubmit(newFunction);
+            dbConn.SubmitChanges();
+        }
+
+        public void EmployeeResourceCreate(int t_budgettime, int t_functionid, int t_activityid)
+        {
+            EmployeeResource.dbEmployeeResource newEmployeeResource = new EmployeeResource.dbEmployeeResource
+            {
+                Budget_time = t_budgettime,
+                Function_id = t_functionid,
+                Activity_id = t_activityid
+            };
+
+            Table<EmployeeResource.dbEmployeeResource> tblEmployeeResource = dbConn.GetTable<EmployeeResource.dbEmployeeResource>();
+            tblEmployeeResource.InsertOnSubmit(newEmployeeResource);
+            dbConn.SubmitChanges();
+        }
     }
 }

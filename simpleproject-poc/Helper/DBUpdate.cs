@@ -132,5 +132,33 @@ namespace simpleproject_poc.Helper
             }
             dbConn.SubmitChanges();
         }
+
+        public void SetExternalCost(int t_pkey, Nullable<int> t_effectivecost, string t_deviation)
+        {
+            Table<ExternalCost.dbExternalCost> tblExternalCost = dbConn.GetTable<ExternalCost.dbExternalCost>();
+            var selectedExternalCost = from entry in tblExternalCost
+                                       where entry.Id == t_pkey
+                                       select entry;
+            foreach (var i in selectedExternalCost)
+            {
+                i.Effective_cost = t_effectivecost;
+                i.Deviation = t_deviation;
+            }
+            dbConn.SubmitChanges();
+        }
+
+        public void SetEmployeeResource(int t_pkey, Nullable<int> t_effectivetime, string t_deviation)
+        {
+            Table<EmployeeResource.dbEmployeeResource> tblEmployeeResource = dbConn.GetTable<EmployeeResource.dbEmployeeResource>();
+            var selectedExternalCost = from entry in tblEmployeeResource
+                                       where entry.Id == t_pkey
+                                       select entry;
+            foreach (var i in selectedExternalCost)
+            {
+                i.Effective_time = t_effectivetime;
+                i.Deviation = t_deviation;
+            }
+            dbConn.SubmitChanges();
+        }
     }
 }

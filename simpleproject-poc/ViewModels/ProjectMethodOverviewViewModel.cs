@@ -16,11 +16,6 @@ namespace simpleproject_poc.ViewModels
         public ObservableCollection<dynamic> _lvPhase;
         public string _lblProjectMethodName;
 
-        public ProjectMethodOverviewViewModel()
-        {
-            
-        }
-
         ProjectMethod _selectedProjectMethod;
         public ProjectMethod selectedProjectMethod
         {

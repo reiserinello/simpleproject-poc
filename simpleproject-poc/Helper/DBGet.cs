@@ -125,6 +125,48 @@ namespace simpleproject_poc.Helper
                         obReturnList.Add(department);
                     }
                     break;
+                case "Cost_type":
+                    Table<CostType.dbCostType> tblCostType = dbConn.GetTable<CostType.dbCostType>();
+                    filteredQuery = from entry in tblCostType
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var costtype = new CostType(i.Id,i.Cost_type_name);
+                        obReturnList.Add(costtype);
+                    }
+                    break;
+                case "v_External_cost_Cost_type":
+                    Table<VExternalCostCostType.dbVExternalCostCostType> tblVExternalCost = dbConn.GetTable<VExternalCostCostType.dbVExternalCostCostType>();
+                    filteredQuery = from entry in tblVExternalCost
+                                    where entry.Activity_id == t_pkey_referencetable
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var externalcost = new VExternalCostCostType(i.Id,i.Budget_cost,i.Effective_cost,i.Deviation,i.Cost_type_name,i.Cost_type_id,i.Activity_id);
+                        obReturnList.Add(externalcost);
+                    }
+                    break;
+                case "Function":
+                    Table<Function.dbFunction> tblFunction = dbConn.GetTable<Function.dbFunction>();
+                    filteredQuery = from entry in tblFunction
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var function = new Function(i.Id, i.Function_name);
+                        obReturnList.Add(function);
+                    }
+                    break;
+                case "v_Employee_resource_Function":
+                    Table<VEmployeeResourceFunction.dbVEmployeeResourceFunction> tblVEmployeeResource = dbConn.GetTable<VEmployeeResourceFunction.dbVEmployeeResourceFunction>();
+                    filteredQuery = from entry in tblVEmployeeResource
+                                    where entry.Activity_id == t_pkey_referencetable
+                                    select entry;
+                    foreach (var i in filteredQuery)
+                    {
+                        var employeeresource = new VEmployeeResourceFunction(i.Id, i.Budget_time, i.Effective_time, i.Deviation, i.Function_name, i.Function_id, i.Activity_id);
+                        obReturnList.Add(employeeresource);
+                    }
+                    break;
             }
 
             return obReturnList;

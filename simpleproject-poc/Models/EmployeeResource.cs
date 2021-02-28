@@ -8,34 +8,35 @@ using System.Threading.Tasks;
 
 namespace simpleproject_poc.Models
 {
-    class ExternalCost
+    class EmployeeResource
     {
         public int Id { get; }
-        public int BudgetCost { get; }
-        public Nullable<int> EffectiveCost { get; }
+        public int BudgetTime { get; }
+        public Nullable<int> EffectiveTime { get; }
         public string Deviation { get; }
-        public int CostTypeId { get; }
+        public int FunctionId { get; }
         public int ActivityId { get; }
 
-        public ExternalCost(int t_Id, int t_BudgetCost, Nullable<int> t_EffectiveCost, string t_Deviation, int t_CostTypeId, int t_ActivityId)
+        public EmployeeResource(int t_Id, int t_BudgetTime, Nullable<int> t_EffectiveTime, string t_Deviation, int t_FunctionId, int t_ActivityId)
         {
             Id = t_Id;
-            BudgetCost = t_BudgetCost;
-            EffectiveCost = t_EffectiveCost;
+            BudgetTime = t_BudgetTime;
+            EffectiveTime = t_EffectiveTime;
             Deviation = t_Deviation;
-            CostTypeId = t_CostTypeId;
+            FunctionId = t_FunctionId;
             ActivityId = t_ActivityId;
         }
 
-        public void SetCost(Nullable<int> t_EffectiveCost, string t_Deviation)
+        public void SetTime(Nullable<int> t_EffectiveTime, string t_Deviation)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetExternalCost(Id,t_EffectiveCost,t_Deviation);
+            dbUpdateObj.SetEmployeeResource(Id, t_EffectiveTime, t_Deviation);
+            //dbUpdateObj.SetExternalCost(Id, t_EffectiveCost, t_Deviation);
         }
 
         //SQL mapping
-        [Table(Name = "External_cost")]
-        public class dbExternalCost
+        [Table(Name = "Employee_resource")]
+        public class dbEmployeeResource
         {
             //Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
@@ -47,16 +48,16 @@ namespace simpleproject_poc.Models
 
             //Mapper auf Feld Name der Gruppe
             [Column]
-            public int Budget_cost;
+            public int Budget_time;
 
             [Column(CanBeNull = true)]
-            public Nullable<int> Effective_cost;
+            public Nullable<int> Effective_time;
 
             [Column]
             public string Deviation;
 
             [Column]
-            public int Cost_type_id;
+            public int Function_id;
 
             [Column]
             public int Activity_id;

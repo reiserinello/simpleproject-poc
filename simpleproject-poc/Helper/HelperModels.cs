@@ -208,4 +208,58 @@ namespace simpleproject_poc.Helper
             public int Activity_id;
         }
     }
+
+    class VEmployeeResourceFunction
+    {
+        public int Id { get; }
+        public int BudgetTime { get; }
+        public Nullable<int> EffectiveTime { get; }
+        public string Deviation { get; }
+        public string FunctionName { get; }
+        public int FunctionId { get; }
+        public int ActivityId { get; }
+
+        public VEmployeeResourceFunction(int t_Id, int t_BudgetTime, Nullable<int> t_EffectiveTime, string t_Deviation, string t_FunctionName, int t_FunctionId, int t_ActivityId)
+        {
+            Id = t_Id;
+            BudgetTime = t_BudgetTime;
+            EffectiveTime = t_EffectiveTime;
+            Deviation = t_Deviation;
+            FunctionName = t_FunctionName;
+            FunctionId = t_FunctionId;
+            ActivityId = t_ActivityId;
+        }
+
+        //SQL mapping
+        [Table(Name = "v_Employee_resource_Function")]
+        public class dbVEmployeeResourceFunction
+        {
+            //Mapper auf Primary Key
+            [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
+            public int Id
+            {
+                get;
+                set;
+            }
+
+            //Mapper auf Eigenschaftsname
+            [Column]
+            public int Budget_time;
+
+            [Column(CanBeNull = true)]
+            public Nullable<int> Effective_time;
+
+            [Column]
+            public string Deviation;
+
+            [Column]
+            public string Function_name;
+
+            [Column]
+            public int Function_id;
+
+            [Column]
+            public int Activity_id;
+        }
+    }
 }

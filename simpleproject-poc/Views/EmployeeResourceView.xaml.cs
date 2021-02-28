@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace simpleproject_poc.Views
 {
     /// <summary>
-    /// Interaktionslogik für ExternalCostView.xaml
+    /// Interaktionslogik für EmployeeResourceView.xaml
     /// </summary>
-    public partial class ExternalCostView : Window
+    public partial class EmployeeResourceView : Window
     {
-        public ExternalCostView()
+        public EmployeeResourceView()
         {
             InitializeComponent();
-            DataContext = new ExternalCostViewViewModel();
-            Loaded += ExternalCostView_Loaded;
+            DataContext = new EmployeeResourceViewViewModel();
+            Loaded += EmployeeResourceView_Loaded;
         }
 
-        private void ExternalCostView_Loaded(object sender, RoutedEventArgs e)
+        private void EmployeeResourceView_Loaded(object sender, RoutedEventArgs e)
         {
             if (DataContext is ICloseWindows vm)
             {

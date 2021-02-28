@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using simpleproject_poc.Helper;
 using simpleproject_poc.Models;
+using simpleproject_poc.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -53,6 +54,21 @@ namespace simpleproject_poc.ViewModels
             lblEnddate = selectedActivity.Enddate;
             lblActivityProgress = selectedActivity.ActivityProgress;
             txtActivityDocumentsLink = selectedActivity.ActivityDocumentsLink;
+
+            UpdateExternalCost();
+            UpdateEmployeeResource();
+        }
+
+        public void UpdateExternalCost()
+        {
+            DBGet dbGetObj = new DBGet();
+            lvExternalCost = dbGetObj.GeneralGet("v_External_cost_Cost_type",selectedActivity.Id);
+        }
+
+        public void UpdateEmployeeResource()
+        {
+            DBGet dbGetObj = new DBGet();
+            lvEmployeeResource = dbGetObj.GeneralGet("v_Employee_resource_Function", selectedActivity.Id);
         }
 
         #region Aktivitätsinformationen
@@ -201,7 +217,11 @@ namespace simpleproject_poc.ViewModels
 
         private void NewExternalCost(object context)
         {
-
+            ExternalCostView externalCostView = new ExternalCostView();
+            var contextExternalCostView = (ExternalCostViewViewModel)externalCostView.DataContext;
+            contextExternalCostView.contextActivityViewViewModel = this;
+            contextExternalCostView.InitialSet();
+            externalCostView.Show();
         }
 
         // Button externe Kosten öffnen
@@ -212,7 +232,14 @@ namespace simpleproject_poc.ViewModels
 
         private void OpenExternalCost(object context)
         {
+            var selectedExternalCost = (VExternalCostCostType)context;
 
+            ExternalCostView externalCostView = new ExternalCostView();
+            var contextExternalCostView = (ExternalCostViewViewModel)externalCostView.DataContext;
+            contextExternalCostView.contextActivityViewViewModel = this;
+            contextExternalCostView.selectedVExternalCost = selectedExternalCost;
+            contextExternalCostView.InitialSet();
+            externalCostView.Show();
         }
 
         private ObservableCollection<dynamic> _lvExternalCost;
@@ -242,7 +269,11 @@ namespace simpleproject_poc.ViewModels
 
         private void NewEmployeeResource(object context)
         {
-
+            EmployeeResourceView employeeResourceView = new EmployeeResourceView();
+            var contextEmployeeResourceView = (EmployeeResourceViewViewModel)employeeResourceView.DataContext;
+            contextEmployeeResourceView.contextActivityViewViewModel = this;
+            contextEmployeeResourceView.InitialSet();
+            employeeResourceView.Show();
         }
 
         // Button personelle Ressource öffnen
@@ -253,7 +284,28 @@ namespace simpleproject_poc.ViewModels
 
         private void OpenEmployeeResource(object context)
         {
+            var selectedEmployeeResource = (VEmployeeResourceFunction)context;
 
+            EmployeeResourceView employeeResourceView = new EmployeeResourceView();
+            var contextEmployeeResourceView = (EmployeeResourceViewViewModel)employeeResourceView.DataContext;
+            contextEmployeeResourceView.contextActivityViewViewModel = this;
+            contextEmployeeResourceView.selectedVEmployeeResource = selectedEmployeeResource;
+            contextEmployeeResourceView.InitialSet();
+            employeeResourceView.Show();
+        }
+
+        private ObservableCollection<dynamic> _lvEmployeeResource;
+        public ObservableCollection<dynamic> lvEmployeeResource
+        {
+            get
+            {
+                return _lvEmployeeResource;
+            }
+            set
+            {
+                _lvEmployeeResource = value;
+                OnPropertyChanged("lvEmployeeResource");
+            }
         }
         #endregion
     }

@@ -39,11 +39,13 @@
         <GroupBox Header="Externe Kosten" HorizontalAlignment="Left" Height="193" Margin="10,201,0,0" VerticalAlignment="Top" Width="772">
             <Grid HorizontalAlignment="Left" Height="157" Margin="10,10,-2,0" VerticalAlignment="Top" Width="752">
                 <Button x:Name="btnNewExternalCost" Content="Neu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding btnNewExternalCost}"/>
-                <Button x:Name="btnOpenExternalCost" Content="Öffnen" HorizontalAlignment="Left" Margin="91,0,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenExternalCost}"/>
+                <Button x:Name="btnOpenExternalCost" Content="Öffnen" HorizontalAlignment="Left" Margin="91,0,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenExternalCost}" CommandParameter="{Binding SelectedItem,ElementName=lvExternalCost}"/>
                 <ListView x:Name="lvExternalCost" HorizontalAlignment="Left" Margin="0,25,0,0" Width="742" ItemsSource="{Binding lvExternalCost}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="Kostenart" DisplayMemberBinding="{Binding CostTypeName}" Width="200"/>
+                            <GridViewColumn Header="Budget" DisplayMemberBinding="{Binding BudgetCost,StringFormat={}{0} Fr.}" Width="200"/>
+                            <GridViewColumn Header="Effektive Kosten" DisplayMemberBinding="{Binding EffectiveCost,StringFormat={}{0} Fr.}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -52,11 +54,13 @@
         <GroupBox Header="Personelle Ressourcen" HorizontalAlignment="Left" Height="193" Margin="10,399,0,0" VerticalAlignment="Top" Width="772">
             <Grid HorizontalAlignment="Left" Height="160" Margin="10,10,-2,0" VerticalAlignment="Top" Width="752">
                 <Button x:Name="btnNewEmployeeResource" Content="Neu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding btnNewEmployeeResource}"/>
-                <Button x:Name="btnOpenEmployeeResource" Content="Öffnen" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenEmployeeResource}"/>
+                <Button x:Name="btnOpenEmployeeResource" Content="Öffnen" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenEmployeeResource}" CommandParameter="{Binding SelectedItem,ElementName=lvEmployeeResource}"/>
                 <ListView x:Name="lvEmployeeResource" HorizontalAlignment="Left" Height="135" Margin="0,25,0,0" VerticalAlignment="Top" Width="742" ItemsSource="{Binding lvEmployeeResource}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="Funktion" DisplayMemberBinding="{Binding FunctionName}" Width="200"/>
+                            <GridViewColumn Header="Budget" DisplayMemberBinding="{Binding BudgetTime,StringFormat={}{0} Std.}" Width="200"/>
+                            <GridViewColumn Header="Effektive Zeit" DisplayMemberBinding="{Binding EffectiveTime,StringFormat={}{0} Std.}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

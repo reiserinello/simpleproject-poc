@@ -9,25 +9,25 @@
     <Grid>
         <GroupBox Header="Kostenart auswählen" HorizontalAlignment="Left" Height="163" Margin="10,10,0,0" VerticalAlignment="Top" Width="409">
             <Grid HorizontalAlignment="Left" Height="130" Margin="10,10,0,0" VerticalAlignment="Top" Width="376">
-                <ListView x:Name="lvCostType" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="376" ItemsSource="{Binding lvCostType}">
+                <ListView x:Name="lvCostType" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="376" ItemsSource="{Binding lvCostType}" IsEnabled="{Binding CreateFieldsEnabled}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="Kostenart" DisplayMemberBinding="{Binding CostTypeName}" Width="250"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <TextBox x:Name="txtCostTypeToAdd" HorizontalAlignment="Left" Height="23" Margin="0,105,0,0" TextWrapping="Wrap" Text="{Binding txtCostTypeToAdd}" VerticalAlignment="Top" Width="296"/>
+                <TextBox x:Name="txtCostTypeToAdd" HorizontalAlignment="Left" Height="23" Margin="0,105,0,0" TextWrapping="Wrap" Text="{Binding txtCostTypeToAdd}" VerticalAlignment="Top" Width="296" IsEnabled="{Binding CreateFieldsEnabled}"/>
                 <Button x:Name="btnAddCostType" Content="Hinzufügen" HorizontalAlignment="Left" Margin="301,105,0,0" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding btnAddCostType}"/>
             </Grid>
         </GroupBox>
         <Label Content="Kosten geplant:" HorizontalAlignment="Left" Margin="10,178,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtCostPlanned" HorizontalAlignment="Left" Height="26" Margin="107,178,0,0" TextWrapping="Wrap" Text="{Binding txtCostPlanned}" VerticalAlignment="Top" Width="312"/>
+        <TextBox x:Name="txtCostPlanned" HorizontalAlignment="Left" Height="26" Margin="107,178,0,0" TextWrapping="Wrap" Text="{Binding txtCostPlanned}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding CreateFieldsEnabled}"/>
         <Label Content="CHF" HorizontalAlignment="Left" Margin="424,178,0,0" VerticalAlignment="Top"/>
         <Label Content="Kosten effektiv:" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtCostEffective" HorizontalAlignment="Left" Height="26" Margin="107,204,0,0" TextWrapping="Wrap" Text="{Binding txtCostEffective}" VerticalAlignment="Top" Width="312"/>
+        <TextBox x:Name="txtCostEffective" HorizontalAlignment="Left" Height="26" Margin="107,204,0,0" TextWrapping="Wrap" Text="{Binding txtCostEffective}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding SetFieldsEnabled}"/>
         <Label Content="Abweichung:" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="91"/>
-        <TextBox x:Name="txtDeviation" HorizontalAlignment="Left" Height="85" Margin="107,230,0,0" TextWrapping="Wrap" Text="{Binding txtDeviation}" VerticalAlignment="Top" Width="312"/>
+        <TextBox x:Name="txtDeviation" HorizontalAlignment="Left" Height="85" Margin="107,230,0,0" TextWrapping="Wrap" Text="{Binding txtDeviation}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding SetFieldsEnabled}"/>
         <Label Content="CHF" HorizontalAlignment="Left" Margin="424,204,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnCreateOrSetExternalCost" Content="Button" HorizontalAlignment="Left" Margin="325,320,0,0" VerticalAlignment="Top" Width="94" Command="{Binding btnCreateOrSetExternalCost}"/>
+        <Button x:Name="btnCreateOrSetExternalCost" Content="{Binding btnCreateOrSetExternalCostName}" HorizontalAlignment="Left" Margin="325,320,0,0" VerticalAlignment="Top" Width="94" Command="{Binding btnCreateOrSetExternalCost}" Height="20" CommandParameter="{Binding SelectedItem,ElementName=lvCostType}"/>
     </Grid>
 </Window>

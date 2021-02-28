@@ -339,6 +339,9 @@ namespace simpleproject_poc.ViewModels
             {
                 dbCreateObj.MilestoneCreate(txtMilestonename, datepickMilestonedate, selectedProjectPhase.Id);
                 SetMilestoneView();
+
+                txtMilestonename = null;
+                datepickMilestonedate = null;
             }
         }
 
