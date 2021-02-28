@@ -154,4 +154,58 @@ namespace simpleproject_poc.Helper
             public string Department_name;
         }
     }
+
+    class VExternalCostCostType
+    {
+        public int Id { get; }
+        public int BudgetCost { get; }
+        public Nullable<int> EffectiveCost { get; }
+        public string Deviation { get; }
+        public string CostTypeName { get; }
+        public int CostTypeId { get; }
+        public int ActivityId { get; }
+
+        public VExternalCostCostType(int t_Id, int t_BudgetCost, Nullable<int> t_EffectiveCost, string t_Deviation, string t_CostTypeName, int t_CostTypeId, int t_ActivityId)
+        {
+            Id = t_Id;
+            BudgetCost = t_BudgetCost;
+            EffectiveCost = t_EffectiveCost;
+            Deviation = t_Deviation;
+            CostTypeName = t_CostTypeName;
+            CostTypeId = t_CostTypeId;
+            ActivityId = t_ActivityId;
+        }
+
+        //SQL mapping
+        [Table(Name = "v_External_cost_Cost_type")]
+        public class dbVExternalCostCostType
+        {
+            //Mapper auf Primary Key
+            [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
+            public int Id
+            {
+                get;
+                set;
+            }
+
+            //Mapper auf Eigenschaftsname
+            [Column]
+            public int Budget_cost;
+
+            [Column(CanBeNull = true)]
+            public Nullable<int> Effective_cost;
+
+            [Column]
+            public string Deviation;
+
+            [Column]
+            public string Cost_type_name;
+
+            [Column]
+            public int Cost_type_id;
+
+            [Column]
+            public int Activity_id;
+        }
+    }
 }

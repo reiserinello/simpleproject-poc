@@ -354,7 +354,12 @@ namespace simpleproject_poc.ViewModels
         private void OpenProjectPhase(object context)
         {
             VProjectPhasePhase selectedProjectPhase = (VProjectPhasePhase)context;
-            if (selectedProjectPhase.PlannedStartdate == null || selectedProjectPhase.PlannedEnddate == null || selectedProjectPhase.PlannedReviewdate == null)
+            
+            if (selectedProjectPhase == null)
+            {
+                MessageBox.Show("Um eine Phase zu öffnen, muss eine Phase ausgewählt sein.", "Phase öffnen");
+            }
+            else if (selectedProjectPhase.PlannedStartdate == null || selectedProjectPhase.PlannedEnddate == null || selectedProjectPhase.PlannedReviewdate == null)
             {
                 MessageBox.Show("Phase muss zuerst definiert & die drei Werte Startdatum geplant, Enddatum geplant und Reviewdatum geplant gesetzt werden.","Phase öffnen");
             }

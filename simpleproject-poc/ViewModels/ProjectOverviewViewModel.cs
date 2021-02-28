@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
 using simpleproject_poc.Helper;
@@ -105,18 +106,25 @@ namespace simpleproject_poc.ViewModels
             // object context zu Project casten
             Project selectedProject = (Project)context;
 
-            // Window ProjectView instanzieren
-            ProjectView projectView = new ProjectView();
+            if (selectedProject == null)
+            {
+                MessageBox.Show("Um ein Projekt zu öffnen, muss ein Projekt erstellt und ausgewählt sein.","Projekt öffnen");
+            }
+            else
+            {
+                // Window ProjectView instanzieren
+                ProjectView projectView = new ProjectView();
 
-            // DataContext auslesen und dort die selectedProject setzen
-            var contextProjectView = (ProjectViewViewModel)projectView.DataContext;
-            contextProjectView.contextProjectOverviewViewModel = this;
-            contextProjectView.selectedProject = selectedProject;
+                // DataContext auslesen und dort die selectedProject setzen
+                var contextProjectView = (ProjectViewViewModel)projectView.DataContext;
+                contextProjectView.contextProjectOverviewViewModel = this;
+                contextProjectView.selectedProject = selectedProject;
 
-            // Methode ausführen, welches die Values neu setzt
-            contextProjectView.SetProjectValues();
+                // Methode ausführen, welches die Values neu setzt
+                contextProjectView.SetProjectValues();
 
-            projectView.Show();
+                projectView.Show();
+            }
         }
 
         // Button Projekt öffnen

@@ -433,14 +433,20 @@ namespace simpleproject_poc.ViewModels
         private void OpenActivity(object context)
         {
             var selectedActivity = (Activity)context;
+            if (selectedActivity == null)
+            {
+                MessageBox.Show("Um eine Aktivität zu öffnen, muss eine Aktivität erstellt und ausgewählt sein.", "Aktivität öffnen");
+            }
+            else
+            {
+                ActivityView activityView = new ActivityView();
 
-            ActivityView activityView = new ActivityView();
-
-            var contextActivityView = (ActivityViewViewModel)activityView.DataContext;
-            contextActivityView.contextPhaseViewViewModel = this;
-            contextActivityView.selectedActivity = selectedActivity;
-            contextActivityView.SetActivityValues();
-            activityView.Show();
+                var contextActivityView = (ActivityViewViewModel)activityView.DataContext;
+                contextActivityView.contextPhaseViewViewModel = this;
+                contextActivityView.selectedActivity = selectedActivity;
+                contextActivityView.SetActivityValues();
+                activityView.Show();
+            }
         }
 
         // Button Aktivität öffnen
