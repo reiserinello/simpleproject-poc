@@ -25,9 +25,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="txtNewPhase" HorizontalAlignment="Left" Height="23" Margin="100,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="295"/>
+        <TextBox x:Name="txtNewPhase" HorizontalAlignment="Left" Height="23" Margin="100,150,0,0" TextWrapping="Wrap" Text="{Binding txtNewPhase}" VerticalAlignment="Top" Width="295"/>
         <Label Content="Phasen Name:" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnNewPhase" Content="Hinzufügen" HorizontalAlignment="Left" Margin="400,150,0,0" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding btnNewPhase}" CommandParameter="{Binding Text, ElementName=txtNewPhase}"/>
+        <Button x:Name="btnNewPhase" Content="Hinzufügen" HorizontalAlignment="Left" Margin="400,150,0,0" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding btnNewPhase}"/>
 
     </Grid>
 </Window>

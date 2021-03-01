@@ -286,13 +286,10 @@ namespace simpleproject_poc.ViewModels
         {
             // Today as approvaldate
             DateTime thisDay = DateTime.Today;
-
-            selectedProject.Release(thisDay);
-
+            lblProjectState = State.Released;
             lblApprovalDate = thisDay;
-            /*
-            Project projectObj = new Project();
-            projectObj.Release(this);*/
+
+            selectedProject.Release(thisDay,lblProjectState);
 
             UpdateProjectOverview();
         }
@@ -315,7 +312,7 @@ namespace simpleproject_poc.ViewModels
         // Button Projekt Datum setzen
         public ICommand btnSetProjectDates
         {
-            get { return new DelegateCommand<object>(SetProjectDates); }
+            get { return new DelegateCommand<object>(SetProjectDates,IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
         }
 
         private void SetProjectDates(object context)
@@ -330,7 +327,7 @@ namespace simpleproject_poc.ViewModels
         // Button Status setzen
         public ICommand btnSetProjectState
         {
-            get { return new DelegateCommand<object>(SetProjectState); }
+            get { return new DelegateCommand<object>(SetProjectState,IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
         }
 
         private void SetProjectState(object context)
@@ -367,7 +364,7 @@ namespace simpleproject_poc.ViewModels
             {
                 PhaseView phaseView = new PhaseView();
                 var contextPhaseView = (PhaseViewViewModel)phaseView.DataContext;
-                contextPhaseView.contextPhaseViewViewModel = this;
+                contextPhaseView.contextProjectViewViewModel = this;
                 contextPhaseView.selectedVProjectPhasePhase = selectedProjectPhase;
                 contextPhaseView.SetPhaseValues();
                 phaseView.Show();

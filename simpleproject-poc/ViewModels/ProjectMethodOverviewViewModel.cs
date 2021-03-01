@@ -15,6 +15,7 @@ namespace simpleproject_poc.ViewModels
     {
         public ObservableCollection<dynamic> _lvPhase;
         public string _lblProjectMethodName;
+        private string _txtNewPhase;
 
         ProjectMethod _selectedProjectMethod;
         public ProjectMethod selectedProjectMethod
@@ -30,17 +31,23 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        /*
         public ObservableCollection<dynamic> GetPhase()
         {
             DBGet dbGet = new DBGet();
             return dbGet.GeneralGet("Phase",_selectedProjectMethod.Id);
+        }*/
+
+        public void UpdatePhaseList()
+        {
+            DBGet dbGet = new DBGet();
+            lvPhase = dbGet.GeneralGet("Phase", _selectedProjectMethod.Id);
         }
 
         public ObservableCollection<dynamic> lvPhase
         {
             get
             {
-                
                 return _lvPhase;
             }
             set
@@ -63,6 +70,33 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        public string txtNewPhase
+        {
+            get
+            {
+                return _txtNewPhase;
+            }
+            set
+            {
+                _txtNewPhase = value;
+                OnPropertyChanged("txtNewPhase");
+            }
+        }
+
+        private ProjectOverviewViewModel _contextProjectOverviewModel;
+        public ProjectOverviewViewModel contextProjectOverviewModel
+        {
+            get
+            {
+                return _contextProjectOverviewModel;
+            }
+            set
+            {
+                _contextProjectOverviewModel = value;
+                OnPropertyChanged("contextProjectOverviewModel");
+            }
+        }
+
         // Button Phase hinzufügen
         public ICommand btnNewPhase
         {
@@ -71,8 +105,15 @@ namespace simpleproject_poc.ViewModels
 
         private void CreateNewPhase(object context)
         {
-            DBCreate dbCreateObj = new DBCreate();
-            dbCreateObj.PhaseCreate((String)context, _selectedProjectMethod.Id,this);
+            if (txtNewPhase != null)
+            {
+                DBCreate dbCreateObj = new DBCreate();
+                dbCreateObj.PhaseCreate(txtNewPhase, selectedProjectMethod.Id);
+
+                UpdatePhaseList();
+
+                txtNewPhase = null;
+            }
         }
     }
 }

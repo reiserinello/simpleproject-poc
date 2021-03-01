@@ -20,9 +20,8 @@ namespace simpleproject_poc.ViewModels
         public ObservableCollection<dynamic> _lvProjectOverview;
         public ProjectOverviewViewModel ()
         {
-            DBGet dbGet = new DBGet();
-            _dtagrdProjectMethod = dbGet.GeneralGet("Project_method",0);
-            _lvProjectOverview = dbGet.GeneralGet("Project", 0);
+            UpdateProjectMethodList();
+            UpdateProjectList();
         }
 
         // Vorgehensmodell Listview
@@ -38,6 +37,12 @@ namespace simpleproject_poc.ViewModels
                 _dtagrdProjectMethod = value;
                 OnPropertyChanged("dtagrdProjectMethod");
             }
+        }
+
+        public void UpdateProjectMethodList()
+        {
+            DBGet dbGet = new DBGet();
+            dtagrdProjectMethod = dbGet.GeneralGet("Project_method", 0);
         }
         
         // Button neues Vorgehensmodell
@@ -73,9 +78,8 @@ namespace simpleproject_poc.ViewModels
             var contextProjectMethodOverviewView = (ProjectMethodOverviewViewModel)projectMethodOverview.DataContext;
             contextProjectMethodOverviewView.selectedProjectMethod = selectedProjectMethod;
 
-            // Phasen auslesen und auf die ListView setzen, da selectedProjectMethod beim instanzieren noch leer war (get)
-            var getPhase = contextProjectMethodOverviewView.GetPhase();
-            contextProjectMethodOverviewView.lvPhase = getPhase;
+            // Entsprechende ProjekteMethode Phasen setzen
+            contextProjectMethodOverviewView.UpdatePhaseList();
 
             // Property lblProjectMethodName setzen, da selectedProjectMethod beim instanziern noch leer war (get)
             contextProjectMethodOverviewView.lblProjectMethodName = selectedProjectMethod.MethodName;
@@ -93,6 +97,12 @@ namespace simpleproject_poc.ViewModels
                 _lvProjectOverview = value;
                 OnPropertyChanged("lvProjectOverview");
             }
+        }
+
+        public void UpdateProjectList()
+        {
+            DBGet dbGet = new DBGet();
+            lvProjectOverview = dbGet.GeneralGet("Project", 0);
         }
 
         // Button Projekt öffnen

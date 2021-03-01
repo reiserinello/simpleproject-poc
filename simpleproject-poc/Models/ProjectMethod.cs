@@ -18,11 +18,6 @@ namespace simpleproject_poc.Models
         public int Id { get; }
         public string MethodName { get; }
 
-        public ProjectMethod(string t_method_name, ProjectOverviewViewModel t_contextProjectOverviewModel) {
-            DBCreate dbCreate = new DBCreate();
-            dbCreate.ProjectMethodCreate(t_method_name, t_contextProjectOverviewModel);
-        }
-
         public ProjectMethod(int t_Id, string t_MethodName)
         {
             Id = t_Id;

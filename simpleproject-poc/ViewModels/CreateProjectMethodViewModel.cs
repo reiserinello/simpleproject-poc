@@ -35,6 +35,20 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        private string _txtMethodName;
+        public string txtMethodName
+        {
+            get
+            {
+                return _txtMethodName;
+            }
+            set
+            {
+                _txtMethodName = value;
+                OnPropertyChanged("txtMethodName");
+            }
+        }
+
         // Button neues Vorgehensmodell erstellen
         public ICommand btnCreateNewProjectMethod
         {
@@ -43,8 +57,10 @@ namespace simpleproject_poc.ViewModels
 
         public void CreateProjectMethod(object context)
         {
-            // Neues Vorgehensmodell erstellen
-            ProjectMethod projectMethod = new ProjectMethod(context.ToString(), contextProjectOverviewModel);
+            DBCreate dbCreateObj = new DBCreate();
+            dbCreateObj.ProjectMethodCreate(txtMethodName);
+
+            contextProjectOverviewModel.UpdateProjectMethodList();
 
             // Neuste ProjectMethod in List abgreifen und Phasenbearbeitung öffnen
             var createdProjectMethod = contextProjectOverviewModel.dtagrdProjectMethod.Last();

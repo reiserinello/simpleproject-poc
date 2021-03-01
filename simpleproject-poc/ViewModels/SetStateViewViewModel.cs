@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
 using simpleproject_poc.Helper;
@@ -70,12 +71,16 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        public IEnumerable<State> StateValues
+        public IEnumerable<dynamic> StateValues
         {
             get
             {
-                return Enum.GetValues(typeof(State))
-                    .Cast<State>();
+                string[] StateNames = Enum.GetNames(typeof(State));
+                IEnumerable<dynamic> list = from state in StateNames where (state != "WaitingForRelease") && (state != "Released") select Enum.Parse(typeof(State), state);
+
+                return list;
+                /*return Enum.GetValues(typeof(State))
+                    .Cast<State>();*/
             }
         }
 
@@ -120,6 +125,8 @@ namespace simpleproject_poc.ViewModels
         {
             if (contextProjectViewViewModel != null)
             {
+                
+
                 cmbbxPriority = contextProjectViewViewModel.lblPriority;
                 cmbbxState = contextProjectViewViewModel.lblProjectState;
                 txtProgress = contextProjectViewViewModel.lblProjectProgress;
@@ -191,6 +198,10 @@ namespace simpleproject_poc.ViewModels
 
             if (contextProjectViewViewModel != null)
             {
+                /*if (cmbbxState == State.WaitingForRelease || cmbbxState == State.Released)
+                {
+                    MessageBox.Show("Der Status WaitingForRelease und Released sind Zustände, welche vom System automatischen generiert werden je nach ");
+                }*/
                 contextProjectViewViewModel.selectedProject.SetState(txtProgress, cmbbxState, cmbbxPriority);
                 contextProjectViewViewModel.lblProjectProgress = txtProgress;
                 contextProjectViewViewModel.lblProjectState = cmbbxState;

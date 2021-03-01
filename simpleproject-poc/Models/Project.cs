@@ -56,10 +56,10 @@ namespace simpleproject_poc.Models
             _dbUpdateObj.SetProjectDates(Id,t_StartDate,t_EndDate);
         }
 
-        public void Release(Nullable<DateTime> t_approvaldate)
+        public void Release(Nullable<DateTime> t_approvaldate, State t_projectstate)
         {
             //DBUpdate dbUpdateObj = new DBUpdate();
-            _dbUpdateObj.SetProjectApprovalDate(Id,t_approvaldate);
+            _dbUpdateObj.SetProjectApprovalDate(Id,t_approvaldate,t_projectstate);
         }
 
         public void SetState(int t_progress, State t_state, Priority t_priority)

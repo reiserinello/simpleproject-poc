@@ -65,10 +65,10 @@ namespace simpleproject_poc.Models
             }
         }
 
-        public void Release(Nullable<DateTime> t_approvaldate, string t_visum)
+        public void Release(Nullable<DateTime> t_approvaldate, string t_visum, State t_projectphasestate)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetPhaseApprovalDate(Id, t_approvaldate, t_visum);
+            dbUpdateObj.SetPhaseApprovalDate(Id, t_approvaldate, t_visum, t_projectphasestate);
         }
 
         public void SetDates(Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)

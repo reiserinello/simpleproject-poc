@@ -152,6 +152,8 @@ namespace simpleproject_poc.ViewModels
                 dbCreateObj.DepartmentCreate(txtDepartmentName);
 
                 SetDepartments();
+
+                txtDepartmentName = null;
             }
             
         }

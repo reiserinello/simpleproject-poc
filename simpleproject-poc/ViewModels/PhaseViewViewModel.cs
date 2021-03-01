@@ -16,17 +16,17 @@ namespace simpleproject_poc.ViewModels
     class PhaseViewViewModel : MainViewModel
     {
         // Context PhaseViewViewModel
-        private ProjectViewViewModel _contextPhaseViewViewModel;
-        public ProjectViewViewModel contextPhaseViewViewModel
+        private ProjectViewViewModel _contextProjectViewViewModel;
+        public ProjectViewViewModel contextProjectViewViewModel
         {
             get
             {
-                return _contextPhaseViewViewModel;
+                return _contextProjectViewViewModel;
             }
             set
             {
-                _contextPhaseViewViewModel = value;
-                OnPropertyChanged("contextPhaseViewViewModel");
+                _contextProjectViewViewModel = value;
+                OnPropertyChanged("contextProjectViewViewModel");
             }
         }
 
@@ -87,7 +87,7 @@ namespace simpleproject_poc.ViewModels
         public void UpdatePhaseOverview()
         {
             DBGet dbGetObj = new DBGet();
-            contextPhaseViewViewModel.lvProjectPhase = dbGetObj.GeneralGet("v_Project_phase_Phase",contextPhaseViewViewModel.selectedProject.Id);
+            contextProjectViewViewModel.lvProjectPhase = dbGetObj.GeneralGet("v_Project_phase_Phase", contextProjectViewViewModel.selectedProject.Id);
         }
 
         public void SetMilestoneView()

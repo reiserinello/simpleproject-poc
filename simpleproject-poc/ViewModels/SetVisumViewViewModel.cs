@@ -51,12 +51,15 @@ namespace simpleproject_poc.ViewModels
             // Get todays date for approvaldate
             Nullable<DateTime> thisDay = DateTime.Today;
 
-            // Release phase
-            contextPhaseViewViewModel.selectedProjectPhase.Release(thisDay, txtVisum);
-
             // Set properties in PhaseView
             contextPhaseViewViewModel.lblApprovalDate = thisDay;
             contextPhaseViewViewModel.lblVisum = txtVisum;
+            contextPhaseViewViewModel.lblPhaseState = Helper.State.Released;
+
+            // Release phase
+            contextPhaseViewViewModel.selectedProjectPhase.Release(thisDay, txtVisum, contextPhaseViewViewModel.lblPhaseState);
+
+            contextPhaseViewViewModel.UpdatePhaseOverview();
 
             Close?.Invoke();
         }

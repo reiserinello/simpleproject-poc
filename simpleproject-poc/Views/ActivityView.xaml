@@ -14,12 +14,12 @@
         <Label Content="Enddatum:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
         <Label Content="Fortschritt:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
         <Label Content="Dokumentablage:" HorizontalAlignment="Left" Margin="335,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblActivityName" Content="{Binding lblActivityName}" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label x:Name="lblPlannedStartdate" Content="{Binding lblPlannedStartdate}" HorizontalAlignment="Left" Margin="130,36,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label x:Name="lblPlannedEnddate" Content="{Binding lblPlannedEnddate}" HorizontalAlignment="Left" Margin="130,62,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label x:Name="lblStartdate" Content="{Binding lblStartdate}" HorizontalAlignment="Left" Margin="130,88,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label x:Name="lblEnddate" Content="{Binding lblEnddate}" HorizontalAlignment="Left" Margin="130,114,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label x:Name="lblActivityProgress" Content="{Binding lblActivityProgress}" HorizontalAlignment="Left" Margin="130,140,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label x:Name="lblActivityName" Content="{Binding lblActivityName}" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200" Height="26"/>
+        <Label x:Name="lblPlannedStartdate" Content="{Binding lblPlannedStartdate}" HorizontalAlignment="Left" Margin="130,36,0,0" VerticalAlignment="Top" Width="200" ContentStringFormat="dd.MM.yyyy" Height="26"/>
+        <Label x:Name="lblPlannedEnddate" Content="{Binding lblPlannedEnddate}" HorizontalAlignment="Left" Margin="130,62,0,0" VerticalAlignment="Top" Width="200" ContentStringFormat="dd.MM.yyyy" Height="26"/>
+        <Label x:Name="lblStartdate" Content="{Binding lblStartdate}" HorizontalAlignment="Left" Margin="130,88,0,0" VerticalAlignment="Top" Width="200" ContentStringFormat="dd.MM.yyyy" Height="26"/>
+        <Label x:Name="lblEnddate" Content="{Binding lblEnddate}" HorizontalAlignment="Left" Margin="130,114,0,0" VerticalAlignment="Top" Width="200" ContentStringFormat="dd.MM.yyyy" Height="26"/>
+        <Label x:Name="lblActivityProgress" Content="{Binding lblActivityProgress}" HorizontalAlignment="Left" Margin="130,140,0,0" VerticalAlignment="Top" Width="200" Height="26"/>
         <TextBox x:Name="txtActivityDocumentsLink" HorizontalAlignment="Left" Height="26" Margin="444,10,0,0" TextWrapping="Wrap" Text="{Binding txtActivityDocumentsLink}" VerticalAlignment="Top" Width="338"/>
         <Label Content="Verantwortlicher &#xD;&#xA;Mitarbeiter:" HorizontalAlignment="Left" Margin="335,36,0,0" VerticalAlignment="Top" Width="104" Height="52"/>
         <ListView x:Name="lvActivityEmployee" HorizontalAlignment="Left" Height="74" Margin="444,40,0,0" VerticalAlignment="Top" Width="338" ItemsSource="{Binding lvActivityEmployee}">

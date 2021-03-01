@@ -34,7 +34,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
-        public void SetProjectApprovalDate(int t_pkey, Nullable<DateTime> t_approvaldate)
+        public void SetProjectApprovalDate(int t_pkey, Nullable<DateTime> t_approvaldate, State t_projectstate)
         {
             Table<Project.dbProject> tblProject = dbConn.GetTable<Project.dbProject>();
             var selectedProject = from entry in tblProject
@@ -43,6 +43,7 @@ namespace simpleproject_poc.Helper
             foreach (var i in selectedProject)
             {
                 i.Approval_date = t_approvaldate;
+                i.Project_state = t_projectstate.ToString();
             }
             dbConn.SubmitChanges();
         }
@@ -76,17 +77,11 @@ namespace simpleproject_poc.Helper
                 i.Phase_documents_link = t_phasedocumentslink;
             }
 
-            // Milestone create
-            
-
             dbConn.SubmitChanges();
         }
 
-        public void SetPhaseApprovalDate(int t_pkey, Nullable<DateTime> t_approvaldate, string t_visum)
+        public void SetPhaseApprovalDate(int t_pkey, Nullable<DateTime> t_approvaldate, string t_visum, State t_phasestate)
         {
-            // Current date
-            //DateTime thisDay = DateTime.Today;
-
             Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
             var selectedProjectPhase = from entry in tblProjectPhase
                                        where entry.Id == t_pkey
@@ -95,15 +90,13 @@ namespace simpleproject_poc.Helper
             {
                 i.Approval_date = t_approvaldate;
                 i.Visum = t_visum;
+                i.Phase_state = t_phasestate.ToString();
             }
             dbConn.SubmitChanges();
         }
 
         public void SetPhaseDates(int t_pkey, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
         {
-            // Current date
-            //DateTime thisDay = DateTime.Today;
-
             Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
             var selectedProjectPhase = from entry in tblProjectPhase
                                        where entry.Id == t_pkey
@@ -118,9 +111,6 @@ namespace simpleproject_poc.Helper
 
         public void SetPhaseState(int t_pkey, int t_progress, State t_state)
         {
-            // Current date
-            //DateTime thisDay = DateTime.Today;
-
             Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
             var selectedProjectPhase = from entry in tblProjectPhase
                                        where entry.Id == t_pkey
@@ -135,7 +125,6 @@ namespace simpleproject_poc.Helper
 
         public void SetActivityDates(int t_pkey, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
         {
-
             Table<Activity.dbActivity> tblActivity = dbConn.GetTable<Activity.dbActivity>();
             var selectedActivity = from entry in tblActivity
                                    where entry.Id == t_pkey
@@ -150,7 +139,6 @@ namespace simpleproject_poc.Helper
 
         public void SetActivityState(int t_pkey, int t_progress)
         {
-
             Table<Activity.dbActivity> tblActivity = dbConn.GetTable<Activity.dbActivity>();
             var selectedActivity = from entry in tblActivity
                                        where entry.Id == t_pkey
