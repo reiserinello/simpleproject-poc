@@ -43,6 +43,20 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        private ActivityViewViewModel _contextActivityViewViewModel;
+        public ActivityViewViewModel contextActivityViewViewModel
+        {
+            get
+            {
+                return _contextActivityViewViewModel;
+            }
+            set
+            {
+                _contextActivityViewViewModel = value;
+                OnPropertyChanged("contextActivityViewViewModel");
+            }
+        }
+
         public Nullable<DateTime> _datepickStartDate;
         public Nullable<DateTime> _datepickEndDate;
 
@@ -80,11 +94,15 @@ namespace simpleproject_poc.ViewModels
                 datepickStartDate = contextProjectViewViewModel.lblStartdate;
                 datepickEndDate = contextProjectViewViewModel.lblEnddate;
             }
-            
-            if (contextPhaseViewViewModel != null)
+            else if (contextPhaseViewViewModel != null)
             {
                 datepickStartDate = contextPhaseViewViewModel.lblStartdate;
                 datepickEndDate = contextPhaseViewViewModel.lblEnddate;
+            }
+            else if (contextActivityViewViewModel != null)
+            {
+                datepickStartDate = contextActivityViewViewModel.lblStartdate;
+                datepickEndDate = contextActivityViewViewModel.lblEnddate;
             }
         }
 
@@ -113,8 +131,7 @@ namespace simpleproject_poc.ViewModels
 
                 contextProjectViewViewModel.UpdateProjectOverview();
             }
-
-            if (contextPhaseViewViewModel != null)
+            else if (contextPhaseViewViewModel != null)
             {
                 contextPhaseViewViewModel.selectedProjectPhase.SetDates(datepickStartDate,datepickEndDate);
 
@@ -122,6 +139,17 @@ namespace simpleproject_poc.ViewModels
                 contextPhaseViewViewModel.lblEnddate = datepickEndDate;
 
                 contextPhaseViewViewModel.UpdatePhaseOverview();
+            }
+            else if (contextActivityViewViewModel != null)
+            {
+                //contextActivityViewViewModel.selectedActivity
+
+                contextActivityViewViewModel.selectedActivity.SetDates(datepickStartDate, datepickEndDate);
+
+                contextActivityViewViewModel.lblStartdate = datepickStartDate;
+                contextActivityViewViewModel.lblEnddate = datepickEndDate;
+
+                contextActivityViewViewModel.contextPhaseViewViewModel.SetActivityView();
             }
 
             Close?.Invoke();

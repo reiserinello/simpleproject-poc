@@ -133,6 +133,35 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        public void SetActivityDates(int t_pkey, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
+        {
+
+            Table<Activity.dbActivity> tblActivity = dbConn.GetTable<Activity.dbActivity>();
+            var selectedActivity = from entry in tblActivity
+                                   where entry.Id == t_pkey
+                                       select entry;
+            foreach (var i in selectedActivity)
+            {
+                i.Startdate = t_StartDate;
+                i.Enddate = t_EndDate;
+            }
+            dbConn.SubmitChanges();
+        }
+
+        public void SetActivityState(int t_pkey, int t_progress)
+        {
+
+            Table<Activity.dbActivity> tblActivity = dbConn.GetTable<Activity.dbActivity>();
+            var selectedActivity = from entry in tblActivity
+                                       where entry.Id == t_pkey
+                                       select entry;
+            foreach (var i in selectedActivity)
+            {
+                i.Activity_progress = t_progress;
+            }
+            dbConn.SubmitChanges();
+        }
+
         public void SetExternalCost(int t_pkey, Nullable<int> t_effectivecost, string t_deviation)
         {
             Table<ExternalCost.dbExternalCost> tblExternalCost = dbConn.GetTable<ExternalCost.dbExternalCost>();

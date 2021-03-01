@@ -193,7 +193,11 @@ namespace simpleproject_poc.ViewModels
 
         private void SetActivityDates(object context)
         {
-
+            SetDatesView setDatesView = new SetDatesView();
+            var contextSetDatesView = (SetDatesViewViewModel)setDatesView.DataContext;
+            contextSetDatesView.contextActivityViewViewModel = this;
+            contextSetDatesView.InitialDateSetter();
+            setDatesView.Show();
         }
 
         // Button Aktivitätsfortschritt setzen

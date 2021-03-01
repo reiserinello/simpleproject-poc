@@ -1,4 +1,5 @@
-﻿using System;
+﻿using simpleproject_poc.Helper;
+using System;
 using System.Collections.Generic;
 using System.Data.Linq.Mapping;
 using System.Linq;
@@ -34,7 +35,17 @@ namespace simpleproject_poc.Models
             EmployeeId = t_EmployeeId;
         }
 
-        
+        public void SetDates(Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate)
+        {
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetActivityDates(Id,t_Startdate,t_Enddate);
+        }
+
+        public void SetState(int t_ActivityProgress)
+        {
+            DBUpdate dbUpdateObj = new DBUpdate();
+            dbUpdateObj.SetActivityState(Id,t_ActivityProgress);
+        }
 
         //SQL mapping
         [Table(Name = "Activity")]
