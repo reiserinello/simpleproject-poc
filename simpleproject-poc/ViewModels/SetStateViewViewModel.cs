@@ -42,6 +42,20 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        private ActivityViewViewModel _contextActivityViewViewModel;
+        public ActivityViewViewModel contextActivityViewViewModel
+        {
+            get
+            {
+                return _contextActivityViewViewModel;
+            }
+            set
+            {
+                _contextActivityViewViewModel = value;
+                OnPropertyChanged("contextActivityViewViewModel");
+            }
+        }
+
         private State _cmbbxState;
         public State cmbbxState
         {
@@ -111,6 +125,7 @@ namespace simpleproject_poc.ViewModels
                 txtProgress = contextProjectViewViewModel.lblProjectProgress;
 
                 PriorityIsEnabled = true;
+                StateIsEnabled = true;
             }
             
             if (contextPhaseViewViewModel != null)
@@ -119,8 +134,16 @@ namespace simpleproject_poc.ViewModels
                 txtProgress = contextPhaseViewViewModel.lblPhaseProgress;
 
                 PriorityIsEnabled = false;
+                StateIsEnabled = true;
             }
 
+            if (contextActivityViewViewModel != null)
+            {
+                txtProgress = contextActivityViewViewModel.lblActivityProgress;
+
+                PriorityIsEnabled = false;
+                StateIsEnabled = false;
+            }
             
         }
 
@@ -138,6 +161,23 @@ namespace simpleproject_poc.ViewModels
 
                 _PriorityIsEnabled = value;
                 OnPropertyChanged("PriorityIsEnabled");
+            }
+        }
+
+        private bool _StateIsEnabled;
+        public bool StateIsEnabled
+        {
+            get { return _StateIsEnabled; }
+
+            set
+            {
+                if (_StateIsEnabled == value)
+                {
+                    return;
+                }
+
+                _StateIsEnabled = value;
+                OnPropertyChanged("StateIsEnabled");
             }
         }
 
@@ -166,6 +206,14 @@ namespace simpleproject_poc.ViewModels
                 contextPhaseViewViewModel.lblPhaseState = cmbbxState;
 
                 contextPhaseViewViewModel.UpdatePhaseOverview();
+            }
+
+            if (contextActivityViewViewModel != null)
+            {
+                contextActivityViewViewModel.selectedActivity.SetState(txtProgress);
+                contextActivityViewViewModel.lblActivityProgress = txtProgress;
+
+                contextActivityViewViewModel.contextPhaseViewViewModel.SetActivityView();
             }
 
             Close?.Invoke();

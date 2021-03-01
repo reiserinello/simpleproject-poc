@@ -208,7 +208,11 @@ namespace simpleproject_poc.ViewModels
 
         private void SetActivityState(object context)
         {
-
+            SetStateView setStateView = new SetStateView();
+            var contextSetStateView = (SetStateViewViewModel)setStateView.DataContext;
+            contextSetStateView.contextActivityViewViewModel = this;
+            contextSetStateView.InitialValuesSetter();
+            setStateView.Show();
         }
         #endregion
 

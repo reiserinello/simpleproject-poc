@@ -12,7 +12,7 @@
         <Label Content="Fortschritt:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmbbxPriority" HorizontalAlignment="Left" Margin="81,10,0,0" VerticalAlignment="Top" Width="164" Height="26" SelectedItem="{Binding cmbbxPriority}" ItemsSource="{Binding PriorityValues}" IsEnabled="{Binding PriorityIsEnabled}"/>
         <TextBox x:Name="txtProgress" HorizontalAlignment="Left" Height="26" Margin="81,62,0,0" TextWrapping="Wrap" Text="{Binding txtProgress}" VerticalAlignment="Top" Width="164"/>
-        <ComboBox x:Name="cmbbxState" HorizontalAlignment="Left" Margin="81,36,0,0" VerticalAlignment="Top" Width="164" Height="26" SelectedItem="{Binding cmbbxState}" ItemsSource="{Binding StateValues}"/>
+        <ComboBox x:Name="cmbbxState" HorizontalAlignment="Left" Margin="81,36,0,0" VerticalAlignment="Top" Width="164" Height="26" SelectedItem="{Binding cmbbxState}" ItemsSource="{Binding StateValues}" IsEnabled="{Binding StateIsEnabled}"/>
         <Label Content="%" HorizontalAlignment="Left" Margin="245,62,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnSetState" Content="Setzen" HorizontalAlignment="Left" Margin="170,93,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnSetState}"/>
 
