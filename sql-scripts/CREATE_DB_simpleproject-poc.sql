@@ -1,13 +1,13 @@
 USE [master]
 GO
 
-/****** Object:  Database [simpleproject-poc]    Script Date: 05.02.2021 16:57:26 ******/
+/****** Object:  Database [simpleproject-poc]    Script Date: 01.03.2021 22:14:18 ******/
 CREATE DATABASE [simpleproject-poc]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'simpleproject-poc', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\simpleproject-poc.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'simpleproject-poc', FILENAME = N'D:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\simpleproject-poc.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
  LOG ON 
-( NAME = N'simpleproject-poc_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\simpleproject-poc_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+( NAME = N'simpleproject-poc_log', FILENAME = N'D:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\simpleproject-poc_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
  WITH CATALOG_COLLATION = DATABASE_DEFAULT
 GO
 

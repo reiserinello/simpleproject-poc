@@ -1,7 +1,7 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[Project]    Script Date: 06.02.2021 17:02:21 ******/
+/****** Object:  Table [dbo].[Project]    Script Date: 01.03.2021 22:16:09 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,13 +12,13 @@ CREATE TABLE [dbo].[Project](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Project_name] [varchar](50) NOT NULL,
 	[Project_description] [varchar](250) NULL,
-	[Approval_date] [date] NULL,
+	[Approval_date] [datetime] NULL,
 	[Priority] [varchar](50) NOT NULL,
 	[Project_state] [varchar](50) NOT NULL,
-	[Planned_startdate] [date] NULL,
-	[Planned_enddate] [date] NULL,
-	[Startdate] [date] NULL,
-	[Enddate] [date] NULL,
+	[Planned_startdate] [datetime] NOT NULL,
+	[Planned_enddate] [datetime] NOT NULL,
+	[Startdate] [datetime] NULL,
+	[Enddate] [datetime] NULL,
 	[Project_manager] [varchar](50) NOT NULL,
 	[Project_progress] [int] NOT NULL,
 	[Project_documents_link] [varchar](250) NULL,

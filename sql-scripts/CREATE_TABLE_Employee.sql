@@ -1,7 +1,7 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[Employee]    Script Date: 06.02.2021 17:04:34 ******/
+/****** Object:  Table [dbo].[Employee]    Script Date: 01.03.2021 22:15:10 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,7 +10,7 @@ GO
 
 CREATE TABLE [dbo].[Employee](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Employee_number] [varchar](50) NOT NULL,
+	[Employee_number] [int] NOT NULL,
 	[Name] [varchar](50) NOT NULL,
 	[Surname] [varchar](50) NOT NULL,
 	[Workload] [int] NOT NULL,

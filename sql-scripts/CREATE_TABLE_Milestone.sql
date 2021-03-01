@@ -1,7 +1,7 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[Milestone]    Script Date: 16.02.2021 13:56:29 ******/
+/****** Object:  Table [dbo].[Milestone]    Script Date: 01.03.2021 22:15:51 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,7 +11,7 @@ GO
 CREATE TABLE [dbo].[Milestone](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Milestone_name] [varchar](50) NOT NULL,
-	[Date] [date] NOT NULL,
+	[Date] [datetime] NOT NULL,
 	[Project_phase_id] [int] NOT NULL,
  CONSTRAINT [PK_Milestone] PRIMARY KEY CLUSTERED 
 (

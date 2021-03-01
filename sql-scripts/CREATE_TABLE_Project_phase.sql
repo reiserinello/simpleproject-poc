@@ -1,7 +1,7 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[Project_phase]    Script Date: 16.02.2021 13:55:58 ******/
+/****** Object:  Table [dbo].[Project_phase]    Script Date: 01.03.2021 22:16:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,14 +12,14 @@ CREATE TABLE [dbo].[Project_phase](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Phase_state] [varchar](50) NOT NULL,
 	[Phase_progress] [int] NOT NULL,
-	[Planned_startdate] [date] NULL,
-	[Planned_enddate] [date] NULL,
-	[Startdate] [date] NULL,
-	[Enddate] [date] NULL,
-	[Approval_date] [date] NULL,
+	[Planned_startdate] [datetime] NULL,
+	[Planned_enddate] [datetime] NULL,
+	[Startdate] [datetime] NULL,
+	[Enddate] [datetime] NULL,
+	[Approval_date] [datetime] NULL,
 	[Visum] [varchar](50) NULL,
-	[Planned_reviewdate] [date] NULL,
-	[Reviewdate] [date] NULL,
+	[Planned_reviewdate] [datetime] NULL,
+	[Reviewdate] [datetime] NULL,
 	[Phase_documents_link] [varchar](250) NULL,
 	[Project_id] [int] NOT NULL,
 	[Phase_id] [int] NOT NULL,
