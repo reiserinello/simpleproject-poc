@@ -269,6 +269,10 @@ namespace simpleproject_poc.ViewModels
                 {
                     MessageBox.Show("Um externe Kosten zu setzen, müssen mindestens die effektiven Kosten angegeben werden.", "Externe Kosten erstellen");
                 }
+                else if (txtCostEffective != txtCostPlanned && String.IsNullOrWhiteSpace(txtDeviation))
+                {
+                    MessageBox.Show("Entsprechen die effektiven Kosten nicht den geplanten Kosten, muss zwingend eine Abweichungsbegründung angegeben werden.", "Externe Kosten erstellen");
+                }
                 else
                 {
                     selectedExternalCost.SetCost(txtCostEffective, txtDeviation);

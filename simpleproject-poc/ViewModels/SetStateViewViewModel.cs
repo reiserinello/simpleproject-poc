@@ -208,6 +208,8 @@ namespace simpleproject_poc.ViewModels
                 contextProjectViewViewModel.lblPriority = cmbbxPriority;
 
                 contextProjectViewViewModel.UpdateProjectOverview();
+
+                Close?.Invoke();
             }
 
             if (contextPhaseViewViewModel != null)
@@ -217,18 +219,64 @@ namespace simpleproject_poc.ViewModels
                 contextPhaseViewViewModel.lblPhaseState = cmbbxState;
 
                 contextPhaseViewViewModel.UpdatePhaseOverview();
+
+                Close?.Invoke();
             }
 
             if (contextActivityViewViewModel != null)
             {
-                contextActivityViewViewModel.selectedActivity.SetState(txtProgress);
-                contextActivityViewViewModel.lblActivityProgress = txtProgress;
+                Boolean StateCanBeSet = true;
 
-                contextActivityViewViewModel.contextPhaseViewViewModel.SetActivityView();
+                if (txtProgress > 100)
+                {
+                    MessageBox.Show("100% ist der maximale Projektfortschritt, welcher gesetzt werden kann.","Status setzen");
+                    StateCanBeSet = false;
+                } 
+                else if (txtProgress == 100)
+                {
+                    // Prüfen ob alle externen Kosten sowie personellen Ressourcen (effektiv) eingetragen sind
+                    Boolean allExternalCostCompleted = true;
+                    foreach (var extCost in contextActivityViewViewModel.lvExternalCost)
+                    {
+                        VExternalCostCostType extCostObj = (VExternalCostCostType)extCost;
+                        if (extCostObj.EffectiveCost == null)
+                        {
+                            allExternalCostCompleted = false;
+                        }
+                    }
+
+                    Boolean allEmployeeResourceCompleted = true;
+                    foreach (var empRes in contextActivityViewViewModel.lvEmployeeResource)
+                    {
+                        VEmployeeResourceFunction empResObj = (VEmployeeResourceFunction)empRes;
+                        if (empResObj.EffectiveTime == null)
+                        {
+                            allEmployeeResourceCompleted = false;
+                        }
+                    }
+
+                    if (allExternalCostCompleted == false || allEmployeeResourceCompleted == false)
+                    {
+                        MessageBox.Show("Um den Aktivitätsfortschritt auf 100% zu setzen, müssen alle effektiven Kosten der externen Kosten und effektiven Zeiten der personellen Ressoucen gesetzt sein.","Status setzen");
+                        StateCanBeSet = false;
+                    }
+                    else if (contextActivityViewViewModel.lblStartdate == null || contextActivityViewViewModel.lblEnddate == null)
+                    {
+                        MessageBox.Show("Um den Aktivitätsfortschritt auf 100% zu setzen, müssen Start- sowie Enddatum gesetzt sein.", "Status setzen");
+                        StateCanBeSet = false;
+                    }
+                }
+
+                if (StateCanBeSet == true)
+                {
+                    contextActivityViewViewModel.selectedActivity.SetState(txtProgress);
+                    contextActivityViewViewModel.lblActivityProgress = txtProgress;
+
+                    contextActivityViewViewModel.contextPhaseViewViewModel.SetActivityView();
+
+                    Close?.Invoke();
+                }   
             }
-
-            Close?.Invoke();
         }
     }
-
 }

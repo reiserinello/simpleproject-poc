@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace simpleproject_poc.ViewModels
@@ -20,6 +21,12 @@ namespace simpleproject_poc.ViewModels
             var dbGetProjectMethods = dbGetObj.GeneralGet("Project_method",0);
         }
         */
+
+        public CreateProjectViewViewModel()
+        {
+            datepickerPlannedStartDate = DateTime.Today;
+            datepickerPlannedEndDate = DateTime.Today;
+        }
 
         private ObservableCollection<dynamic> _cmbbxProjectMethod;
         public ObservableCollection<dynamic> cmbbxProjectMethod
@@ -56,7 +63,7 @@ namespace simpleproject_poc.ViewModels
         private DateTime _datepickerPlannedStartDate;
         private DateTime _datepickerPlannedEndDate;
         private string _txtProjectDocumentsLink;
-        private string _txtProjectDescripting;
+        private string _txtProjectDescription;
 
         private ProjectOverviewViewModel _contextProjectOverviewModel;
         public ProjectOverviewViewModel contextProjectOverviewModel
@@ -159,16 +166,16 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        public string txtProjectDescripting
+        public string txtProjectDescription
         {
             get
             {
-                return _txtProjectDescripting;
+                return _txtProjectDescription;
             }
             set
             {
-                _txtProjectDescripting = value;
-                OnPropertyChanged("txtbProjectDescription");
+                _txtProjectDescription = value;
+                OnPropertyChanged("txtProjectDescription");
             }
         }
 
@@ -180,18 +187,31 @@ namespace simpleproject_poc.ViewModels
 
         private void CreateProject(object context)
         {
-            Project projectObj = new Project();
-            projectObj.CreateDBProject(txtProjectName,cmbbxPriority,txtProjectManager,datepickerPlannedStartDate,datepickerPlannedEndDate,txtProjectDocumentsLink,txtProjectDescripting,selectedProjectMethod.Id);
+            if (String.IsNullOrWhiteSpace(txtProjectName) || selectedProjectMethod == null || String.IsNullOrWhiteSpace(txtProjectManager) || datepickerPlannedStartDate == null || datepickerPlannedEndDate == null || String.IsNullOrWhiteSpace(txtProjectDocumentsLink) || String.IsNullOrWhiteSpace(txtProjectDescription))
+            {
+                MessageBox.Show("Um ein Projekt zu erstellen, müssen alle Felder ausgefüllt sein.","Projekt erstellen");
+            } 
+            else if (datepickerPlannedEndDate < datepickerPlannedStartDate) 
+            {
+                MessageBox.Show("Das geplante Enddatum kann nicht vor dem geplanten Startdatum liegen.", "Projekt erstellen");
+            } 
+            else
+            {
+                Project projectObj = new Project();
+                projectObj.CreateDBProject(txtProjectName, cmbbxPriority, txtProjectManager, datepickerPlannedStartDate, datepickerPlannedEndDate, txtProjectDocumentsLink, txtProjectDescription, selectedProjectMethod.Id);
 
-            DBGet dbGetObj = new DBGet();
-            var dbGetProjects = dbGetObj.GeneralGet("Project", 0);
-            contextProjectOverviewModel.lvProjectOverview = dbGetProjects;
+                DBGet dbGetObj = new DBGet();
+                var dbGetProjects = dbGetObj.GeneralGet("Project", 0);
+                contextProjectOverviewModel.lvProjectOverview = dbGetProjects;
 
-            // Neustes Project in List abgreifen und ProjektView öffnen
-            var createdProject = contextProjectOverviewModel.lvProjectOverview.Last();
-            contextProjectOverviewModel.OpenProject(createdProject);
+                // Neustes Project in List abgreifen und ProjektView öffnen
+                var createdProject = contextProjectOverviewModel.lvProjectOverview.Last();
+                contextProjectOverviewModel.OpenProject(createdProject);
 
-            Close?.Invoke();
+                Close?.Invoke();
+            }
+
+            
         }
     }
 }

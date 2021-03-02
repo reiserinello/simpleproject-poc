@@ -95,7 +95,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
-        public void SetPhaseDates(int t_pkey, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
+        public void SetPhaseDates(int t_pkey, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate, Nullable<DateTime> t_ReviewDate)
         {
             Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
             var selectedProjectPhase = from entry in tblProjectPhase
@@ -105,6 +105,7 @@ namespace simpleproject_poc.Helper
             {
                 i.Startdate = t_StartDate;
                 i.Enddate = t_EndDate;
+                i.Reviewdate = t_ReviewDate;
             }
             dbConn.SubmitChanges();
         }

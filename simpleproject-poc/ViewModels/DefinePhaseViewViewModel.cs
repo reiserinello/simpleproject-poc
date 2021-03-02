@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using simpleproject_poc.Models;
 using simpleproject_poc.Helper;
+using System.Windows;
 
 namespace simpleproject_poc.ViewModels
 {
@@ -134,13 +135,28 @@ namespace simpleproject_poc.ViewModels
 
         private void DefinePhase(object context)
         {
-            selectedProjectPhase.Define(datepickPlannedStartdate,datepickPlannedEnddate,datepickPlannedReviewdate,txtPhaseDocumentsLink,selectedVProjectPhasePhase.PhaseName);
+            if (datepickPlannedStartdate == null || datepickPlannedEnddate == null || datepickPlannedReviewdate == null || String.IsNullOrWhiteSpace(txtPhaseDocumentsLink))
+            {
+                MessageBox.Show("Um eine Phase zu definieren, müssen alle Felder ausgefüllt werden.","Phase definieren");
+            }
+            else if (datepickPlannedEnddate < datepickPlannedStartdate)
+            {
+                MessageBox.Show("Das geplante Enddatum kann nicht vor dem geplanten Startdatum liegen.", "Phase definieren");
+            }
+            else if (datepickPlannedReviewdate < datepickPlannedStartdate || datepickPlannedReviewdate > datepickPlannedEnddate)
+            {
+                MessageBox.Show("Das geplante Reviewdatum muss zwischen geplantem Start- und Enddatum liegen.", "Phase definieren");
+            }
+            else
+            {
+                selectedProjectPhase.Define(datepickPlannedStartdate, datepickPlannedEnddate, datepickPlannedReviewdate, txtPhaseDocumentsLink, selectedVProjectPhasePhase.PhaseName);
 
-            DBGet dbGetObj = new DBGet();
-            var dbGetVProjectPhasePhase = dbGetObj.GeneralGet("v_Project_phase_Phase",contextProjectViewViewModel.lblProjectKey);
-            contextProjectViewViewModel.lvProjectPhase = dbGetVProjectPhasePhase;
+                DBGet dbGetObj = new DBGet();
+                var dbGetVProjectPhasePhase = dbGetObj.GeneralGet("v_Project_phase_Phase", contextProjectViewViewModel.lblProjectKey);
+                contextProjectViewViewModel.lvProjectPhase = dbGetVProjectPhasePhase;
 
-            Close?.Invoke();
+                Close?.Invoke();
+            }
         }
     }
 }

@@ -31,13 +31,6 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        /*
-        public ObservableCollection<dynamic> GetPhase()
-        {
-            DBGet dbGet = new DBGet();
-            return dbGet.GeneralGet("Phase",_selectedProjectMethod.Id);
-        }*/
-
         public void UpdatePhaseList()
         {
             DBGet dbGet = new DBGet();

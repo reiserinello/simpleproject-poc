@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace simpleproject_poc.ViewModels
@@ -185,10 +186,25 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // CanExecute Methode für wenn Aktivitätsfortschritt 100% ist
+        private bool IsActivityCompleted(object context)
+        {
+            // Solange ApprovalDate der Phase nicht gesetzt ist, kann die Phase freigegeben werden
+            if (lblActivityProgress == 100)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
         // Button Aktivitätsdatum setzen
         public ICommand btnSetActivityDates
         {
-            get { return new DelegateCommand<object>(SetActivityDates); }
+            get { return new DelegateCommand<object>(SetActivityDates,IsActivityCompleted).ObservesProperty(() => lblActivityProgress); }
         }
 
         private void SetActivityDates(object context)
@@ -220,7 +236,7 @@ namespace simpleproject_poc.ViewModels
         // Button neue externe Kosten
         public ICommand btnNewExternalCost
         {
-            get { return new DelegateCommand<object>(NewExternalCost); }
+            get { return new DelegateCommand<object>(NewExternalCost,IsActivityCompleted).ObservesProperty(() => lblActivityProgress); }
         }
 
         private void NewExternalCost(object context)
@@ -235,19 +251,26 @@ namespace simpleproject_poc.ViewModels
         // Button externe Kosten öffnen
         public ICommand btnOpenExternalCost
         {
-            get { return new DelegateCommand<object>(OpenExternalCost); }
+            get { return new DelegateCommand<object>(OpenExternalCost,IsActivityCompleted).ObservesProperty(() => lblActivityProgress); }
         }
 
         private void OpenExternalCost(object context)
         {
             var selectedExternalCost = (VExternalCostCostType)context;
 
-            ExternalCostView externalCostView = new ExternalCostView();
-            var contextExternalCostView = (ExternalCostViewViewModel)externalCostView.DataContext;
-            contextExternalCostView.contextActivityViewViewModel = this;
-            contextExternalCostView.selectedVExternalCost = selectedExternalCost;
-            contextExternalCostView.InitialSet();
-            externalCostView.Show();
+            if (selectedExternalCost == null)
+            {
+                MessageBox.Show("Um externe Kosten zu öffnen, muss eine der externe Kosten ausgewählt werden.","Externe Kosten öffnen");
+            }
+            else
+            {
+                ExternalCostView externalCostView = new ExternalCostView();
+                var contextExternalCostView = (ExternalCostViewViewModel)externalCostView.DataContext;
+                contextExternalCostView.contextActivityViewViewModel = this;
+                contextExternalCostView.selectedVExternalCost = selectedExternalCost;
+                contextExternalCostView.InitialSet();
+                externalCostView.Show();
+            }
         }
 
         private ObservableCollection<dynamic> _lvExternalCost;
@@ -272,7 +295,7 @@ namespace simpleproject_poc.ViewModels
         // Button neue personelle Ressource
         public ICommand btnNewEmployeeResource
         {
-            get { return new DelegateCommand<object>(NewEmployeeResource); }
+            get { return new DelegateCommand<object>(NewEmployeeResource,IsActivityCompleted).ObservesProperty(() => lblActivityProgress); }
         }
 
         private void NewEmployeeResource(object context)
@@ -287,19 +310,26 @@ namespace simpleproject_poc.ViewModels
         // Button personelle Ressource öffnen
         public ICommand btnOpenEmployeeResource
         {
-            get { return new DelegateCommand<object>(OpenEmployeeResource); }
+            get { return new DelegateCommand<object>(OpenEmployeeResource,IsActivityCompleted).ObservesProperty(() => lblActivityProgress); }
         }
 
         private void OpenEmployeeResource(object context)
         {
             var selectedEmployeeResource = (VEmployeeResourceFunction)context;
 
-            EmployeeResourceView employeeResourceView = new EmployeeResourceView();
-            var contextEmployeeResourceView = (EmployeeResourceViewViewModel)employeeResourceView.DataContext;
-            contextEmployeeResourceView.contextActivityViewViewModel = this;
-            contextEmployeeResourceView.selectedVEmployeeResource = selectedEmployeeResource;
-            contextEmployeeResourceView.InitialSet();
-            employeeResourceView.Show();
+            if (selectedEmployeeResource == null)
+            {
+                MessageBox.Show("Um eine personelle Ressource zu öffnen, muss eine personelle Ressource ausgewählt werden.","Personelle Ressource öffnen");
+            }
+            else
+            {
+                EmployeeResourceView employeeResourceView = new EmployeeResourceView();
+                var contextEmployeeResourceView = (EmployeeResourceViewViewModel)employeeResourceView.DataContext;
+                contextEmployeeResourceView.contextActivityViewViewModel = this;
+                contextEmployeeResourceView.selectedVEmployeeResource = selectedEmployeeResource;
+                contextEmployeeResourceView.InitialSet();
+                employeeResourceView.Show();
+            }
         }
 
         private ObservableCollection<dynamic> _lvEmployeeResource;

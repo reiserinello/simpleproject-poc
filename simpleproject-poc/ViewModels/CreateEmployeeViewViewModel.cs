@@ -146,7 +146,7 @@ namespace simpleproject_poc.ViewModels
 
         private void AddDepartment(object context)
         {
-            if (txtDepartmentName != null) 
+            if (!(String.IsNullOrWhiteSpace(txtDepartmentName))) 
             {
                 DBCreate dbCreateObj = new DBCreate();
                 dbCreateObj.DepartmentCreate(txtDepartmentName);
@@ -168,7 +168,7 @@ namespace simpleproject_poc.ViewModels
         private void CreateEmployee(object context)
         {
             var selectedDepartment = (Department)context;
-            if (selectedDepartment == null || txtName == null || txtSurname == null || txtEmployeeNumber == null || txtWorkload == null || txtFunctions == null)
+            if (selectedDepartment == null || txtName == null || txtSurname == null || txtFunctions == null)
             {
                 MessageBox.Show("Bitte alle Felder ausfüllen und eine Abteilung auswählen", "Mitarbeiter erstellen");
             } 

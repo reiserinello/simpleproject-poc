@@ -356,9 +356,9 @@ namespace simpleproject_poc.ViewModels
             {
                 MessageBox.Show("Um eine Phase zu öffnen, muss eine Phase ausgewählt sein.", "Phase öffnen");
             }
-            else if (selectedProjectPhase.PlannedStartdate == null || selectedProjectPhase.PlannedEnddate == null || selectedProjectPhase.PlannedReviewdate == null)
+            else if (selectedProjectPhase.PlannedStartdate == null || selectedProjectPhase.PlannedEnddate == null || selectedProjectPhase.PlannedReviewdate == null || String.IsNullOrWhiteSpace(selectedProjectPhase.PhaseDocumentsLink))
             {
-                MessageBox.Show("Phase muss zuerst definiert & die drei Werte Startdatum geplant, Enddatum geplant und Reviewdatum geplant gesetzt werden.","Phase öffnen");
+                MessageBox.Show("Phase muss zuerst definiert und alle Werte gesetzt werden.","Phase öffnen");
             }
             else
             {
@@ -381,12 +381,20 @@ namespace simpleproject_poc.ViewModels
         private void DefineProjectPhase(object context)
         {
             VProjectPhasePhase selectedProjectPhase = (VProjectPhasePhase)context;
-            DefinePhaseView definePhaseView = new DefinePhaseView();
-            var contextDefinePhaseView = (DefinePhaseViewViewModel)definePhaseView.DataContext;
-            contextDefinePhaseView.contextProjectViewViewModel = this;
-            contextDefinePhaseView.selectedVProjectPhasePhase = selectedProjectPhase;
-            contextDefinePhaseView.SetPhaseValues();
-            definePhaseView.Show();
+
+            if (selectedProjectPhase == null)
+            {
+                MessageBox.Show("Um eine Projektphase zu definieren, muss eine Projektphase ausgewählt werden.","Phase definieren");
+            }
+            else
+            {
+                DefinePhaseView definePhaseView = new DefinePhaseView();
+                var contextDefinePhaseView = (DefinePhaseViewViewModel)definePhaseView.DataContext;
+                contextDefinePhaseView.contextProjectViewViewModel = this;
+                contextDefinePhaseView.selectedVProjectPhasePhase = selectedProjectPhase;
+                contextDefinePhaseView.SetPhaseValues();
+                definePhaseView.Show();
+            }
         }
 
         // CanExecute Methode für btnOpenProjectPhase & btnDefineProjectPhase

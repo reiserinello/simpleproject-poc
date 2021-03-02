@@ -15,14 +15,14 @@
         <Label Content="Enddatum geplant:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
         <Label Content="Projektleiter:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
         <Label Content="Dokumentablage (Link):" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtProjectDocumentsLink" HorizontalAlignment="Left" Height="26" Margin="151,166,0,0" TextWrapping="Wrap" Text="{Binding txtProjectDocumentsLink}" VerticalAlignment="Top" Width="336"/>
-        <TextBox x:Name="txtProjectManager" HorizontalAlignment="Left" Height="26" Margin="151,140,0,0" TextWrapping="Wrap" Text="{Binding txtProjectManager}" VerticalAlignment="Top" Width="336"/>
         <TextBox x:Name="txtProjectName"  HorizontalAlignment="Left" Height="26" Margin="151,10,0,0" TextWrapping="Wrap" Text="{Binding txtProjectName}" VerticalAlignment="Top" Width="336"/>
         <ComboBox x:Name="cmbbxPriority" HorizontalAlignment="Left" Margin="151,36,0,0" VerticalAlignment="Top" Width="336" Height="26" SelectedItem="{Binding cmbbxPriority}" ItemsSource="{Binding PriorityValues}"/>
         <ComboBox x:Name="cmbbxProjectMethod" HorizontalAlignment="Left" Margin="151,62,0,0" VerticalAlignment="Top" Width="336" Height="26" SelectedItem="{Binding selectedProjectMethod}" ItemsSource="{Binding cmbbxProjectMethod}" DisplayMemberPath="MethodName"/>
         <DatePicker x:Name="datepickerPlannedStartDate" HorizontalAlignment="Left" Margin="151,88,0,0" VerticalAlignment="Top" Height="26" Width="336" SelectedDate="{Binding datepickerPlannedStartDate}"/>
         <DatePicker x:Name="datepickerPlannedEndDate" HorizontalAlignment="Left" Margin="151,114,0,0" VerticalAlignment="Top" Height="26" Width="336" SelectedDate="{Binding datepickerPlannedEndDate}"/>
-        <TextBox x:Name="txtProjectDescripting" HorizontalAlignment="Left" Height="159" Margin="151,192,0,0" TextWrapping="Wrap" Text="{Binding txtProjectDescripting}" VerticalAlignment="Top" Width="336"/>
+        <TextBox x:Name="txtProjectManager" HorizontalAlignment="Left" Height="26" Margin="151,140,0,0" TextWrapping="Wrap" Text="{Binding txtProjectManager}" VerticalAlignment="Top" Width="336"/>
+        <TextBox x:Name="txtProjectDocumentsLink" HorizontalAlignment="Left" Height="26" Margin="151,166,0,0" TextWrapping="Wrap" Text="{Binding txtProjectDocumentsLink}" VerticalAlignment="Top" Width="336"/>
+        <TextBox x:Name="txtProjectDescription" HorizontalAlignment="Left" Height="159" Margin="151,192,0,0" TextWrapping="Wrap" Text="{Binding txtProjectDescription}" VerticalAlignment="Top" Width="336"/>
         <Button x:Name="btnCreateProject" Content="Erstellen" HorizontalAlignment="Left" Margin="412,356,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnCreateProject}"/>
 
     </Grid>

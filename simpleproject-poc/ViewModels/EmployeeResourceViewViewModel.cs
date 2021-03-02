@@ -271,6 +271,10 @@ namespace simpleproject_poc.ViewModels
                 {
                     MessageBox.Show("Um eine personelle Ressource zu setzen, muss mindestens die effektive Zeit angegeben werden.", "Personelle Ressource erstellen");
                 }
+                else if (txtEffectiveTime != txtPlannedTime && String.IsNullOrWhiteSpace(txtDeviation))
+                {
+                    MessageBox.Show("Entspricht die effektive Zeit nicht der geplanten Zeit, muss zwingend eine Abweichungsbegründung angegeben werden.", "Personelle Ressource erstellen");
+                }
                 else
                 {
                     selectedEmployeeResource.SetTime(txtEffectiveTime, txtDeviation);
@@ -280,9 +284,6 @@ namespace simpleproject_poc.ViewModels
                     Close?.Invoke();
                 }
             }
-
-            
-
         }
 
         // Anzeigename des Buttons

@@ -71,19 +71,26 @@ namespace simpleproject_poc.ViewModels
             // object context zu ProjectMethod casten
             ProjectMethod selectedProjectMethod = (ProjectMethod)context;
 
-            // Windows ProjectMethodOverview instanzieren
-            ProjectMethodOverview projectMethodOverview = new ProjectMethodOverview();
+            if (selectedProjectMethod == null)
+            {
+                MessageBox.Show("Um ein Vorgehensmodell zu öffnen, muss ein Vorgehensmodell ausgewählt werden.","Vorgehensmodell öffnen");
+            } 
+            else
+            {
+                // Windows ProjectMethodOverview instanzieren
+                ProjectMethodOverview projectMethodOverview = new ProjectMethodOverview();
 
-            // DataContext auslesen und dort die selectedProjectMethod setzen
-            var contextProjectMethodOverviewView = (ProjectMethodOverviewViewModel)projectMethodOverview.DataContext;
-            contextProjectMethodOverviewView.selectedProjectMethod = selectedProjectMethod;
+                // DataContext auslesen und dort die selectedProjectMethod setzen
+                var contextProjectMethodOverviewView = (ProjectMethodOverviewViewModel)projectMethodOverview.DataContext;
+                contextProjectMethodOverviewView.selectedProjectMethod = selectedProjectMethod;
 
-            // Entsprechende ProjekteMethode Phasen setzen
-            contextProjectMethodOverviewView.UpdatePhaseList();
+                // Entsprechende ProjekteMethode Phasen setzen
+                contextProjectMethodOverviewView.UpdatePhaseList();
 
-            // Property lblProjectMethodName setzen, da selectedProjectMethod beim instanziern noch leer war (get)
-            contextProjectMethodOverviewView.lblProjectMethodName = selectedProjectMethod.MethodName;
-            projectMethodOverview.Show();
+                // Property lblProjectMethodName setzen, da selectedProjectMethod beim instanziern noch leer war (get)
+                contextProjectMethodOverviewView.lblProjectMethodName = selectedProjectMethod.MethodName;
+                projectMethodOverview.Show();
+            }
         }
 
         public ObservableCollection<dynamic> lvProjectOverview

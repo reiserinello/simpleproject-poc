@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace simpleproject_poc.ViewModels
@@ -59,6 +60,7 @@ namespace simpleproject_poc.ViewModels
 
         public Nullable<DateTime> _datepickStartDate;
         public Nullable<DateTime> _datepickEndDate;
+        public Nullable<DateTime> _datepickReviewDate;
 
         public Nullable<DateTime> datepickStartDate
         {
@@ -86,6 +88,36 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        public Nullable<DateTime> datepickReviewDate
+        {
+            get 
+            {
+                return _datepickReviewDate;
+            }
+            set
+            {
+                _datepickReviewDate = value;
+                OnPropertyChanged("datepickReviewDate");
+            }
+        }
+
+        private bool _ReviewDateIsEnabled;
+        public bool ReviewDateIsEnabled
+        {
+            get { return _ReviewDateIsEnabled; }
+
+            set
+            {
+                if (_ReviewDateIsEnabled == value)
+                {
+                    return;
+                }
+
+                _ReviewDateIsEnabled = value;
+                OnPropertyChanged("ReviewDateIsEnabled");
+            }
+        }
+
         // Initial date setter
         public void InitialDateSetter()
         {
@@ -93,16 +125,22 @@ namespace simpleproject_poc.ViewModels
             {
                 datepickStartDate = contextProjectViewViewModel.lblStartdate;
                 datepickEndDate = contextProjectViewViewModel.lblEnddate;
+
+                ReviewDateIsEnabled = false;
             }
             else if (contextPhaseViewViewModel != null)
             {
                 datepickStartDate = contextPhaseViewViewModel.lblStartdate;
                 datepickEndDate = contextPhaseViewViewModel.lblEnddate;
+
+                ReviewDateIsEnabled = true;
             }
             else if (contextActivityViewViewModel != null)
             {
                 datepickStartDate = contextActivityViewViewModel.lblStartdate;
                 datepickEndDate = contextActivityViewViewModel.lblEnddate;
+
+                ReviewDateIsEnabled = false;
             }
         }
 
@@ -122,37 +160,47 @@ namespace simpleproject_poc.ViewModels
             projectObj.SetDates(datepickStartDate, datepickEndDate);
             */
 
-            if (contextProjectViewViewModel != null)
+            if (datepickEndDate < datepickStartDate)
             {
-                contextProjectViewViewModel.selectedProject.SetDates(datepickStartDate, datepickEndDate);
-
-                contextProjectViewViewModel.lblStartdate = datepickStartDate;
-                contextProjectViewViewModel.lblEnddate = datepickEndDate;
-
-                contextProjectViewViewModel.UpdateProjectOverview();
-            }
-            else if (contextPhaseViewViewModel != null)
+                MessageBox.Show("Das Enddatum kann nicht vor dem Startdatum liegen.","Datum setzen");
+            } 
+            else if (datepickReviewDate < datepickStartDate || datepickReviewDate > datepickEndDate)
             {
-                contextPhaseViewViewModel.selectedProjectPhase.SetDates(datepickStartDate,datepickEndDate);
-
-                contextPhaseViewViewModel.lblStartdate = datepickStartDate;
-                contextPhaseViewViewModel.lblEnddate = datepickEndDate;
-
-                contextPhaseViewViewModel.UpdatePhaseOverview();
+                MessageBox.Show("Das Reviewdatum muss zwischen Start- und Enddatum liegen.", "Datum setzen");
             }
-            else if (contextActivityViewViewModel != null)
+            else 
             {
-                //contextActivityViewViewModel.selectedActivity
+                if (contextProjectViewViewModel != null)
+                {
+                    contextProjectViewViewModel.selectedProject.SetDates(datepickStartDate, datepickEndDate);
 
-                contextActivityViewViewModel.selectedActivity.SetDates(datepickStartDate, datepickEndDate);
+                    contextProjectViewViewModel.lblStartdate = datepickStartDate;
+                    contextProjectViewViewModel.lblEnddate = datepickEndDate;
 
-                contextActivityViewViewModel.lblStartdate = datepickStartDate;
-                contextActivityViewViewModel.lblEnddate = datepickEndDate;
+                    contextProjectViewViewModel.UpdateProjectOverview();
+                }
+                else if (contextPhaseViewViewModel != null)
+                {
+                    contextPhaseViewViewModel.selectedProjectPhase.SetDates(datepickStartDate, datepickEndDate, datepickReviewDate);
 
-                contextActivityViewViewModel.contextPhaseViewViewModel.SetActivityView();
+                    contextPhaseViewViewModel.lblStartdate = datepickStartDate;
+                    contextPhaseViewViewModel.lblEnddate = datepickEndDate;
+                    contextPhaseViewViewModel.lblReviewdate = datepickReviewDate;
+
+                    contextPhaseViewViewModel.UpdatePhaseOverview();
+                }
+                else if (contextActivityViewViewModel != null)
+                {
+                    contextActivityViewViewModel.selectedActivity.SetDates(datepickStartDate, datepickEndDate);
+
+                    contextActivityViewViewModel.lblStartdate = datepickStartDate;
+                    contextActivityViewViewModel.lblEnddate = datepickEndDate;
+
+                    contextActivityViewViewModel.contextPhaseViewViewModel.SetActivityView();
+                }
+
+                Close?.Invoke();
             }
-
-            Close?.Invoke();
         }
     }
 }

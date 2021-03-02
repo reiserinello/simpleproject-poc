@@ -15,6 +15,12 @@ namespace simpleproject_poc.ViewModels
 {
     class CreateActivityViewViewModel : MainViewModel, ICloseWindows
     {
+        public CreateActivityViewViewModel()
+        {
+            datepickPlannedStartdate = DateTime.Today;
+            datepickPlannedEnddate = DateTime.Today;
+        }
+
         public Action Close { get; set; }
 
         private PhaseViewViewModel _contextPhaseViewViewModel;
@@ -132,9 +138,9 @@ namespace simpleproject_poc.ViewModels
         {
             var selectedEmployee = (Employee)context;
 
-            if (txtActivityName == null || datepickPlannedStartdate == null || datepickPlannedEnddate == null || selectedEmployee == null)
+            if (txtActivityName == null || datepickPlannedStartdate == null || datepickPlannedEnddate == null || txtActivityDocumentsLink == null || selectedEmployee == null)
             {
-                MessageBox.Show("Bitte Felder Name, geplantes Startdatum, geplantes Enddatum ausfüllen und einen Mitarbeiter auswählen.", "Aktivität erstellen");
+                MessageBox.Show("Bitte alle Felder ausfüllen und einen Mitarbeiter auswählen.", "Aktivität erstellen");
             } 
             else
             {

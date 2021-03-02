@@ -71,10 +71,10 @@ namespace simpleproject_poc.Models
             dbUpdateObj.SetPhaseApprovalDate(Id, t_approvaldate, t_visum, t_projectphasestate);
         }
 
-        public void SetDates(Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
+        public void SetDates(Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate, Nullable<DateTime> t_ReviewDate)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
-            dbUpdateObj.SetPhaseDates(Id,t_StartDate,t_EndDate);
+            dbUpdateObj.SetPhaseDates(Id,t_StartDate,t_EndDate,t_ReviewDate);
         }
 
         public void SetState(int t_progress, State t_phasestate)
