@@ -17,12 +17,14 @@ namespace simpleproject_poc.ViewModels
     {
         public CreateActivityViewViewModel()
         {
+            // Datepicker auf heutiges Datum setzen
             datepickPlannedStartdate = DateTime.Today;
             datepickPlannedEnddate = DateTime.Today;
         }
 
         public Action Close { get; set; }
 
+        // Kontext der Phasenansicht
         private PhaseViewViewModel _contextPhaseViewViewModel;
         public PhaseViewViewModel contextPhaseViewViewModel
         {
@@ -37,6 +39,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Alle möglichen Mitarbeiter anzeigen
         public void SetEmployeeValues()
         {
             DBGet dbGetObj = new DBGet();
@@ -128,7 +131,7 @@ namespace simpleproject_poc.ViewModels
             createEmployeeView.Show();
         }
 
-        // Button Mitarbeiter-hinzufügen-Form öffnen
+        // Button Aktivität erstellen
         public ICommand btnCreateActivity
         {
             get { return new DelegateCommand<object>(CreateActivity); }
@@ -147,8 +150,10 @@ namespace simpleproject_poc.ViewModels
                 DBCreate dbCreateObj = new DBCreate();
                 dbCreateObj.ActivityCreate(txtActivityName,datepickPlannedStartdate,datepickPlannedEnddate,txtActivityDocumentsLink,contextPhaseViewViewModel.selectedProjectPhase.Id,selectedEmployee.Id);
 
+                // Aktivitätsübersicht updaten
                 contextPhaseViewViewModel.SetActivityView();
 
+                // Wenn Phase im Status WorkInProgress ist, wird die erstellte Aktivität direkt geöffnet
                 if (contextPhaseViewViewModel.lblPhaseState == State.WorkInProgress)
                 {
                     contextPhaseViewViewModel.OpenNewestActivity();

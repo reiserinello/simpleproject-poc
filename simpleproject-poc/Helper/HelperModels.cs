@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace simpleproject_poc.Helper
 {
+    // Klassen, welche die SQL Views darstellen
+
+    // View, welche die Projektphase direkt mit Phasennamen anzeigt (joined)
     class VProjectPhasePhase
     {
         public int Id { get; }
@@ -101,6 +104,7 @@ namespace simpleproject_poc.Helper
         }
     }
 
+    // View, welche den Mitarbeiter direkt mit dem Abteilungsnamen anzeigt (joined)
     class VEmployeeDepartment
     {
         public int Id { get; }
@@ -155,6 +159,7 @@ namespace simpleproject_poc.Helper
         }
     }
 
+    // View, welche die externen Kosten direkt mit der Kostenart anzeigt (joined)
     class VExternalCostCostType
     {
         public int Id { get; }
@@ -209,6 +214,7 @@ namespace simpleproject_poc.Helper
         }
     }
 
+    // View, welche die personelle Ressource direkt mit der Funktion anzeigt (joined)
     class VEmployeeResourceFunction
     {
         public int Id { get; }

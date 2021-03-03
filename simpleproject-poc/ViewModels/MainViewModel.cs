@@ -22,6 +22,7 @@ namespace simpleproject_poc.ViewModels
         }
     }
 
+    // Interface für Close-Funktion der einzelnen Views
     interface ICloseWindows
     {
         Action Close { get; set; }

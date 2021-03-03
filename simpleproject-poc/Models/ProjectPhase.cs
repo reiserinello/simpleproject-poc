@@ -43,16 +43,17 @@ namespace simpleproject_poc.Models
             PhaseId = t_PhaseId;
         }
 
-        public ProjectPhase() { }
-
+        // Projektphasen definieren
         public void Define(Nullable<DateTime> t_plannedstartdate, Nullable<DateTime> t_plannedenddate, Nullable<DateTime> t_plannedreviewdate, string t_phasedocumentslink, string t_phasename)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
             dbUpdateObj.DefineProjectPhase(Id,t_plannedstartdate,t_plannedenddate,t_plannedreviewdate,t_phasedocumentslink);
 
+            // Prüfen, ob schon ein Meilenstein existiert
             DBGet dbGetObj = new DBGet();
             var checkMilestone = dbGetObj.GeneralGet("Milestone", Id);
 
+            // Existiert noch kein Meilenstein, wird eine Meilenstein am geplanten Phasenende definiert
             if (checkMilestone.Count == 0)
             {
                 if (t_plannedenddate != null)
@@ -65,29 +66,32 @@ namespace simpleproject_poc.Models
             }
         }
 
+        // ProjektPhase freigeben
         public void Release(Nullable<DateTime> t_approvaldate, string t_visum, State t_projectphasestate)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
             dbUpdateObj.SetPhaseApprovalDate(Id, t_approvaldate, t_visum, t_projectphasestate);
         }
 
+        // ProjektPhase Datum setzen
         public void SetDates(Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate, Nullable<DateTime> t_ReviewDate)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
             dbUpdateObj.SetPhaseDates(Id,t_StartDate,t_EndDate,t_ReviewDate);
         }
 
+        // ProjektPhase Status setzen
         public void SetState(int t_progress, State t_phasestate)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
             dbUpdateObj.SetPhaseState(Id,t_progress,t_phasestate);
         }
 
-        //SQL mapping
+        // SQL mapping
         [Table(Name = "Project_phase")]
         public class dbProjectPhase
         {
-            //Mapper auf Primary Key
+            // Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
             public int Id
             {
@@ -95,7 +99,7 @@ namespace simpleproject_poc.Models
                 set;
             }
 
-            //Mapper auf Feld Name der Gruppe
+            // Mapper auf Feld Name
             [Column]
             public string Phase_state;
 

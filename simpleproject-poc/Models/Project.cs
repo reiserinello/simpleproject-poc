@@ -48,37 +48,29 @@ namespace simpleproject_poc.Models
             _dbUpdateObj = new DBUpdate();
         }
 
-        public Project () { }
-
+        // Projektdatum setzen
         public void SetDates(Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
         {
-            //DBUpdate dbUpdateObj = new DBUpdate();
             _dbUpdateObj.SetProjectDates(Id,t_StartDate,t_EndDate);
         }
 
+        // Projekt freigeben
         public void Release(Nullable<DateTime> t_approvaldate, State t_projectstate)
         {
-            //DBUpdate dbUpdateObj = new DBUpdate();
             _dbUpdateObj.SetProjectApprovalDate(Id,t_approvaldate,t_projectstate);
         }
 
+        // Projektstatus setzen
         public void SetState(int t_progress, State t_state, Priority t_priority)
         {
-            //DBUpdate dbUpdateObj = new DBUpdate();
             _dbUpdateObj.SetProjectState(Id, t_progress, t_state, t_priority);
         }
 
-        public void CreateDBProject (string t_projectname, Priority t_priority, string t_projectmanager, DateTime t_plannedstartdate, DateTime t_plannedenddate, string t_projectdocumentslink, string t_projectdescription, int t_projectmethodid)
-        {
-            DBCreate dbCreateObj = new DBCreate();
-            dbCreateObj.ProjectCreate(t_projectname,t_priority,t_projectmanager,t_plannedstartdate,t_plannedenddate,t_projectdocumentslink,t_projectdescription,t_projectmethodid);
-        }
-
-        //SQL mapping
+        // SQL mapping
         [Table(Name = "Project")]
         public class dbProject
         {
-            //Mapper auf Primary Key
+            // Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
             public int Id
             {
@@ -86,7 +78,7 @@ namespace simpleproject_poc.Models
                 set;
             }
 
-            //Mapper auf Feld Name der Gruppe
+            // Mapper auf Feld Name
             [Column]
             public string Project_name;
 

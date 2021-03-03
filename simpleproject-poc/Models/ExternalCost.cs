@@ -27,17 +27,18 @@ namespace simpleproject_poc.Models
             ActivityId = t_ActivityId;
         }
 
+        // Effektive Kosten setzen
         public void SetCost(Nullable<int> t_EffectiveCost, string t_Deviation)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
             dbUpdateObj.SetExternalCost(Id,t_EffectiveCost,t_Deviation);
         }
 
-        //SQL mapping
+        // SQL mapping
         [Table(Name = "External_cost")]
         public class dbExternalCost
         {
-            //Mapper auf Primary Key
+            // Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
             public int Id
             {
@@ -45,7 +46,7 @@ namespace simpleproject_poc.Models
                 set;
             }
 
-            //Mapper auf Feld Name der Gruppe
+            // Mapper auf Feld Name
             [Column]
             public int Budget_cost;
 

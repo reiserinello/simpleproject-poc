@@ -18,11 +18,11 @@ namespace simpleproject_poc.Models
             FunctionName = t_FunctionName;
         }
 
-        //SQL mapping
+        // SQL mapping
         [Table(Name = "Function")]
         public class dbFunction
         {
-            //Mapper auf Primary Key
+            // Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
             public int Id
             {
@@ -30,7 +30,7 @@ namespace simpleproject_poc.Models
                 set;
             }
 
-            //Mapper auf Feld Name
+            // Mapper auf Feld Name
             [Column]
             public string Function_name;
         }

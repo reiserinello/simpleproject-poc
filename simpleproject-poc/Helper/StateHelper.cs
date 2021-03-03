@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace simpleproject_poc.Helper
 {
-    class StateHelper
-    {
-        //nothing
-    }
+    // Enum für die Implementierung der Priorität (Projekt) und dem Status (Projekt und ProjektPhase)
     public enum Priority
     {
         Major,

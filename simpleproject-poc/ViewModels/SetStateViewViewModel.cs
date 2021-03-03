@@ -11,10 +11,13 @@ using simpleproject_poc.Models;
 
 namespace simpleproject_poc.ViewModels
 {
+    // View und ViewModel wird für Projekt, Projektphase und Aktivität genutzt
+    // Je nach gesetztem Kontext, sind unterschiedlich viele Felder/Funktionen verfügbar
     class SetStateViewViewModel : MainViewModel, ICloseWindows
     {
         public Action Close { get; set; }
 
+        // Kontext Projektansicht
         ProjectViewViewModel _contextProjectViewViewModel;
         public ProjectViewViewModel contextProjectViewViewModel
         {
@@ -29,6 +32,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Kontext Phasenansicht
         PhaseViewViewModel _contextPhaseViewViewModel;
         public PhaseViewViewModel contextPhaseViewViewModel
         {
@@ -43,6 +47,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Kontext Aktivitätsansicht
         private ActivityViewViewModel _contextActivityViewViewModel;
         public ActivityViewViewModel contextActivityViewViewModel
         {
@@ -75,12 +80,11 @@ namespace simpleproject_poc.ViewModels
         {
             get
             {
+                // Von den verfügbaren Werten als Status, werden Created und Released ausgeschlossen
                 string[] StateNames = Enum.GetNames(typeof(State));
                 IEnumerable<dynamic> list = from state in StateNames where (state != "Created") && (state != "Released") select Enum.Parse(typeof(State), state);
 
                 return list;
-                /*return Enum.GetValues(typeof(State))
-                    .Cast<State>();*/
             }
         }
 
@@ -121,8 +125,10 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Werte setzen
         public void InitialValuesSetter()
         {
+            // Ja nach gesetztem Kontext werden unterschiedliche Werte gesetzt
             if (contextProjectViewViewModel != null)
             {
                 cmbbxPriority = contextProjectViewViewModel.lblPriority;
@@ -168,6 +174,7 @@ namespace simpleproject_poc.ViewModels
             
         }
 
+        // Bool Methode für IsEnabled Eigenschaft auf dem XAML Objekt
         private bool _PriorityIsEnabled;
         public bool PriorityIsEnabled
         {
@@ -185,6 +192,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Bool Methode für IsEnabled Eigenschaft auf dem XAML Objekt
         private bool _StateIsEnabled;
         public bool StateIsEnabled
         {
@@ -202,6 +210,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Button Status setzen
         public ICommand btnSetState
         {
             get { return new DelegateCommand<object>(SetState); }
@@ -212,10 +221,6 @@ namespace simpleproject_poc.ViewModels
 
             if (contextProjectViewViewModel != null)
             {
-                /*if (cmbbxState == State.WaitingForRelease || cmbbxState == State.Released)
-                {
-                    MessageBox.Show("Der Status WaitingForRelease und Released sind Zustände, welche vom System automatischen generiert werden je nach ");
-                }*/
                 Boolean StateCanBeSet = true;
                 Boolean NotAllPhaseDefined = false;
                 Boolean NotAllPhaseClosed = false;
@@ -224,6 +229,7 @@ namespace simpleproject_poc.ViewModels
 
                 if (cmbbxState == State.InPlanning)
                 {
+                    // Will der Projekt-Status auf InPlanning gewechsel werden und ist nicht auf Released / InPlanning, ist dies nicht möglich
                     if (contextProjectViewViewModel.lblProjectState != State.Released && contextProjectViewViewModel.lblProjectState != State.InPlanning)
                     {
                         StateCanBeSet = false;
@@ -231,6 +237,7 @@ namespace simpleproject_poc.ViewModels
                     }
                     else
                     {
+                        // Ist Fortschritt unter 10%, wird dieser mit dem InPlanning setzen auf 10% gehoben
                         if (txtProgress < 10)
                         {
                             txtProgress = 10;
@@ -240,7 +247,7 @@ namespace simpleproject_poc.ViewModels
 
                 if (cmbbxState == State.WorkInProgress)
                 {
-                    
+                    // Will der Projekt-Status auf WIP gesetzt werden, wird geprüft ob alle Phasen definiert sind
                     foreach (var pp in contextProjectViewViewModel.lvProjectPhase)
                     {
                         VProjectPhasePhase ppObj = (VProjectPhasePhase)pp;
@@ -253,11 +260,13 @@ namespace simpleproject_poc.ViewModels
 
                     if (NotAllPhaseDefined == false && txtProgress < 20)
                     {
+                        // Ist der Projekt-Fortschritt unter 20%, wird dieser mit dem WIP Setzen auf 20% gehoben
                         txtProgress = 20;
                     }
                 }
                 else if (cmbbxState == State.Closed)
                 {   
+                    // Will der Projekt-Status auf Closed gesetzt werden, wird geprüft ob alle Phasen geschlossen sind
                     foreach (var pp in contextProjectViewViewModel.lvProjectPhase)
                     {
                         VProjectPhasePhase ppObj = (VProjectPhasePhase)pp;
@@ -268,6 +277,7 @@ namespace simpleproject_poc.ViewModels
                         }
                     }
 
+                    // Prüfen ob Start- und Enddatum gesetzt sind
                     if (contextProjectViewViewModel.lblStartdate == null || contextProjectViewViewModel.lblEnddate == null)
                     {
                         StateCanBeSet = false;
@@ -276,6 +286,7 @@ namespace simpleproject_poc.ViewModels
 
                     if (NotAllPhaseClosed == false && NotAllDatesSet == false)
                     {
+                        // Ist der Status unter 100% beim Setzen auf Closend, wird dieser auf 100% gehoben
                         txtProgress = 100;
                     }
                 }
@@ -320,6 +331,7 @@ namespace simpleproject_poc.ViewModels
 
                 if (cmbbxState == State.InPlanning)
                 {
+                    // Will der Phasen-Status auf InPlanning gewechsel werden und ist nicht auf Released / InPlanning, ist dies nicht möglich
                     if (contextPhaseViewViewModel.lblPhaseState != State.Released && contextPhaseViewViewModel.lblPhaseState != State.InPlanning)
                     {
                         StateCanBeSet = false;
@@ -329,12 +341,14 @@ namespace simpleproject_poc.ViewModels
                     {
                         if (txtProgress < 10)
                         {
+                            // Ist Fortschritt unter 10%, wird dieser mit dem InPlanning setzen auf 10% gehoben
                             txtProgress = 10;
                         }
                     }
                 }
                 else if (cmbbxState == State.WorkInProgress)
                 {
+                    // Will der Phasen-Status auf WIP gesetzt werden, wird geprüft ob mind. eine Aktivität existiert
                     if (contextPhaseViewViewModel.lvActivity.Count == 0)
                     {
                         StateCanBeSet = false;
@@ -343,11 +357,13 @@ namespace simpleproject_poc.ViewModels
 
                     if (NoActivityCreated == false && txtProgress < 20)
                     {
+                        // Ist der Phasen-Fortschritt unter 20%, wird dieser mit dem WIP Setzen auf 20% gehoben
                         txtProgress = 20;
                     }
                 }
                 else if (cmbbxState == State.Closed)
                 {
+                    // Will der Phasen-Status auf Closed gesetzt werden, kann dies nur aus WIP geschehen
                     if (contextPhaseViewViewModel.lblPhaseState != State.WorkInProgress)
                     {
                         StateCanBeSet = false;
@@ -355,6 +371,7 @@ namespace simpleproject_poc.ViewModels
                     }
                     else
                     {
+                        // Um den Phasen-Status auf Closed zu setzen, muss jede Aktivität 100% Fortschritt aufzeigen
                         foreach (var act in contextPhaseViewViewModel.lvActivity)
                         {
                             Activity actObj = (Activity)act;
@@ -365,6 +382,7 @@ namespace simpleproject_poc.ViewModels
                             }
                         }
 
+                        // prüfen ob Start- End- und Reviewdatum gesetzt sind
                         if (contextPhaseViewViewModel.lblStartdate == null || contextPhaseViewViewModel.lblEnddate == null || contextPhaseViewViewModel.lblReviewdate == null)
                         {
                             StateCanBeSet = false;
@@ -373,6 +391,7 @@ namespace simpleproject_poc.ViewModels
 
                         if (NotAllActivity100 == false && NotAllDatesSet == false)
                         {
+                            // Ist der Status unter 100% beim Setzen auf Closend, wird dieser auf 100% gehoben
                             txtProgress = 100;
                         }
                     }
@@ -449,6 +468,7 @@ namespace simpleproject_poc.ViewModels
                     }
                     else if (contextActivityViewViewModel.lblStartdate == null || contextActivityViewViewModel.lblEnddate == null)
                     {
+                        // Prüfung ob Start- und Enddatum gesetzt sind
                         MessageBox.Show("Um den Aktivitätsfortschritt auf 100% zu setzen, müssen Start- sowie Enddatum gesetzt sein.", "Status setzen");
                         StateCanBeSet = false;
                     }

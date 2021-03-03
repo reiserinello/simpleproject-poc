@@ -17,6 +17,7 @@ namespace simpleproject_poc.ViewModels
         public string _lblProjectMethodName;
         private string _txtNewPhase;
 
+        // Ausgewähltes Vorgehensmodell
         ProjectMethod _selectedProjectMethod;
         public ProjectMethod selectedProjectMethod
         {
@@ -31,6 +32,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Updaten der Phasenlistview
         public void UpdatePhaseList()
         {
             DBGet dbGet = new DBGet();
@@ -76,6 +78,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Kontext der Projektübersicht
         private ProjectOverviewViewModel _contextProjectOverviewModel;
         public ProjectOverviewViewModel contextProjectOverviewModel
         {
@@ -103,8 +106,10 @@ namespace simpleproject_poc.ViewModels
                 DBCreate dbCreateObj = new DBCreate();
                 dbCreateObj.PhaseCreate(txtNewPhase, selectedProjectMethod.Id);
 
+                // Phasenliste updaten
                 UpdatePhaseList();
 
+                // Phasentextbox leeren
                 txtNewPhase = null;
             }
         }

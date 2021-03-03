@@ -25,7 +25,6 @@ namespace simpleproject_poc.ViewModels
         }
 
         // Vorgehensmodell Listview
-        
         public ObservableCollection<dynamic> dtagrdProjectMethod
         {
             get
@@ -39,6 +38,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Methode zum Vorgehensmodell Liste updaten
         public void UpdateProjectMethodList()
         {
             DBGet dbGet = new DBGet();
@@ -106,6 +106,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Methode Projektliste updaten
         public void UpdateProjectList()
         {
             DBGet dbGet = new DBGet();
@@ -144,7 +145,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // Button Projekt öffnen
+        // Button Projekterstellen Form öffnen
         public ICommand btnCreateProjectForm
         {
             get { return new DelegateCommand<object>(CreateProjectForm); }
@@ -158,14 +159,5 @@ namespace simpleproject_poc.ViewModels
             contextCreateProjectView.cmbbxProjectMethod = dtagrdProjectMethod;
             createProjectView.Show();
         }
-
-        /*
-        private bool FuncToEvaluate(object context)
-        {
-            //this is called to evaluate whether FuncToCall can be called
-            //for example you can return true or false based on some validation logic
-            return true;
-        }
-        */
     }
 }

@@ -9,8 +9,10 @@ using simpleproject_poc.Models;
 
 namespace simpleproject_poc.Helper
 {
+    // Klasse für alle DB Auslesen (SELECT) Operationen
     class DBGet
     {
+        // DB Verbindung erstellen im Kostruktor
         private DataContext dbConn;
         public DBGet()
         {
@@ -19,6 +21,7 @@ namespace simpleproject_poc.Helper
         }
 
         // Allgemeine DBGet Funktion mit Datentyp dynamic
+        // Über den Paramter t_table wird entschieden, welche Tabelle / SQL View ausgelesen werden muss
         public ObservableCollection<dynamic> GeneralGet(string t_table, int t_pkey_referencetable)
         {
             var obReturnList = new ObservableCollection<dynamic>();

@@ -23,32 +23,15 @@ namespace simpleproject_poc.Models
             Id = t_Id;
             MethodName = t_MethodName;
         }
-
-        /*
-        public ObservableCollection<ProjectMethod> Get()
-        {
-            DBGet dbGet = new DBGet();
-            var dbGetProjectMethod = dbGet.ProjectMethodGet();
-            return dbGetProjectMethod;
-        }
-        */
-
-        /*
-        public void Create(string t_method_name, ProjectOverviewViewModel t_contextProjectOverviewModel)
-        {
-            DBCreate dbCreate = new DBCreate();
-            dbCreate.ProjectMethodCreate(t_method_name, t_contextProjectOverviewModel);
-        }
-        */
     }
 
     class DbProjectMethod
     {
-        //SQL mapping
+        // SQL mapping
         [Table(Name = "Project_method")]
         public class MappingProjectMethod
         {
-            //Mapper auf Primary Key
+            // Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
             public int Id
             {
@@ -56,7 +39,7 @@ namespace simpleproject_poc.Models
                 set;
             }
 
-            //Mapper auf Feld Name der Gruppe
+            // Mapper auf Feld Name
             [Column]
             public string Method_name;
         }

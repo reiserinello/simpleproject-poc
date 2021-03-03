@@ -27,18 +27,18 @@ namespace simpleproject_poc.Models
             ActivityId = t_ActivityId;
         }
 
+        // Effektive Zeit setzen
         public void SetTime(Nullable<int> t_EffectiveTime, string t_Deviation)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
             dbUpdateObj.SetEmployeeResource(Id, t_EffectiveTime, t_Deviation);
-            //dbUpdateObj.SetExternalCost(Id, t_EffectiveCost, t_Deviation);
         }
 
-        //SQL mapping
+        // SQL mapping
         [Table(Name = "Employee_resource")]
         public class dbEmployeeResource
         {
-            //Mapper auf Primary Key
+            // Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
             public int Id
             {
@@ -46,7 +46,7 @@ namespace simpleproject_poc.Models
                 set;
             }
 
-            //Mapper auf Feld Name der Gruppe
+            // Mapper auf Feld Name
             [Column]
             public int Budget_time;
 

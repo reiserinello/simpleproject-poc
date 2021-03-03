@@ -11,6 +11,7 @@ namespace simpleproject_poc.Helper
 {
     class DBCreate
     {
+        // DB Verbindung erstellen im Kostruktor
         private DataContext dbConn;
         public DBCreate()
         {
@@ -18,10 +19,9 @@ namespace simpleproject_poc.Helper
             dbConn = dbConnObj.SetupDBConnection();
         }
 
+        // Vorgehensmodell erstellen
         public void ProjectMethodCreate(string t_method_name)
         {
-            //return null;
-
             DbProjectMethod.MappingProjectMethod newProjectMethod = new DbProjectMethod.MappingProjectMethod
             {
                 Method_name = t_method_name
@@ -32,6 +32,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Phase zum Vorgehensmodell erstellen
         public void PhaseCreate(string t_Phase_name, int t_Project_method_id)
         {
             DbPhase.MappingPhase newPhase = new DbPhase.MappingPhase
@@ -45,6 +46,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Projekt erstellen
         public void ProjectCreate(string t_projectname, Priority t_priority, string t_projectmanager, DateTime t_plannedstartdate, DateTime t_plannedenddate, string t_projectdocumentslink, string t_projectdescription, int t_projectmethodid)
         {
             Project.dbProject newProject = new Project.dbProject
@@ -65,10 +67,12 @@ namespace simpleproject_poc.Helper
             tblProject.InsertOnSubmit(newProject);
             dbConn.SubmitChanges();
 
+            // Die Phasen zum Vorgehensmodell auslesen, welches beim Projekt erstellen ausgewählt wurde
             DBGet dbGetObj = new DBGet();
             var dbGetPhase = dbGetObj.GeneralGet("Phase", t_projectmethodid);
             var dbGetProject = dbGetObj.GeneralGet("Project", 0).Last();
 
+            // Für jede Phase im Vorgehensmodell eine ProjektPhase anlegen
             foreach (var i in dbGetPhase)
             {
                 ProjectPhase.dbProjectPhase newProjectPhase = new ProjectPhase.dbProjectPhase
@@ -85,6 +89,7 @@ namespace simpleproject_poc.Helper
             }
         }
 
+        // Meilenstein erstellen
         public void MilestoneCreate(string t_milestonename, Nullable<DateTime> t_date, int t_projectphaseid)
         {
             Milestone.dbMilestone newMilestone = new Milestone.dbMilestone
@@ -99,6 +104,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Aktivität erstellen
         public void ActivityCreate(string t_activityname, DateTime t_plannedstartdate, DateTime t_plannedenddate, string t_activitydocumentslink, int t_projectphaseid, int t_employeeid)
         {
             Activity.dbActivity newActivity = new Activity.dbActivity
@@ -117,6 +123,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Abteilung erstellen
         public void DepartmentCreate(string t_departmentname)
         {
             Department.dbDepartment newDepartment = new Department.dbDepartment
@@ -129,6 +136,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Mitarbeiter erstellen
         public void EmployeeCreate(string t_name, string t_surname, int t_employeenumber, int t_workload, string t_functions, int t_departmentid)
         {
             Employee.dbEmployee newEmployee = new Employee.dbEmployee
@@ -146,6 +154,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Kostenart erstellen
         public void CostTypeCreate(string t_costtypename)
         {
             CostType.dbCostType newCostType = new CostType.dbCostType
@@ -158,6 +167,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Externe Kosten erstellen mit Verweis auf Kostenart und Aktivität
         public void ExternalCostCreate(int t_budgetcost, int t_costtypeid, int t_activityid)
         {
             ExternalCost.dbExternalCost newExternalCost = new ExternalCost.dbExternalCost
@@ -172,6 +182,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Funktion erstellen
         public void FunctionCreate(string t_functionname)
         {
             Function.dbFunction newFunction = new Function.dbFunction
@@ -184,6 +195,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Personelle Ressource erstellen mit Verweis auf Funktion und Aktivität
         public void EmployeeResourceCreate(int t_budgettime, int t_functionid, int t_activityid)
         {
             EmployeeResource.dbEmployeeResource newEmployeeResource = new EmployeeResource.dbEmployeeResource

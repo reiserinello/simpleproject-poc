@@ -9,19 +9,17 @@ using simpleproject_poc.Models;
 using simpleproject_poc.Helper;
 using simpleproject_poc.Views;
 using System.ComponentModel;
+using System.Windows;
 //using System.Windows;
 
 namespace simpleproject_poc.ViewModels
 {
     class CreateProjectMethodViewModel : MainViewModel, ICloseWindows
     {
-        /* Kontext des ProjectOverviewViewModel
-         * Wird verwendet, um Daten auf vorheriger View zu aktualisieren
-         */
-
-        ProjectOverviewViewModel _contextProjectOverViewModel;
         public Action Close { get; set; }
 
+        // Kontext der Projektübersicht
+        ProjectOverviewViewModel _contextProjectOverViewModel;
         public ProjectOverviewViewModel contextProjectOverviewModel
         {
             get
@@ -57,29 +55,24 @@ namespace simpleproject_poc.ViewModels
 
         public void CreateProjectMethod(object context)
         {
-            DBCreate dbCreateObj = new DBCreate();
-            dbCreateObj.ProjectMethodCreate(txtMethodName);
+            if (String.IsNullOrWhiteSpace(txtMethodName))
+            {
+                MessageBox.Show("Um ein Vorgehensmodell zu erstellen, muss ein Vorgehensmodell-Name angegeben werden.","Vorgehensmodell erstellen");
+            } 
+            else
+            {
+                DBCreate dbCreateObj = new DBCreate();
+                dbCreateObj.ProjectMethodCreate(txtMethodName);
 
-            contextProjectOverviewModel.UpdateProjectMethodList();
+                // Vorgehensmodellübersicht updaten
+                contextProjectOverviewModel.UpdateProjectMethodList();
 
-            // Neuste ProjectMethod in List abgreifen und Phasenbearbeitung öffnen
-            var createdProjectMethod = contextProjectOverviewModel.dtagrdProjectMethod.Last();
-            contextProjectOverviewModel.OpenProjectMethod(createdProjectMethod);
+                // Neustes Vorgehensmodell in List abgreifen und Phasenbearbeitung öffnen
+                var createdProjectMethod = contextProjectOverviewModel.dtagrdProjectMethod.Last();
+                contextProjectOverviewModel.OpenProjectMethod(createdProjectMethod);
 
-            Close?.Invoke();
+                Close?.Invoke();
+            }
         }
-
-        /*
-         * Beispiel einer Evaluation Funktion, kann, muss aber nicht verwendet werden
-         *
-        private bool FuncToEvaluate(object context)
-        {
-            //this is called to evaluate whether CreateProjectMethod can be called
-            //for example you can return true or false based on some validation logic
-            return false;
-        }
-        */
-
-        
     }
 }

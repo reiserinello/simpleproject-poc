@@ -15,7 +15,7 @@ namespace simpleproject_poc.ViewModels
     {
         public Action Close { get; set; }
 
-        // Context PhaseViewViewModel
+        // Kontext PhaseViewViewModel
         private ProjectViewViewModel _contextProjectViewViewModel;
         public ProjectViewViewModel contextProjectViewViewModel
         {
@@ -60,6 +60,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // ProjektPhasen Werte setzen
         public void SetPhaseValues()
         {
             ProjectPhase convertToProjectPhase = new ProjectPhase(selectedVProjectPhasePhase.Id, selectedVProjectPhasePhase.PhaseState, selectedVProjectPhasePhase.PhaseProgress, selectedVProjectPhasePhase.PlannedStartdate, selectedVProjectPhasePhase.PlannedEnddate, selectedVProjectPhasePhase.Startdate, selectedVProjectPhasePhase.Enddate, selectedVProjectPhasePhase.ApprovalDate, selectedVProjectPhasePhase.Visum, selectedVProjectPhasePhase.PlannedReviewdate, selectedVProjectPhasePhase.Reviewdate, selectedVProjectPhasePhase.PhaseDocumentsLink, selectedVProjectPhasePhase.ProjectId, selectedVProjectPhasePhase.PhaseId);
@@ -128,6 +129,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Button Phase definieren
         public ICommand btnDefinePhase
         {
             get { return new DelegateCommand<object>(DefinePhase); }

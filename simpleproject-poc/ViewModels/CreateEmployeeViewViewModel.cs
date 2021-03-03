@@ -15,6 +15,8 @@ namespace simpleproject_poc.ViewModels
     class CreateEmployeeViewViewModel : MainViewModel, ICloseWindows
     {
         public Action Close { get; set; }
+
+        // Kontext Aktivität erstellen
         private CreateActivityViewViewModel _contextCreateActivityViewViewModel;
         public CreateActivityViewViewModel contextCreateActivityViewViewModel
         {
@@ -29,6 +31,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Alle Abteilungen anzeigen
         public void SetDepartments()
         {
             DBGet dbGetObj = new DBGet();
@@ -151,8 +154,10 @@ namespace simpleproject_poc.ViewModels
                 DBCreate dbCreateObj = new DBCreate();
                 dbCreateObj.DepartmentCreate(txtDepartmentName);
 
+                // Abteilungsübersicht updaten
                 SetDepartments();
 
+                // Abteilungs-Textbox leeren
                 txtDepartmentName = null;
             }
             
@@ -177,6 +182,7 @@ namespace simpleproject_poc.ViewModels
                 DBCreate dbCreateObj = new DBCreate();
                 dbCreateObj.EmployeeCreate(txtName, txtSurname, txtEmployeeNumber, txtWorkload, txtFunctions, selectedDepartment.Id);
 
+                // Mitarbeiterübersicht in Aktivitäterstellen View updaten
                 contextCreateActivityViewViewModel.SetEmployeeValues();
 
                 Close?.Invoke();

@@ -12,6 +12,7 @@ namespace simpleproject_poc.ViewModels
     {
         public Action Close { get; set; }
 
+        // Kontext der Phasenansicht
         private PhaseViewViewModel _contextPhaseViewViewModel;
         public PhaseViewViewModel contextPhaseViewViewModel
         {
@@ -48,10 +49,9 @@ namespace simpleproject_poc.ViewModels
 
         private void ReleasePhaseWithVisum(object context)
         {
-            // Get todays date for approvaldate
+            // Heutiges Datum als Freigabedatum
             Nullable<DateTime> thisDay = DateTime.Today;
 
-            // Set properties in PhaseView
             contextPhaseViewViewModel.lblApprovalDate = thisDay;
             contextPhaseViewViewModel.lblVisum = txtVisum;
             contextPhaseViewViewModel.lblPhaseState = Helper.State.Released;

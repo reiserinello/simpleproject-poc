@@ -22,11 +22,11 @@ namespace simpleproject_poc.Models
             ProjectPhaseId = t_ProjectPhaseId;
         }
 
-        //SQL mapping
+        // SQL mapping
         [Table(Name = "Milestone")]
         public class dbMilestone
         {
-            //Mapper auf Primary Key
+            // Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
             public int Id
             {
@@ -34,7 +34,7 @@ namespace simpleproject_poc.Models
                 set;
             }
 
-            //Mapper auf Feld Name
+            // Mapper auf Feld Name
             [Column]
             public string Milestone_name;
 

@@ -16,6 +16,7 @@ namespace simpleproject_poc.ViewModels
     {
         public Action Close { get; set; }
 
+        // Kontext der Aktivitätsansicht
         private ActivityViewViewModel _contextActivityViewViewModel;
         public ActivityViewViewModel contextActivityViewViewModel
         {
@@ -30,6 +31,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Ausgewählte personelle Ressource (View Obj)
         private VEmployeeResourceFunction _selectedVEmployeeResource;
         public VEmployeeResourceFunction selectedVEmployeeResource
         {
@@ -44,6 +46,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Ausgewählte personelle Ressource (richtiges Obj)
         private EmployeeResource _selectedEmployeeResource;
         public EmployeeResource selectedEmployeeResource
         {
@@ -58,24 +61,26 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Werte setzen
         public void InitialSet()
         {
             UpdateFunctionList();
 
+            // Wenn keine personelle Ressource ausgewählt: Erstellen
             if (selectedVEmployeeResource == null)
             {
                 CreateFieldsEnabled = true;
                 SetFieldsEnabled = false;
 
                 btnCreateOrSetEmployeeResourceName = "Erstellen";
-
-
             }
             else
             {
+                // Wenn personelle Ressource ausgewählt: Updaten
                 CreateFieldsEnabled = false;
                 SetFieldsEnabled = true;
 
+                // View Obj in richtiges EmployeeResource umwandeln
                 selectedEmployeeResource = new EmployeeResource(selectedVEmployeeResource.Id, selectedVEmployeeResource.BudgetTime, selectedVEmployeeResource.EffectiveTime, selectedVEmployeeResource.Deviation, selectedVEmployeeResource.FunctionId, selectedVEmployeeResource.ActivityId);
 
                 txtPlannedTime= selectedEmployeeResource.BudgetTime;
@@ -83,17 +88,17 @@ namespace simpleproject_poc.ViewModels
                 txtDeviation = selectedEmployeeResource.Deviation;
 
                 btnCreateOrSetEmployeeResourceName = "Setzen";
-
             }
         }
 
+        // Funktions Listview updaten
         public void UpdateFunctionList()
         {
             DBGet dbGetObj = new DBGet();
             lvFunction = dbGetObj.GeneralGet("Function", 0);
         }
 
-        // Alle Felder für Erstellen der Kosten aktivieren / deaktivieren
+        // Alle Felder für Erstellen der Ressource aktivieren / deaktivieren
         private bool _CreateFieldsEnabled;
         public bool CreateFieldsEnabled
         {
@@ -111,7 +116,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // Alle Felder für Setzen der bestehenden Kosten aktivieren / deaktivieren
+        // Alle Felder für Setzen der bestehenden Ressource aktivieren / deaktivieren
         private bool _SetFieldsEnabled;
         public bool SetFieldsEnabled
         {
@@ -239,7 +244,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // Button Externe Kosten erstellen oder setzen
+        // Button personelle Ressource erstellen oder setzen
         public ICommand btnCreateOrSetEmployeeResource
         {
             get { return new DelegateCommand<object>(CreateOrSetEmployeeResource); }
@@ -247,6 +252,7 @@ namespace simpleproject_poc.ViewModels
 
         private void CreateOrSetEmployeeResource(object context)
         {
+            // Button personelle Ressource erstellen oder setzen
             if (selectedVEmployeeResource == null)
             {
                 var selectedFunction = (Function)context;
@@ -286,7 +292,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // Anzeigename des Buttons
+        // Anzeigename des Buttons (erstellen / setzen)
         private string _btnCreateOrSetEmployeeResourceName;
         public string btnCreateOrSetEmployeeResourceName
         {

@@ -15,6 +15,7 @@ namespace simpleproject_poc.ViewModels
 {
     class ActivityViewViewModel : MainViewModel
     {
+        // Kontext der Phasenansicht
         private PhaseViewViewModel _contextPhaseViewViewModel;
         public PhaseViewViewModel contextPhaseViewViewModel
         {
@@ -29,6 +30,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Ausgewählte Aktivität
         private Activity _selectedActivity;
         public Activity selectedActivity
         {
@@ -43,6 +45,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Setzen der Labels mit den Infos der ausgewählten Aktivität
         public void SetActivityValues()
         {
             DBGet dbGetObj = new DBGet();
@@ -60,12 +63,14 @@ namespace simpleproject_poc.ViewModels
             UpdateEmployeeResource();
         }
 
+        // Externe Kosten Listview updaten
         public void UpdateExternalCost()
         {
             DBGet dbGetObj = new DBGet();
             lvExternalCost = dbGetObj.GeneralGet("v_External_cost_Cost_type",selectedActivity.Id);
         }
 
+        // Personelle Ressourcen ListView updaten
         public void UpdateEmployeeResource()
         {
             DBGet dbGetObj = new DBGet();
@@ -285,9 +290,6 @@ namespace simpleproject_poc.ViewModels
                 OnPropertyChanged("lvExternalCost");
             }
         }
-
-
-
         #endregion
 
         #region Personelle Ressourcen

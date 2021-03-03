@@ -8,15 +8,17 @@ using System.Net;
 
 namespace simpleproject_poc.Helper
 {
+    // Klasse für die DBConnection
+    // Wird von den einzelnen DB Manipulationsklassen aufgerufen
     class DBConnection
     {
         public DataContext SetupDBConnection()
         {
-            // Get hostname and build connectionString
+            // Hostname auslesen und Connectionstring zusammensetzen
             String hostname = Dns.GetHostName();
             String connectionString = "Server=" + hostname + "\\SQLEXPRESS;Database=simpleproject-poc;Connection timeout=30;Integrated Security=True";
 
-            // Setup db connection
+            // DB Verbindung aufsetzen
             DataContext dbConnection = new DataContext(connectionString);
             return dbConnection;
         }

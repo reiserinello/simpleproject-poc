@@ -35,23 +35,25 @@ namespace simpleproject_poc.Models
             EmployeeId = t_EmployeeId;
         }
 
+        // Aktivitätdatum setzen
         public void SetDates(Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
             dbUpdateObj.SetActivityDates(Id,t_Startdate,t_Enddate);
         }
 
+        // Aktivitätstatus setzen
         public void SetState(int t_ActivityProgress)
         {
             DBUpdate dbUpdateObj = new DBUpdate();
             dbUpdateObj.SetActivityState(Id,t_ActivityProgress);
         }
 
-        //SQL mapping
+        // SQL mapping
         [Table(Name = "Activity")]
         public class dbActivity
         {
-            //Mapper auf Primary Key
+            // Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
             public int Id
             {
@@ -59,7 +61,7 @@ namespace simpleproject_poc.Models
                 set;
             }
 
-            //Mapper auf Feld Name
+            // Mapper auf Feld Name
             [Column]
             public string Activity_name;
 

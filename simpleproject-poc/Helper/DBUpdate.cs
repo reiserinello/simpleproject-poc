@@ -9,8 +9,10 @@ using simpleproject_poc.ViewModels;
 
 namespace simpleproject_poc.Helper
 {
+    // Klasse für alle DB Updaten Operationen
     class DBUpdate
     {
+        // DB Verbindung erstellen im Kostruktor
         private DataContext dbConn;
         public DBUpdate()
         {
@@ -18,6 +20,7 @@ namespace simpleproject_poc.Helper
             dbConn = dbConnObj.SetupDBConnection();
         }
 
+        // Projektdatum setzen
         public void SetProjectDates(int t_pkey, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
         {
             Table<Project.dbProject> tblProject = dbConn.GetTable<Project.dbProject>();
@@ -34,6 +37,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Projektfreigabe, Freigabedatum und Projektstatus setzen
         public void SetProjectApprovalDate(int t_pkey, Nullable<DateTime> t_approvaldate, State t_projectstate)
         {
             Table<Project.dbProject> tblProject = dbConn.GetTable<Project.dbProject>();
@@ -48,6 +52,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Projektstatus setzen
         public void SetProjectState(int t_pkey, int t_progress, State t_state, Priority t_priority)
         {
             Table<Project.dbProject> tblProject = dbConn.GetTable<Project.dbProject>();
@@ -63,6 +68,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Projektphasen definieren (nachdem diese aus dem Projekt-Erstellen Vorgang erstellt wurden)
         public void DefineProjectPhase(int t_pkey, Nullable<DateTime> t_plannedstartdate, Nullable<DateTime> t_plannedenddate, Nullable<DateTime> t_plannedreviewdate, string t_phasedocumentslink)
         {
             Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
@@ -80,6 +86,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Phasenfreigabe, Freigabedatum, Visum und Status setzen
         public void SetPhaseApprovalDate(int t_pkey, Nullable<DateTime> t_approvaldate, string t_visum, State t_phasestate)
         {
             Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
@@ -95,6 +102,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Phasendatum setzen
         public void SetPhaseDates(int t_pkey, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate, Nullable<DateTime> t_ReviewDate)
         {
             Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
@@ -110,6 +118,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Phasenstatus setzen
         public void SetPhaseState(int t_pkey, int t_progress, State t_state)
         {
             Table<ProjectPhase.dbProjectPhase> tblProjectPhase = dbConn.GetTable<ProjectPhase.dbProjectPhase>();
@@ -124,6 +133,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Aktivitätsdatum setzen
         public void SetActivityDates(int t_pkey, Nullable<DateTime> t_StartDate, Nullable<DateTime> t_EndDate)
         {
             Table<Activity.dbActivity> tblActivity = dbConn.GetTable<Activity.dbActivity>();
@@ -138,6 +148,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Aktivitätsstatus setzen
         public void SetActivityState(int t_pkey, int t_progress)
         {
             Table<Activity.dbActivity> tblActivity = dbConn.GetTable<Activity.dbActivity>();
@@ -151,6 +162,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Externe Kosten setzen (effektiv)
         public void SetExternalCost(int t_pkey, Nullable<int> t_effectivecost, string t_deviation)
         {
             Table<ExternalCost.dbExternalCost> tblExternalCost = dbConn.GetTable<ExternalCost.dbExternalCost>();
@@ -165,6 +177,7 @@ namespace simpleproject_poc.Helper
             dbConn.SubmitChanges();
         }
 
+        // Personelle Ressourcen setzen (effektiv)
         public void SetEmployeeResource(int t_pkey, Nullable<int> t_effectivetime, string t_deviation)
         {
             Table<EmployeeResource.dbEmployeeResource> tblEmployeeResource = dbConn.GetTable<EmployeeResource.dbEmployeeResource>();

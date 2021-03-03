@@ -15,12 +15,7 @@ namespace simpleproject_poc.ViewModels
 {
     class ProjectViewViewModel : MainViewModel
     {
-        //private DBGet _dbGetObj;
-        public ProjectViewViewModel ()
-        {
-            //_dbGetObj = new DBGet();
-        }
-
+        // Kontext der Projektübersicht
         private ProjectOverviewViewModel _contextProjectOverviewViewModel;
         public ProjectOverviewViewModel contextProjectOverviewViewModel
         {
@@ -51,6 +46,7 @@ namespace simpleproject_poc.ViewModels
         public string _txtProjectDocumentsLink;
         public string _txtbProjectDescription;
 
+        // Ausgewähltes Projekt
         Project _selectedProject;
         public Project selectedProject
         {
@@ -247,8 +243,10 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Projektwerte setzen
         public void SetProjectValues()
         {
+            // Vorgehensmodell auslesen
             DBGet dbGetObj = new DBGet();
             var dbGetProjectMethod = dbGetObj.GetSpecificProjectMethod(_selectedProject.ProjectMethodId);
 
@@ -270,6 +268,7 @@ namespace simpleproject_poc.ViewModels
             lvProjectPhase = dbGetObj.GeneralGet("v_Project_phase_Phase",_selectedProject.Id);
         }
 
+        // Projektübersicht updaten
         public void UpdateProjectOverview()
         {
             DBGet dbGetObj = new DBGet();
@@ -284,7 +283,7 @@ namespace simpleproject_poc.ViewModels
 
         private void ReleaseProject(object context)
         {
-            // Today as approvaldate
+            // Heutiges Datum als Freigabedatum
             DateTime thisDay = DateTime.Today;
             lblProjectState = State.Released;
             lblApprovalDate = thisDay;
@@ -324,7 +323,7 @@ namespace simpleproject_poc.ViewModels
             setDatesView.Show();
         }
 
-        // CanExecute Methode für SetProjectDates
+        // CanExecute Methode für btnSetProjectDates
         private bool CanExecuteSetProjectDates(object context)
         {
             if (lblProjectState == State.WorkInProgress)
@@ -355,7 +354,6 @@ namespace simpleproject_poc.ViewModels
         // CanExecute Methode für btnSetProjectState
         private bool CanExecuteSetProjectState(object context)
         {
-            // Solange ApprovalDate des Projektes nicht gesetzt ist, kann der Status nicht gesetzt werden
             if (lblProjectState != State.Created && lblProjectState != State.Closed)
             {
                 return true;
@@ -368,11 +366,10 @@ namespace simpleproject_poc.ViewModels
         #endregion
 
         #region ProjectPhase
-        // Button Projekt Phase erstellen
+        // Button Projekt Phase öffnen
         public ICommand btnOpenProjectPhase
         {
             get { return new DelegateCommand<object>(OpenProjectPhase, CanExecuteOpenPhase).ObservesProperty(() => lblProjectState); }
-            //set { }
         }
 
         private void OpenProjectPhase(object context)
@@ -402,7 +399,6 @@ namespace simpleproject_poc.ViewModels
         public ICommand btnDefineProjectPhase
         {
             get { return new DelegateCommand<object>(DefineProjectPhase, CanExecuteDefinePhase).ObservesProperty(() => lblProjectState); }
-            //set { }
         }
 
         private void DefineProjectPhase(object context)
@@ -424,10 +420,9 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // CanExecute Methode für btnOpenProjectPhase & btnDefineProjectPhase
+        // CanExecute Methode für btnDefineProjectPhase
         private bool CanExecuteDefinePhase(object context)
         {
-            // Solange ApprovalDate des Projektes nicht gesetzt ist, kann keine ProjectPhase angelegt oder geöffnet werden
             if (lblProjectState == State.InPlanning)
             {
                 return true;
@@ -437,9 +432,9 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // CanExecute Methode für btnOpenProjectPhase
         private bool CanExecuteOpenPhase(object context)
         {
-            // Solange ApprovalDate des Projektes nicht gesetzt ist, kann keine ProjectPhase angelegt oder geöffnet werden
             if (lblProjectState == State.WorkInProgress || lblProjectState == State.Closed)
             {
                 return true;

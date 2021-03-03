@@ -14,20 +14,14 @@ namespace simpleproject_poc.ViewModels
 {
     class CreateProjectViewViewModel : MainViewModel, ICloseWindows
     {
-        /*
         public CreateProjectViewViewModel()
         {
-            DBGet dbGetObj = new DBGet();
-            var dbGetProjectMethods = dbGetObj.GeneralGet("Project_method",0);
-        }
-        */
-
-        public CreateProjectViewViewModel()
-        {
+            // Datepicker auf heutiges Datum setzen
             datepickerPlannedStartDate = DateTime.Today;
             datepickerPlannedEndDate = DateTime.Today;
         }
 
+        // Liste mit allen Vorgehensmodellen für Combobox
         private ObservableCollection<dynamic> _cmbbxProjectMethod;
         public ObservableCollection<dynamic> cmbbxProjectMethod
         {
@@ -38,10 +32,11 @@ namespace simpleproject_poc.ViewModels
             set
             {
                 _cmbbxProjectMethod = value;
-                OnPropertyChanged("allProjectMethods");
+                OnPropertyChanged("cmbbxProjectMethod");
             }
         }
 
+        // Ausgewähltes Vorgehensmodell
         private dynamic _selectedProjectMethod;
         public dynamic selectedProjectMethod
         {
@@ -65,6 +60,7 @@ namespace simpleproject_poc.ViewModels
         private string _txtProjectDocumentsLink;
         private string _txtProjectDescription;
 
+        // Kontext der Projektübersicht
         private ProjectOverviewViewModel _contextProjectOverviewModel;
         public ProjectOverviewViewModel contextProjectOverviewModel
         {
@@ -206,13 +202,13 @@ namespace simpleproject_poc.ViewModels
                 }
                 else
                 {
-                    Project projectObj = new Project();
-                    projectObj.CreateDBProject(txtProjectName, cmbbxPriority, txtProjectManager, datepickerPlannedStartDate, datepickerPlannedEndDate, txtProjectDocumentsLink, txtProjectDescription, selectedProjectMethod.Id);
+                    DBCreate dbCreateObj = new DBCreate();
+                    dbCreateObj.ProjectCreate(txtProjectName, cmbbxPriority, txtProjectManager, datepickerPlannedStartDate, datepickerPlannedEndDate, txtProjectDocumentsLink, txtProjectDescription, selectedProjectMethod.Id);
 
                     var dbGetProjects = dbGetObj.GeneralGet("Project", 0);
                     contextProjectOverviewModel.lvProjectOverview = dbGetProjects;
 
-                    // Neustes Project in List abgreifen und ProjektView öffnen
+                    // Neustes Projekt in List abgreifen und ProjektView öffnen
                     var createdProject = contextProjectOverviewModel.lvProjectOverview.Last();
                     contextProjectOverviewModel.OpenProject(createdProject);
 

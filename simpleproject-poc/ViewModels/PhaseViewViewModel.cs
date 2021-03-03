@@ -15,7 +15,7 @@ namespace simpleproject_poc.ViewModels
 {
     class PhaseViewViewModel : MainViewModel
     {
-        // Context PhaseViewViewModel
+        // Kontext PhaseViewViewModel
         private ProjectViewViewModel _contextProjectViewViewModel;
         public ProjectViewViewModel contextProjectViewViewModel
         {
@@ -62,7 +62,7 @@ namespace simpleproject_poc.ViewModels
 
         public void SetPhaseValues()
         {
-            // Eigenschaften von selectedVProjectPhasePhase and selectedProjectPhase zuweisen
+            // Eigenschaften von selectedVProjectPhasePhase und selectedProjectPhase zuweisen
             ProjectPhase convertToProjectPhase = new ProjectPhase(selectedVProjectPhasePhase.Id,selectedVProjectPhasePhase.PhaseState,selectedVProjectPhasePhase.PhaseProgress,selectedVProjectPhasePhase.PlannedStartdate,selectedVProjectPhasePhase.PlannedEnddate,selectedVProjectPhasePhase.Startdate,selectedVProjectPhasePhase.Enddate,selectedVProjectPhasePhase.ApprovalDate,selectedVProjectPhasePhase.Visum,selectedVProjectPhasePhase.PlannedReviewdate,selectedVProjectPhasePhase.Reviewdate,selectedVProjectPhasePhase.PhaseDocumentsLink,selectedVProjectPhasePhase.ProjectId,selectedVProjectPhasePhase.PhaseId);
             selectedProjectPhase = convertToProjectPhase;
 
@@ -90,18 +90,21 @@ namespace simpleproject_poc.ViewModels
             contextProjectViewViewModel.lvProjectPhase = dbGetObj.GeneralGet("v_Project_phase_Phase", contextProjectViewViewModel.selectedProject.Id);
         }
 
+        // Meilensteinansicht updaten
         public void SetMilestoneView()
         {
             DBGet dbGetObj = new DBGet();
             lvMilestoneOverview = dbGetObj.GeneralGet("Milestone",selectedProjectPhase.Id);
         }
 
+        // Aktivitätsübersicht updaten
         public void SetActivityView()
         {
             DBGet dbGetObj = new DBGet();
             lvActivity = dbGetObj.GeneralGet("Activity",selectedProjectPhase.Id);
         }
 
+        // Neuste Aktivität öffnen
         public void OpenNewestActivity()
         {
             var newestActivity = lvActivity.Last();
@@ -278,7 +281,6 @@ namespace simpleproject_poc.ViewModels
         }
 
         #region Milestone
-
         private ObservableCollection<dynamic> _lvMilestoneOverview;
         public ObservableCollection<dynamic> lvMilestoneOverview
         {
@@ -349,7 +351,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // CanExecute Methode für btnReleasePhase
+        // CanExecute Methode für btnAddMilestone
         private bool CanExecuteAddMilestone(object context)
         {
             if (lblPhaseState == State.InPlanning)
@@ -362,7 +364,6 @@ namespace simpleproject_poc.ViewModels
             }
 
         }
-
         #endregion
 
 
@@ -378,8 +379,6 @@ namespace simpleproject_poc.ViewModels
             var contextSetVisumView = (SetVisumViewViewModel)setVisumView.DataContext;
             contextSetVisumView.contextPhaseViewViewModel = this;
             setVisumView.Show();
-
-            //selectedProjectPhase.Release(selectedProjectPhase.Id,lblApprovalDate,lblVisum);
         }
 
         // CanExecute Methode für btnReleasePhase
@@ -393,7 +392,6 @@ namespace simpleproject_poc.ViewModels
             {
                 return false;
             }
-
         }
 
         // Button Phase Datum setzen
@@ -411,6 +409,7 @@ namespace simpleproject_poc.ViewModels
             setDatesView.Show();
         }
 
+        // CanExecute Methode für btnSetPhaseDates
         private bool CanExecuteSetPhaseDates(object context)
         {
             if (lblPhaseState == State.WorkInProgress)
@@ -438,6 +437,7 @@ namespace simpleproject_poc.ViewModels
             setStateView.Show();
         }
 
+        // CanExecute Methode für btnSetPhaseState
         private bool CanExecuteSetPhaseState(object context)
         {
             if (lblPhaseState != State.Created && lblPhaseState != State.Closed)
@@ -449,12 +449,10 @@ namespace simpleproject_poc.ViewModels
                 return false;
             }
         }
-
         #endregion
 
         #region Aktivitäten
         private ObservableCollection<dynamic> _lvActivity;
-
         public ObservableCollection<dynamic> lvActivity
         {
             get
@@ -493,6 +491,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // CanExecute Methode für btnOpenActivity
         private bool CanExecuteOpenActivity(object context)
         {
             if (lblPhaseState == State.WorkInProgress || lblPhaseState == State.Closed)
@@ -503,10 +502,9 @@ namespace simpleproject_poc.ViewModels
             {
                 return false;
             }
-
         }
 
-        // Button Aktivität öffnen
+        // Button Aktivität erstellen
         public ICommand btnCreateActivity
         {
             get { return new DelegateCommand<object>(CreateActivity, CanExecuteCreateActivity).ObservesProperty(() => lblPhaseState); }
@@ -532,9 +530,7 @@ namespace simpleproject_poc.ViewModels
             {
                 return false;
             }
-
         }
-
         #endregion
     }
 }

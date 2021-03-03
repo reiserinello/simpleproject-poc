@@ -11,12 +11,14 @@ using System.Windows.Input;
 
 namespace simpleproject_poc.ViewModels
 {
+    // View und ViewModel wird für Projekt, Projektphase und Aktivität genutzt
+    // Je nach gesetztem Kontext, sind unterschiedlich viele Felder/Funktionen verfügbar
     class SetDatesViewViewModel : MainViewModel, ICloseWindows
     {
         public Action Close { get; set; }
 
+        // Kontext Projektansicht
         private ProjectViewViewModel _contextProjectViewViewModel;
-
         public ProjectViewViewModel contextProjectViewViewModel
         {
             get
@@ -30,6 +32,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Kontext Phasenansicht
         private PhaseViewViewModel _contextPhaseViewViewModel;
         public PhaseViewViewModel contextPhaseViewViewModel
         {
@@ -44,6 +47,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Kontext Aktivitätsansicht
         private ActivityViewViewModel _contextActivityViewViewModel;
         public ActivityViewViewModel contextActivityViewViewModel
         {
@@ -118,7 +122,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // Initial date setter
+        // Werte setzen je nach Kontext der gesetzt ist
         public void InitialDateSetter()
         {
             if (contextProjectViewViewModel != null)
@@ -144,7 +148,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // Button Projekt freigeben
+        // Button Datum setzen
         public ICommand btnSetDates
         {
             get { return new DelegateCommand<object>(SetDates); }
@@ -152,14 +156,6 @@ namespace simpleproject_poc.ViewModels
 
         private void SetDates(object context)
         {
-            //var test = context;
-
-
-            /*
-            Project projectObj = new Project();
-            projectObj.SetDates(datepickStartDate, datepickEndDate);
-            */
-
             if (datepickEndDate < datepickStartDate)
             {
                 MessageBox.Show("Das Enddatum kann nicht vor dem Startdatum liegen.","Datum setzen");
@@ -170,6 +166,7 @@ namespace simpleproject_poc.ViewModels
             }
             else 
             {
+                // Je nach Kontext wird Reviewdatum gesetzt oder nicht
                 if (contextProjectViewViewModel != null)
                 {
                     contextProjectViewViewModel.selectedProject.SetDates(datepickStartDate, datepickEndDate);

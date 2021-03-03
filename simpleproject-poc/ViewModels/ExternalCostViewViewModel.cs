@@ -16,6 +16,7 @@ namespace simpleproject_poc.ViewModels
     {
         public Action Close { get; set; }
 
+        // Kontext Aktivitätsübersicht
         private ActivityViewViewModel _contextActivityViewViewModel;
         public ActivityViewViewModel contextActivityViewViewModel
         {
@@ -30,6 +31,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Ausgewählte externe Kosten (View Obj)
         private VExternalCostCostType _selectedVExternalCost;
         public VExternalCostCostType selectedVExternalCost
         {
@@ -44,6 +46,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Ausgewählte externe Kosten (richtiges Obj)
         private ExternalCost _selectedExternalCost;
         public ExternalCost selectedExternalCost
         {
@@ -58,23 +61,26 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Werte setzen
         public void InitialSet()
         {
             UpdateCostTypeList();
 
+            // Wenn externe Koste nicht gesetzt: Erstellen
             if (selectedVExternalCost == null)
             {
                 CreateFieldsEnabled = true;
                 SetFieldsEnabled = false;
 
                 btnCreateOrSetExternalCostName = "Erstellen";
-
-
-            } else
+            } 
+            else
             {
+                // Wenn externe Koste gesetzt: Setzen
                 CreateFieldsEnabled = false;
                 SetFieldsEnabled = true;
 
+                // View Obj umwandeln in richtiges externe Kosten Obj
                 selectedExternalCost = new ExternalCost(selectedVExternalCost.Id, selectedVExternalCost.BudgetCost, selectedVExternalCost.EffectiveCost, selectedVExternalCost.Deviation, selectedVExternalCost.CostTypeId, selectedVExternalCost.ActivityId);
 
                 txtCostPlanned = selectedExternalCost.BudgetCost;
@@ -82,10 +88,10 @@ namespace simpleproject_poc.ViewModels
                 txtDeviation = selectedExternalCost.Deviation;
 
                 btnCreateOrSetExternalCostName = "Setzen";
-
             }
         }
 
+        // Kostenart Listview updaten
         public void UpdateCostTypeList()
         {
             DBGet dbGetObj = new DBGet();
@@ -174,8 +180,10 @@ namespace simpleproject_poc.ViewModels
                 DBCreate dbCreateObj = new DBCreate();
                 dbCreateObj.CostTypeCreate(txtCostTypeToAdd);
 
+                // Kostenart View udpaten
                 UpdateCostTypeList();
 
+                // Kostenart-Textbox leeren
                 txtCostTypeToAdd = null;
             }
         }
@@ -245,6 +253,7 @@ namespace simpleproject_poc.ViewModels
 
         private void CreateOrSetExternalCost(object context)
         {
+            // Erstellen oder setzen der externen Kosten
             if (selectedVExternalCost == null)
             {
                 var selectedCostType = (CostType)context;

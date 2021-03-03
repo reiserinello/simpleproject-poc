@@ -23,11 +23,11 @@ namespace simpleproject_poc.Models
 
     class DbPhase
     {
-        //SQL mapping
+        // SQL mapping
         [Table(Name = "Phase")]
         public class MappingPhase
         {
-            //Mapper auf Primary Key
+            // Mapper auf Primary Key
             [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true)]
             public int Id
             {
@@ -35,7 +35,7 @@ namespace simpleproject_poc.Models
                 set;
             }
 
-            //Mapper auf Feld Name der Gruppe
+            // Mapper auf Feld Name
             [Column]
             public string Phase_name;
 
