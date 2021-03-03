@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleproject_poc.Views"
         mc:Ignorable="d"
-        Title="SimpleProject - Aktivitätsansicht" Height="635.52" Width="800">
+        Title="SimpleProject - Aktivitätsansicht" Height="644.181" Width="810.827">
     <Grid>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Startdatum geplant:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
@@ -44,8 +44,9 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Kostenart" DisplayMemberBinding="{Binding CostTypeName}" Width="200"/>
-                            <GridViewColumn Header="Budget" DisplayMemberBinding="{Binding BudgetCost,StringFormat={}{0} Fr.}" Width="200"/>
-                            <GridViewColumn Header="Effektive Kosten" DisplayMemberBinding="{Binding EffectiveCost,StringFormat={}{0} Fr.}" Width="200"/>
+                            <GridViewColumn Header="Budget" DisplayMemberBinding="{Binding BudgetCost,StringFormat={}{0} Fr.}" Width="150"/>
+                            <GridViewColumn Header="Effektive Kosten" DisplayMemberBinding="{Binding EffectiveCost,StringFormat={}{0} Fr.}" Width="150"/>
+                            <GridViewColumn Header="Abweichungsbegründung" DisplayMemberBinding="{Binding Deviation}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -59,8 +60,9 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Funktion" DisplayMemberBinding="{Binding FunctionName}" Width="200"/>
-                            <GridViewColumn Header="Budget" DisplayMemberBinding="{Binding BudgetTime,StringFormat={}{0} Std.}" Width="200"/>
-                            <GridViewColumn Header="Effektive Zeit" DisplayMemberBinding="{Binding EffectiveTime,StringFormat={}{0} Std.}" Width="200"/>
+                            <GridViewColumn Header="Budget" DisplayMemberBinding="{Binding BudgetTime,StringFormat={}{0} Std.}" Width="150"/>
+                            <GridViewColumn Header="Effektive Zeit" DisplayMemberBinding="{Binding EffectiveTime,StringFormat={}{0} Std.}" Width="150"/>
+                            <GridViewColumn Header="Abweichungsbegründung" DisplayMemberBinding="{Binding Deviation}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

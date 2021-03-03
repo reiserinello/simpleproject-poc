@@ -17,12 +17,12 @@ Wichtig: Im Create DB Script ist der Pfad zum Datenbank .mdf und .ldf File angeg
 **Step 3:**
 * CREATE_TABLE_Project.sql
 * CREATE_TABLE_Phase.sql
-* CREATE_TABLE_Milestone.sql
 
 **Step 4:**
 * CREATE_TABLE_Project_phase.sql
 
 **Step 5:**
+* CREATE_TABLE_Milestone.sql
 * CREATE_TABLE_Department.sql
 * CREATE_TABLE_Cost_type.sql
 * CREATE_TABLE_Function.sql

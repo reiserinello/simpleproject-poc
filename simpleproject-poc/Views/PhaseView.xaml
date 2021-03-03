@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleproject_poc.Views"
         mc:Ignorable="d"
-        Title="SimpleProject - Phasenansicht" Height="609.935" Width="800">
+        Title="SimpleProject - Phasenansicht" Height="621.365" Width="814.547">
     <Grid>
         <GroupBox x:Name="grpbxPhaseInformation" Header="Phaseninformationen" HorizontalAlignment="Left" Height="349" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
             <Grid x:Name="grdPhaseInformation" HorizontalAlignment="Left" Height="317" Margin="10,10,-2,0" VerticalAlignment="Top" Width="753">
@@ -41,7 +41,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Meilenstein" DisplayMemberBinding="{Binding MilestoneName}" Width="160"/>
-                            <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Date}" Width="160"/>
+                            <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Path=Date, StringFormat='dd.MM.yyyy'}" Width="160"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -60,6 +60,8 @@
                         <GridView>
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding ActivityName}" Width="150"/>
                             <GridViewColumn Header="Fortschritt" DisplayMemberBinding="{Binding ActivityProgress,StringFormat={}{0}%}" Width="150"/>
+                            <GridViewColumn Header="Startdatum geplant" DisplayMemberBinding="{Binding Path=PlannedStartdate, StringFormat='dd.MM.yyyy'}" Width="150"/>
+                            <GridViewColumn Header="Enddatum geplant" DisplayMemberBinding="{Binding Path=PlannedEnddate, StringFormat='dd.MM.yyyy'}" Width="150"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

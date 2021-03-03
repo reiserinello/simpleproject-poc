@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleproject_poc.Views"
         mc:Ignorable="d"
-        Title="SimpleProject - Projektansicht" Height="524.041" Width="800">
+        Title="SimpleProject - Projektansicht" Height="536.539" Width="810.713">
     <Grid>
         <GroupBox x:Name="grpbxProjectInformation" Header="Projektinformationen" HorizontalAlignment="Left" Height="272" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
             <Grid x:Name="grdProjectInformation" HorizontalAlignment="Left" Height="236" Margin="10,10,-1.667,0" VerticalAlignment="Top" Width="753">
@@ -40,7 +40,6 @@
                 <Button x:Name="btnReleaseProject" Content="Freigeben" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnReleaseProject}"/>
                 <Button x:Name="btnSetProjectDates" Content="Datum setzen" HorizontalAlignment="Left" Margin="99,205,0,0" VerticalAlignment="Top" Width="84" Command="{Binding btnSetProjectDates}"/>
                 <Button x:Name="btnSetProjectState" Content="Status setzen" HorizontalAlignment="Left" Margin="198,205,0,0" VerticalAlignment="Top" Width="84" Command="{Binding btnSetProjectState}"/>
-                <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
             </Grid>
         </GroupBox>
         <GroupBox x:Name="grpbxPhaseView" Header="Phasen" HorizontalAlignment="Left" Height="198" Margin="10,287,0,0" VerticalAlignment="Top" Width="773">
@@ -51,14 +50,13 @@
                             <GridViewColumn Header="Phase" DisplayMemberBinding="{Binding PhaseName}" Width="150"/>
                             <GridViewColumn Header="Status" DisplayMemberBinding="{Binding PhaseState}" Width="150"/>
                             <GridViewColumn Header="Fortschritt" DisplayMemberBinding="{Binding PhaseProgress,StringFormat={}{0}%}" Width="120"/>
-                            <GridViewColumn Header="Startdatum geplant" DisplayMemberBinding="{Binding PlannedStartdate}" Width="145"/>
-                            <GridViewColumn Header="Enddatum geplant" DisplayMemberBinding="{Binding PlannedEnddate}" Width="145"/>
+                            <GridViewColumn Header="Startdatum geplant" DisplayMemberBinding="{Binding Path=PlannedStartdate, StringFormat='dd.MM.yyyy'}" Width="145"/>
+                            <GridViewColumn Header="Enddatum geplant" DisplayMemberBinding="{Binding Path=PlannedEnddate, StringFormat='dd.MM.yyyy'}" Width="145"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
                 <Button x:Name="btnOpenProjectPhase" Content="Öffnen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenProjectPhase}" CommandParameter="{Binding SelectedItem,ElementName=lvProjectPhase}"/>
                 <Button x:Name="btnDefineProjectPhase"  Content="Definieren" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnDefineProjectPhase}" CommandParameter="{Binding SelectedItem,ElementName=lvProjectPhase}"/>
-                <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
             </Grid>
         </GroupBox>
 

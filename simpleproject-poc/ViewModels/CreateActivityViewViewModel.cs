@@ -149,8 +149,11 @@ namespace simpleproject_poc.ViewModels
 
                 contextPhaseViewViewModel.SetActivityView();
 
-                contextPhaseViewViewModel.OpenNewestActivity();
-
+                if (contextPhaseViewViewModel.lblPhaseState == State.WorkInProgress)
+                {
+                    contextPhaseViewViewModel.OpenNewestActivity();
+                }
+                
                 Close?.Invoke();
             }
         }

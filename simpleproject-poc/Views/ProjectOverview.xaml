@@ -5,13 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleproject_poc"
         mc:Ignorable="d"
-        Title="SimpleProject" Height="450" Width="800">
+        Title="SimpleProject" Height="457" Width="810">
     <Grid x:Name="grdSimpleProjectMain">
         <GroupBox x:Name="grpbxProjectMethod" Header="Vorgehensmodell" HorizontalAlignment="Left" Height="188" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
             <Grid x:Name="grdProjectMethod" HorizontalAlignment="Left" Height="146" Margin="10,10,-1.667,0" VerticalAlignment="Top" Width="753">
                 <Button x:Name="btnNew" Content="Neu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,0,0,0" Command="{Binding btnNewProjectMethod}"/>
                 <Button x:Name="btnOpen" Content="Öffnen" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenProjectMethod}" CommandParameter="{Binding SelectedItem,ElementName=lvProjectMethod}"/>
-                <!--<DataGrid x:Name="dtagrdProjectMethod" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding dtagrdProjectMethod}"/>-->
                 <ListView x:Name="lvProjectMethod" HorizontalAlignment="Left" Height="115" Margin="10,26,0,0" VerticalAlignment="Top" Width="354" SelectionMode="Single" ItemsSource="{Binding dtagrdProjectMethod}">
                     <ListView.View>
                         <GridView>
@@ -29,9 +28,10 @@
                         <GridView>
                             <GridViewColumn Header="Projektkey" DisplayMemberBinding="{Binding Id}" Width="100"/>
                             <GridViewColumn Header="Projekttitel" DisplayMemberBinding="{Binding ProjectName}" Width="100"/>
-                            <GridViewColumn Header="Vorgehensmodell Nr." DisplayMemberBinding="{Binding ProjectMethodId}" Width="200"/>
                             <GridViewColumn Header="Priorität" DisplayMemberBinding="{Binding Priority}" Width="100"/>
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding ProjectState}" Width="100"/>
                             <GridViewColumn Header="Fortschritt" DisplayMemberBinding="{Binding ProjectProgress,StringFormat={}{0}%}" Width="100"/>
+                            <GridViewColumn Header="Vorgehensmodell Nr." DisplayMemberBinding="{Binding ProjectMethodId}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -189,7 +189,6 @@ namespace simpleproject_poc.ViewModels
         // CanExecute Methode für wenn Aktivitätsfortschritt 100% ist
         private bool IsActivityCompleted(object context)
         {
-            // Solange ApprovalDate der Phase nicht gesetzt ist, kann die Phase freigegeben werden
             if (lblActivityProgress == 100)
             {
                 return false;
@@ -219,7 +218,7 @@ namespace simpleproject_poc.ViewModels
         // Button Aktivitätsfortschritt setzen
         public ICommand btnSetActivityState
         {
-            get { return new DelegateCommand<object>(SetActivityState); }
+            get { return new DelegateCommand<object>(SetActivityState,IsActivityCompleted).ObservesProperty(() => lblActivityProgress); }
         }
 
         private void SetActivityState(object context)

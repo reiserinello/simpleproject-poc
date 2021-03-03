@@ -325,7 +325,7 @@ namespace simpleproject_poc.ViewModels
         // Button Meilenstein hinzufügen
         public ICommand btnAddMilestone
         {
-            get { return new DelegateCommand<object>(AddMilestone, CanExecuteCreateActivityAndMileStone).ObservesProperty(() => lblPhaseState); }
+            get { return new DelegateCommand<object>(AddMilestone, CanExecuteAddMilestone).ObservesProperty(() => lblPhaseState); }
         }
 
         private void AddMilestone(object context)
@@ -335,6 +335,10 @@ namespace simpleproject_poc.ViewModels
             {
                 MessageBox.Show("Name sowie Datum müssen gesetzt sein, um einen Meilenstein zu erstellen.", "Meilenstein hinzufügen");
             }
+            else if (datepickMilestonedate < lblStartdatePlanned || datepickMilestonedate > lblEnddatePlanned)
+            {
+                MessageBox.Show("Meilensteindatum muss zwischen geplantem Start- und Enddatum liegen.", "Meilenstein hinzufügen");
+            }
             else
             {
                 dbCreateObj.MilestoneCreate(txtMilestonename, datepickMilestonedate, selectedProjectPhase.Id);
@@ -343,6 +347,20 @@ namespace simpleproject_poc.ViewModels
                 txtMilestonename = null;
                 datepickMilestonedate = null;
             }
+        }
+
+        // CanExecute Methode für btnReleasePhase
+        private bool CanExecuteAddMilestone(object context)
+        {
+            if (lblPhaseState == State.InPlanning)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         #endregion
@@ -491,7 +509,7 @@ namespace simpleproject_poc.ViewModels
         // Button Aktivität öffnen
         public ICommand btnCreateActivity
         {
-            get { return new DelegateCommand<object>(CreateActivity, CanExecuteCreateActivityAndMileStone).ObservesProperty(() => lblPhaseState); }
+            get { return new DelegateCommand<object>(CreateActivity, CanExecuteCreateActivity).ObservesProperty(() => lblPhaseState); }
         }
 
         private void CreateActivity(object context)
@@ -504,7 +522,7 @@ namespace simpleproject_poc.ViewModels
         }
 
         // CanExecute Methode für btnCreateActivity
-        private bool CanExecuteCreateActivityAndMileStone(object context)
+        private bool CanExecuteCreateActivity(object context)
         {
             if (lblPhaseState == State.InPlanning || lblPhaseState == State.WorkInProgress)
             {

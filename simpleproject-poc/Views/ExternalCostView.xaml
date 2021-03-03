@@ -25,7 +25,7 @@
         <Label Content="CHF" HorizontalAlignment="Left" Margin="424,178,0,0" VerticalAlignment="Top"/>
         <Label Content="Kosten effektiv:" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCostEffective" HorizontalAlignment="Left" Height="26" Margin="107,204,0,0" TextWrapping="Wrap" Text="{Binding txtCostEffective}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding SetFieldsEnabled}"/>
-        <Label Content="Abweichung:" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="91"/>
+        <Label Content="Abweichungs-&#xD;&#xA;begründung:" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="91" Height="52"/>
         <TextBox x:Name="txtDeviation" HorizontalAlignment="Left" Height="85" Margin="107,230,0,0" TextWrapping="Wrap" Text="{Binding txtDeviation}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding SetFieldsEnabled}"/>
         <Label Content="CHF" HorizontalAlignment="Left" Margin="424,204,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnCreateOrSetExternalCost" Content="{Binding btnCreateOrSetExternalCostName}" HorizontalAlignment="Left" Margin="325,320,0,0" VerticalAlignment="Top" Width="94" Command="{Binding btnCreateOrSetExternalCost}" Height="20" CommandParameter="{Binding SelectedItem,ElementName=lvCostType}"/>

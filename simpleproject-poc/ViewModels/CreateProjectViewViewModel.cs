@@ -197,21 +197,28 @@ namespace simpleproject_poc.ViewModels
             } 
             else
             {
-                Project projectObj = new Project();
-                projectObj.CreateDBProject(txtProjectName, cmbbxPriority, txtProjectManager, datepickerPlannedStartDate, datepickerPlannedEndDate, txtProjectDocumentsLink, txtProjectDescription, selectedProjectMethod.Id);
-
                 DBGet dbGetObj = new DBGet();
-                var dbGetProjects = dbGetObj.GeneralGet("Project", 0);
-                contextProjectOverviewModel.lvProjectOverview = dbGetProjects;
+                var dbGetPhase = dbGetObj.GeneralGet("Phase", selectedProjectMethod.Id);
 
-                // Neustes Project in List abgreifen und ProjektView öffnen
-                var createdProject = contextProjectOverviewModel.lvProjectOverview.Last();
-                contextProjectOverviewModel.OpenProject(createdProject);
+                if (dbGetPhase.Count == 0)
+                {
+                    MessageBox.Show("Es wurde ein Vorgehensmodell ausgewählt, welche keine Phasen enthält. Bitte ein Vorgehensmodell mit Phasen auswählen oder dem aktuellen Vorgehensmodell Phasen hinzufügen.", "Projekt erstellen");
+                }
+                else
+                {
+                    Project projectObj = new Project();
+                    projectObj.CreateDBProject(txtProjectName, cmbbxPriority, txtProjectManager, datepickerPlannedStartDate, datepickerPlannedEndDate, txtProjectDocumentsLink, txtProjectDescription, selectedProjectMethod.Id);
 
-                Close?.Invoke();
-            }
+                    var dbGetProjects = dbGetObj.GeneralGet("Project", 0);
+                    contextProjectOverviewModel.lvProjectOverview = dbGetProjects;
 
-            
+                    // Neustes Project in List abgreifen und ProjektView öffnen
+                    var createdProject = contextProjectOverviewModel.lvProjectOverview.Last();
+                    contextProjectOverviewModel.OpenProject(createdProject);
+
+                    Close?.Invoke();
+                }
+            }            
         }
     }
 }

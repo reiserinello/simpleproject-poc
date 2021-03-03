@@ -25,7 +25,7 @@
         <Label Content="Std." HorizontalAlignment="Left" Margin="424,178,0,0" VerticalAlignment="Top"/>
         <Label Content="Zeit effektiv:" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtEffectiveTime" HorizontalAlignment="Left" Height="26" Margin="107,204,0,0" TextWrapping="Wrap" Text="{Binding txtEffectiveTime}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding SetFieldsEnabled}"/>
-        <Label Content="Abweichung:" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="91"/>
+        <Label Content="Abweichungs-&#xD;&#xA;begründung:" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="91"/>
         <TextBox x:Name="txtDeviation" HorizontalAlignment="Left" Height="85" Margin="107,230,0,0" TextWrapping="Wrap" Text="{Binding txtDeviation}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding SetFieldsEnabled}"/>
         <Label Content="Std." HorizontalAlignment="Left" Margin="424,204,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnCreateOrSetEmployeeResource" Content="{Binding btnCreateOrSetEmployeeResourceName}" HorizontalAlignment="Left" Margin="325,320,0,0" VerticalAlignment="Top" Width="94" Command="{Binding btnCreateOrSetEmployeeResource}" Height="20" CommandParameter="{Binding SelectedItem,ElementName=lvFunction}"/>

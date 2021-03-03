@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleproject_poc.Views"
         mc:Ignorable="d"
-        Title="Aktivität erstellen" Height="233.049" Width="800">
+        Title="Aktivität erstellen" Height="239.716" Width="812">
     <Grid>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Startdatum geplant:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>

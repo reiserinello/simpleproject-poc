@@ -316,6 +316,7 @@ namespace simpleproject_poc.ViewModels
                 Boolean PreviousPhaseChange = false;
                 Boolean NotAllActivity100 = false;
                 Boolean NotAllDatesSet = false;
+                Boolean CloseFromNotWIP = false;
 
                 if (cmbbxState == State.InPlanning)
                 {
@@ -350,7 +351,7 @@ namespace simpleproject_poc.ViewModels
                     if (contextPhaseViewViewModel.lblPhaseState != State.WorkInProgress)
                     {
                         StateCanBeSet = false;
-                        PreviousPhaseChange = true;
+                        CloseFromNotWIP = true;
                     }
                     else
                     {
@@ -402,6 +403,10 @@ namespace simpleproject_poc.ViewModels
                 else if (PreviousPhaseChange == true)
                 {
                     MessageBox.Show("Es kann nicht auf einen vorherigen Status gewechselt werden.", "Status setzen");
+                }
+                else if (CloseFromNotWIP == true)
+                {
+                    MessageBox.Show("Die Phase kann nur aus dem Status WorkInProgress geschlossen werden.", "Status setzen");
                 }
             }
 
