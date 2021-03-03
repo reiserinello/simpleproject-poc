@@ -51,7 +51,7 @@ namespace simpleproject_poc.Helper
             {
                 Project_name = t_projectname,
                 Priority = t_priority.ToString(),
-                Project_state = "WaitingForRelease",
+                Project_state = "Created",
                 Project_manager = t_projectmanager,
                 Planned_startdate = t_plannedstartdate,
                 Planned_enddate = t_plannedenddate,
@@ -74,7 +74,7 @@ namespace simpleproject_poc.Helper
                 ProjectPhase.dbProjectPhase newProjectPhase = new ProjectPhase.dbProjectPhase
                 {
                     Phase_progress = 0,
-                    Phase_state = "WaitingForRelease",
+                    Phase_state = "Created",
                     Project_id = dbGetProject.Id,
                     Phase_id = i.Id
                 };

@@ -279,7 +279,7 @@ namespace simpleproject_poc.ViewModels
         // Button Projekt freigeben
         public ICommand btnReleaseProject
         {
-            get { return new DelegateCommand<object>(ReleaseProject,IsProjectReleasedOne).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(ReleaseProject,IsProjectReleased).ObservesProperty(() => lblApprovalDate); }
         }
 
         private void ReleaseProject(object context)
@@ -295,7 +295,7 @@ namespace simpleproject_poc.ViewModels
         }
 
         // CanExecute Methode für btnReleaseProject
-        private bool IsProjectReleasedOne(object context)
+        private bool IsProjectReleased(object context)
         {
             // Solange ApprovalDate des Projektes nicht gesetzt ist, kann keine ProjectPhase angelegt oder geöffnet werden
             if (lblApprovalDate == null)
@@ -312,7 +312,7 @@ namespace simpleproject_poc.ViewModels
         // Button Projekt Datum setzen
         public ICommand btnSetProjectDates
         {
-            get { return new DelegateCommand<object>(SetProjectDates,IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(SetProjectDates, CanExecuteSetProjectDates).ObservesProperty(() => lblProjectState); }
         }
 
         private void SetProjectDates(object context)
@@ -324,10 +324,23 @@ namespace simpleproject_poc.ViewModels
             setDatesView.Show();
         }
 
+        // CanExecute Methode für SetProjectDates
+        private bool CanExecuteSetProjectDates(object context)
+        {
+            if (lblProjectState == State.WorkInProgress)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         // Button Status setzen
         public ICommand btnSetProjectState
         {
-            get { return new DelegateCommand<object>(SetProjectState,IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(SetProjectState, CanExecuteSetProjectState).ObservesProperty(() => lblProjectState); }
         }
 
         private void SetProjectState(object context)
@@ -338,13 +351,27 @@ namespace simpleproject_poc.ViewModels
             contextSetStateView.InitialValuesSetter();
             setStateView.Show();
         }
+
+        // CanExecute Methode für btnSetProjectState
+        private bool CanExecuteSetProjectState(object context)
+        {
+            // Solange ApprovalDate des Projektes nicht gesetzt ist, kann der Status nicht gesetzt werden
+            if (lblProjectState != State.Created && lblProjectState != State.Closed)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
 
         #region ProjectPhase
         // Button Projekt Phase erstellen
         public ICommand btnOpenProjectPhase
         {
-            get { return new DelegateCommand<object>(OpenProjectPhase, IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(OpenProjectPhase, CanExecuteOpenPhase).ObservesProperty(() => lblProjectState); }
             //set { }
         }
 
@@ -374,7 +401,7 @@ namespace simpleproject_poc.ViewModels
         // Button Projekt Phase definieren
         public ICommand btnDefineProjectPhase
         {
-            get { return new DelegateCommand<object>(DefineProjectPhase, IsProjectReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(DefineProjectPhase, CanExecuteDefinePhase).ObservesProperty(() => lblProjectState); }
             //set { }
         }
 
@@ -398,17 +425,29 @@ namespace simpleproject_poc.ViewModels
         }
 
         // CanExecute Methode für btnOpenProjectPhase & btnDefineProjectPhase
-        private bool IsProjectReleasedTwo(object context)
+        private bool CanExecuteDefinePhase(object context)
         {
             // Solange ApprovalDate des Projektes nicht gesetzt ist, kann keine ProjectPhase angelegt oder geöffnet werden
-            if (lblApprovalDate == null)
+            if (lblProjectState == State.InPlanning)
+            {
+                return true;
+            } else
             {
                 return false;
-            } else
+            }
+        }
+
+        private bool CanExecuteOpenPhase(object context)
+        {
+            // Solange ApprovalDate des Projektes nicht gesetzt ist, kann keine ProjectPhase angelegt oder geöffnet werden
+            if (lblProjectState == State.WorkInProgress || lblProjectState == State.Closed)
             {
                 return true;
             }
-            
+            else
+            {
+                return false;
+            }
         }
 
         // Listview Projektphase

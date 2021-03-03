@@ -325,7 +325,7 @@ namespace simpleproject_poc.ViewModels
         // Button Meilenstein hinzufügen
         public ICommand btnAddMilestone
         {
-            get { return new DelegateCommand<object>(AddMilestone,IsPhaseReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(AddMilestone, CanExecuteCreateActivityAndMileStone).ObservesProperty(() => lblPhaseState); }
         }
 
         private void AddMilestone(object context)
@@ -351,7 +351,7 @@ namespace simpleproject_poc.ViewModels
         // Button Phase freigeben
         public ICommand btnReleasePhase
         {
-            get { return new DelegateCommand<object>(ReleasePhase, IsPhaseReleasedOne).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(ReleasePhase, CanExecuteReleasePhase).ObservesProperty(() => lblApprovalDate); }
         }
 
         private void ReleasePhase(object context)
@@ -365,10 +365,9 @@ namespace simpleproject_poc.ViewModels
         }
 
         // CanExecute Methode für btnReleasePhase
-        private bool IsPhaseReleasedOne(object context)
+        private bool CanExecuteReleasePhase(object context)
         {
-            // Solange ApprovalDate der Phase nicht gesetzt ist, kann die Phase freigegeben werden
-            if (lblApprovalDate == null)
+            if (lblPhaseState == State.Created)
             {
                 return true;
             }
@@ -382,7 +381,7 @@ namespace simpleproject_poc.ViewModels
         // Button Phase Datum setzen
         public ICommand btnSetPhaseDates
         {
-            get { return new DelegateCommand<object>(SetPhaseDates, IsPhaseReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(SetPhaseDates, CanExecuteSetPhaseDates).ObservesProperty(() => lblPhaseState); }
         }
 
         private void SetPhaseDates(object context)
@@ -394,10 +393,22 @@ namespace simpleproject_poc.ViewModels
             setDatesView.Show();
         }
 
+        private bool CanExecuteSetPhaseDates(object context)
+        {
+            if (lblPhaseState == State.WorkInProgress)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         // Button Phase Status setzen
         public ICommand btnSetPhaseState
         {
-            get { return new DelegateCommand<object>(SetPhaseState, IsPhaseReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(SetPhaseState, CanExecuteSetPhaseState).ObservesProperty(() => lblPhaseState); }
         }
 
         private void SetPhaseState(object context)
@@ -407,6 +418,18 @@ namespace simpleproject_poc.ViewModels
             contextSetStateView.contextPhaseViewViewModel = this;
             contextSetStateView.InitialValuesSetter();
             setStateView.Show();
+        }
+
+        private bool CanExecuteSetPhaseState(object context)
+        {
+            if (lblPhaseState != State.Created && lblPhaseState != State.Closed)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion
@@ -430,7 +453,7 @@ namespace simpleproject_poc.ViewModels
         // Button Aktivität öffnen
         public ICommand btnOpenActivity
         {
-            get { return new DelegateCommand<object>(OpenActivity, IsPhaseReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(OpenActivity, CanExecuteOpenActivity).ObservesProperty(() => lblPhaseState); }
         }
 
         private void OpenActivity(object context)
@@ -452,10 +475,23 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        private bool CanExecuteOpenActivity(object context)
+        {
+            if (lblPhaseState == State.WorkInProgress || lblPhaseState == State.Closed)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
         // Button Aktivität öffnen
         public ICommand btnCreateActivity
         {
-            get { return new DelegateCommand<object>(CreateActivity, IsPhaseReleasedTwo).ObservesProperty(() => lblApprovalDate); }
+            get { return new DelegateCommand<object>(CreateActivity, CanExecuteCreateActivityAndMileStone).ObservesProperty(() => lblPhaseState); }
         }
 
         private void CreateActivity(object context)
@@ -467,17 +503,16 @@ namespace simpleproject_poc.ViewModels
             createActivityView.Show();
         }
 
-        // CanExecute Methode für btnOpenActivity & btnCreateActivity
-        private bool IsPhaseReleasedTwo(object context)
+        // CanExecute Methode für btnCreateActivity
+        private bool CanExecuteCreateActivityAndMileStone(object context)
         {
-            // Solange ApprovalDate der Phase nicht gesetzt ist, kann keine Aktivität erstellt oder geöffnet werden
-            if (lblApprovalDate == null)
+            if (lblPhaseState == State.InPlanning || lblPhaseState == State.WorkInProgress)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
 
         }

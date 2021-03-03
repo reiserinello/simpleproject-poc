@@ -20,7 +20,7 @@ namespace simpleproject_poc.Helper
 
     public enum State
     {
-        WaitingForRelease,
+        Created,
         Released,
         InPlanning,
         WorkInProgress,

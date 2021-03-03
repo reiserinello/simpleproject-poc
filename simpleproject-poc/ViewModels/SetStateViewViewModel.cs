@@ -76,7 +76,7 @@ namespace simpleproject_poc.ViewModels
             get
             {
                 string[] StateNames = Enum.GetNames(typeof(State));
-                IEnumerable<dynamic> list = from state in StateNames where (state != "WaitingForRelease") && (state != "Released") select Enum.Parse(typeof(State), state);
+                IEnumerable<dynamic> list = from state in StateNames where (state != "Created") && (state != "Released") select Enum.Parse(typeof(State), state);
 
                 return list;
                 /*return Enum.GetValues(typeof(State))
@@ -125,10 +125,17 @@ namespace simpleproject_poc.ViewModels
         {
             if (contextProjectViewViewModel != null)
             {
-                
-
                 cmbbxPriority = contextProjectViewViewModel.lblPriority;
-                cmbbxState = contextProjectViewViewModel.lblProjectState;
+
+                if (contextProjectViewViewModel.lblProjectState == State.Released)
+                {
+                    cmbbxState = State.InPlanning;
+                }
+                else
+                {
+                    cmbbxState = contextProjectViewViewModel.lblProjectState;
+                }
+                
                 txtProgress = contextProjectViewViewModel.lblProjectProgress;
 
                 PriorityIsEnabled = true;
@@ -137,7 +144,14 @@ namespace simpleproject_poc.ViewModels
             
             if (contextPhaseViewViewModel != null)
             {
-                cmbbxState = contextPhaseViewViewModel.lblPhaseState;
+                if (contextPhaseViewViewModel.lblPhaseState == State.Released)
+                {
+                    cmbbxState = State.InPlanning;
+                }
+                else
+                {
+                    cmbbxState = contextPhaseViewViewModel.lblPhaseState;
+                }
                 txtProgress = contextPhaseViewViewModel.lblPhaseProgress;
 
                 PriorityIsEnabled = false;
@@ -202,25 +216,193 @@ namespace simpleproject_poc.ViewModels
                 {
                     MessageBox.Show("Der Status WaitingForRelease und Released sind Zustände, welche vom System automatischen generiert werden je nach ");
                 }*/
-                contextProjectViewViewModel.selectedProject.SetState(txtProgress, cmbbxState, cmbbxPriority);
-                contextProjectViewViewModel.lblProjectProgress = txtProgress;
-                contextProjectViewViewModel.lblProjectState = cmbbxState;
-                contextProjectViewViewModel.lblPriority = cmbbxPriority;
+                Boolean StateCanBeSet = true;
+                Boolean NotAllPhaseDefined = false;
+                Boolean NotAllPhaseClosed = false;
+                Boolean PreviousPhaseChange = false;
+                Boolean NotAllDatesSet = false;
 
-                contextProjectViewViewModel.UpdateProjectOverview();
+                if (cmbbxState == State.InPlanning)
+                {
+                    if (contextProjectViewViewModel.lblProjectState != State.Released && contextProjectViewViewModel.lblProjectState != State.InPlanning)
+                    {
+                        StateCanBeSet = false;
+                        PreviousPhaseChange = true;
+                    }
+                    else
+                    {
+                        if (txtProgress < 10)
+                        {
+                            txtProgress = 10;
+                        }
+                    }
+                }
 
-                Close?.Invoke();
+                if (cmbbxState == State.WorkInProgress)
+                {
+                    
+                    foreach (var pp in contextProjectViewViewModel.lvProjectPhase)
+                    {
+                        VProjectPhasePhase ppObj = (VProjectPhasePhase)pp;
+                        if (ppObj.PlannedStartdate == null)
+                        {
+                            StateCanBeSet = false;
+                            NotAllPhaseDefined = true;
+                        }
+                    }
+
+                    if (NotAllPhaseDefined == false && txtProgress < 20)
+                    {
+                        txtProgress = 20;
+                    }
+                }
+                else if (cmbbxState == State.Closed)
+                {   
+                    foreach (var pp in contextProjectViewViewModel.lvProjectPhase)
+                    {
+                        VProjectPhasePhase ppObj = (VProjectPhasePhase)pp;
+                        if (ppObj.PhaseState != State.Closed)
+                        {
+                            StateCanBeSet = false;
+                            NotAllPhaseClosed = true;
+                        }
+                    }
+
+                    if (contextProjectViewViewModel.lblStartdate == null || contextProjectViewViewModel.lblEnddate == null)
+                    {
+                        StateCanBeSet = false;
+                        NotAllDatesSet = true;
+                    }
+
+                    if (NotAllPhaseClosed == false && NotAllDatesSet == false)
+                    {
+                        txtProgress = 100;
+                    }
+                }
+
+                if (StateCanBeSet == true)
+                {
+                    contextProjectViewViewModel.selectedProject.SetState(txtProgress, cmbbxState, cmbbxPriority);
+                    contextProjectViewViewModel.lblProjectProgress = txtProgress;
+                    contextProjectViewViewModel.lblProjectState = cmbbxState;
+                    contextProjectViewViewModel.lblPriority = cmbbxPriority;
+
+                    contextProjectViewViewModel.UpdateProjectOverview();
+
+                    Close?.Invoke();
+                }
+                else if (NotAllPhaseDefined == true)
+                {
+                    MessageBox.Show("Um den Status auf WorkInProgress zu setzen, müssen alle Projektphasen definiert sein.","Status setzen");
+                }
+                else if (NotAllPhaseClosed == true)
+                {
+                    MessageBox.Show("Um den Status auf Closed zu setzen, müssen alle Projektphasen bereits geschlossen sein (Status closed).", "Status setzen");
+                } 
+                else if (NotAllDatesSet == true)
+                {
+                    MessageBox.Show("Um den Status auf Closed zu setzen, müssen Start- sowie Enddatum des Projektes gesetzt sein.", "Status setzen");
+                }
+                else if (PreviousPhaseChange == true)
+                {
+                    MessageBox.Show("Es kann nicht auf einen vorherigen Status gewechselt werden.","Status setzen");
+                }
             }
 
             if (contextPhaseViewViewModel != null)
             {
-                contextPhaseViewViewModel.selectedProjectPhase.SetState(txtProgress,cmbbxState);
-                contextPhaseViewViewModel.lblPhaseProgress = txtProgress;
-                contextPhaseViewViewModel.lblPhaseState = cmbbxState;
+                Boolean StateCanBeSet = true;
+                Boolean NoActivityCreated = false;
+                Boolean PreviousPhaseChange = false;
+                Boolean NotAllActivity100 = false;
+                Boolean NotAllDatesSet = false;
 
-                contextPhaseViewViewModel.UpdatePhaseOverview();
+                if (cmbbxState == State.InPlanning)
+                {
+                    if (contextPhaseViewViewModel.lblPhaseState != State.Released && contextPhaseViewViewModel.lblPhaseState != State.InPlanning)
+                    {
+                        StateCanBeSet = false;
+                        PreviousPhaseChange = true;
+                    }
+                    else
+                    {
+                        if (txtProgress < 10)
+                        {
+                            txtProgress = 10;
+                        }
+                    }
+                }
+                else if (cmbbxState == State.WorkInProgress)
+                {
+                    if (contextPhaseViewViewModel.lvActivity.Count == 0)
+                    {
+                        StateCanBeSet = false;
+                        NoActivityCreated = true;
+                    }
 
-                Close?.Invoke();
+                    if (NoActivityCreated == false && txtProgress < 20)
+                    {
+                        txtProgress = 20;
+                    }
+                }
+                else if (cmbbxState == State.Closed)
+                {
+                    if (contextPhaseViewViewModel.lblPhaseState != State.WorkInProgress)
+                    {
+                        StateCanBeSet = false;
+                        PreviousPhaseChange = true;
+                    }
+                    else
+                    {
+                        foreach (var act in contextPhaseViewViewModel.lvActivity)
+                        {
+                            Activity actObj = (Activity)act;
+                            if (actObj.ActivityProgress != 100)
+                            {
+                                StateCanBeSet = false;
+                                NotAllActivity100 = true;
+                            }
+                        }
+
+                        if (contextPhaseViewViewModel.lblStartdate == null || contextPhaseViewViewModel.lblEnddate == null || contextPhaseViewViewModel.lblReviewdate == null)
+                        {
+                            StateCanBeSet = false;
+                            NotAllDatesSet = true;
+                        }
+
+                        if (NotAllActivity100 == false && NotAllDatesSet == false)
+                        {
+                            txtProgress = 100;
+                        }
+                    }
+                }
+
+                if (StateCanBeSet == true)
+                {
+                    contextPhaseViewViewModel.selectedProjectPhase.SetState(txtProgress, cmbbxState);
+                    contextPhaseViewViewModel.lblPhaseProgress = txtProgress;
+                    contextPhaseViewViewModel.lblPhaseState = cmbbxState;
+
+                    contextPhaseViewViewModel.UpdatePhaseOverview();
+
+                    Close?.Invoke();
+                } 
+                else if (NoActivityCreated == true)
+                {
+                    MessageBox.Show("Um den Status auf WorkInProgress zu setzen, muss eine Aktivität erstellt werden.", "Status setzen");
+                } 
+                else if (NotAllActivity100 == true)
+                {
+                    MessageBox.Show("Um den Status auf Closed zu setzen, müssen alle Aktivitäten abgeschlossen sein (Fortschritt 100%).", "Status setzen");
+                }
+                else if (NotAllDatesSet == true)
+                {
+                    MessageBox.Show("Um den Status auf Closed zu setzen, müssen Start-, End- sowie Reviewdatum der Phase gesetzt sein.", "Status setzen");
+                }
+                else if (PreviousPhaseChange == true)
+                {
+                    MessageBox.Show("Es kann nicht auf einen vorherigen Status gewechselt werden.", "Status setzen");
+                }
             }
 
             if (contextActivityViewViewModel != null)
