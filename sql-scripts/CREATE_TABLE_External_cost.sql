@@ -1,7 +1,7 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[External_cost]    Script Date: 01.03.2021 22:15:33 ******/
+/****** Object:  Table [dbo].[External_cost]    Script Date: 05.03.2021 19:48:09 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[External_cost](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Budget_cost] [int] NOT NULL,
 	[Effective_cost] [int] NULL,
-	[Deviation] [varchar](50) NULL,
+	[Deviation] [varchar](500) NULL,
 	[Cost_type_id] [int] NOT NULL,
 	[Activity_id] [int] NOT NULL,
  CONSTRAINT [PK_External_cost] PRIMARY KEY CLUSTERED 

@@ -1,12 +1,13 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  View [dbo].[v_Employee_resource_Function]    Script Date: 01.03.2021 22:17:31 ******/
+/****** Object:  View [dbo].[v_Employee_resource_Function]    Script Date: 05.03.2021 19:50:18 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 CREATE VIEW [dbo].[v_Employee_resource_Function]
 AS

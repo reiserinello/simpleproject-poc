@@ -1,7 +1,7 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[Project]    Script Date: 01.03.2021 22:16:09 ******/
+/****** Object:  Table [dbo].[Project]    Script Date: 05.03.2021 19:49:30 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -19,15 +19,22 @@ CREATE TABLE [dbo].[Project](
 	[Planned_enddate] [datetime] NOT NULL,
 	[Startdate] [datetime] NULL,
 	[Enddate] [datetime] NULL,
-	[Project_manager] [varchar](50) NOT NULL,
 	[Project_progress] [int] NOT NULL,
 	[Project_documents_link] [varchar](250) NULL,
 	[Project_method_id] [int] NOT NULL,
+	[Employee_id] [int] NOT NULL,
  CONSTRAINT [PK_Project] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Project]  WITH CHECK ADD  CONSTRAINT [FK_Project_Employee] FOREIGN KEY([Employee_id])
+REFERENCES [dbo].[Employee] ([Id])
+GO
+
+ALTER TABLE [dbo].[Project] CHECK CONSTRAINT [FK_Project_Employee]
 GO
 
 ALTER TABLE [dbo].[Project]  WITH CHECK ADD  CONSTRAINT [FK_Project_Project_method] FOREIGN KEY([Project_method_id])

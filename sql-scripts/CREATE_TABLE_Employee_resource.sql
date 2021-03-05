@@ -1,7 +1,7 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[Employee_resource]    Script Date: 01.03.2021 22:15:21 ******/
+/****** Object:  Table [dbo].[Employee_resource]    Script Date: 05.03.2021 19:48:00 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[Employee_resource](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Budget_time] [int] NOT NULL,
 	[Effective_time] [int] NULL,
-	[Deviation] [varchar](50) NULL,
+	[Deviation] [varchar](500) NULL,
 	[Function_id] [int] NOT NULL,
 	[Activity_id] [int] NOT NULL,
  CONSTRAINT [PK_Personal_resource] PRIMARY KEY CLUSTERED 

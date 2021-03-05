@@ -1,7 +1,7 @@
 USE [simpleproject-poc]
 GO
 
-/****** Object:  Table [dbo].[Project_phase]    Script Date: 01.03.2021 22:16:29 ******/
+/****** Object:  Table [dbo].[Project_phase]    Script Date: 05.03.2021 19:49:50 ******/
 SET ANSI_NULLS ON
 GO
 

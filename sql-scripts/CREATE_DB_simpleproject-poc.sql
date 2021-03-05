@@ -1,7 +1,7 @@
 USE [master]
 GO
 
-/****** Object:  Database [simpleproject-poc]    Script Date: 01.03.2021 22:14:18 ******/
+/****** Object:  Database [simpleproject-poc]    Script Date: 05.03.2021 19:47:07 ******/
 CREATE DATABASE [simpleproject-poc]
  CONTAINMENT = NONE
  ON  PRIMARY 
