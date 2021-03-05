@@ -1,0 +1,33 @@
+Beim Ausführen der SQL Scripts zum Aufbau der DB, bitte folgende Reihenfolge einhalten (zwingend aufgrund der Beziehungen).
+
+1:
+CREATE_DB_simpleproject-poc.sql
+
+2:
+CREATE_TABLE_Project_method.sql
+CREATE_TABLE_Department.sql
+
+3:
+CREATE_TABLE_Employee.sql
+
+4:
+CREATE_TABLE_Project.sql
+CREATE_TABLE_Phase.sql
+
+5:
+CREATE_TABLE_Project_phase.sql
+
+6:
+CREATE_TABLE_Milestone.sql
+CREATE_TABLE_Cost_type.sql
+CREATE_TABLE_Function.sql
+
+7:
+CREATE_TABLE_Activity.sql
+
+8:
+CREATE_TABLE_External_cost.sql
+CREATE_TABLE_Personal_resource.sql
+
+9:
+Alle Views
