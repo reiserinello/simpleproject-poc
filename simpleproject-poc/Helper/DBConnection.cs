@@ -15,9 +15,10 @@ namespace simpleproject_poc.Helper
         public DataContext SetupDBConnection()
         {
             // Hostname auslesen und Connectionstring zusammensetzen
-            String hostname = Dns.GetHostName();
-            String connectionString = "Server=" + hostname + "\\SQLEXPRESS;Database=simpleproject-poc;Connection timeout=30;Integrated Security=True";
-
+            //String hostname = Dns.GetHostName();
+            //String connectionString = "Server=" + hostname + "\\SQLEXPRESS;Database=simpleproject-poc;Connection timeout=30;Integrated Security=True";
+            String connectionString = "Data Source=.\\SQLEXPRESS;AttachDbFilename=" + AppDomain.CurrentDomain.BaseDirectory + "simpleproject-poc.mdf" + ";Integrated Security=True;User Instance=False";
+            
             // DB Verbindung aufsetzen
             DataContext dbConnection = new DataContext(connectionString);
             return dbConnection;
