@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using simpleproject_poc.Helper;
 using simpleproject_poc.Models;
+using simpleproject_poc.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,10 +52,17 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Alle möglichen Mitarbeiter/innen als Projektleiter/in anzeigen
+        public void SetEmployeeValues()
+        {
+            DBGet dbGetObj = new DBGet();
+            lvProjectmanager = dbGetObj.GeneralGet("Employee", 0);
+        }
+
         public Action Close { get; set; }
         private string _txtProjectName;
         private Priority _cmbbxPriority;
-        private string _txtProjectManager;
+        //private string _txtProjectManager;
         private DateTime _datepickerPlannedStartDate;
         private DateTime _datepickerPlannedEndDate;
         private string _txtProjectDocumentsLink;
@@ -110,6 +118,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        /*
         public string txtProjectManager
         {
             get
@@ -121,7 +130,7 @@ namespace simpleproject_poc.ViewModels
                 _txtProjectManager = value;
                 OnPropertyChanged("lblProjectManager");
             }
-        }
+        }*/
 
         public DateTime datepickerPlannedStartDate
         {
@@ -175,6 +184,38 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        #region Projectmanager
+        private ObservableCollection<dynamic> _lvProjectmanager;
+        public ObservableCollection<dynamic> lvProjectmanager
+        {
+            get
+            {
+                return _lvProjectmanager;
+            }
+            set
+            {
+                _lvProjectmanager = value;
+                OnPropertyChanged("lvProjectmanager");
+            }
+        }
+
+        // Button Mitarbeiter erstellen, um Projektleiter zu kreieren
+        public ICommand btnOpenCreateEmployeeView
+        {
+            get { return new DelegateCommand<object>(OpenCreateEmployeeView); }
+        }
+
+        private void OpenCreateEmployeeView(object context)
+        {
+            CreateEmployeeView createEmployeeView = new CreateEmployeeView();
+            var contextCreateEmployeeView = (CreateEmployeeViewViewModel)createEmployeeView.DataContext;
+            contextCreateEmployeeView.contextCreateProjectViewViewModel = this;
+            contextCreateEmployeeView.SetDepartments();
+            createEmployeeView.Show();
+        }
+
+        #endregion
+
         // Button Projekt erstellen
         public ICommand btnCreateProject
         {
@@ -183,9 +224,11 @@ namespace simpleproject_poc.ViewModels
 
         private void CreateProject(object context)
         {
-            if (String.IsNullOrWhiteSpace(txtProjectName) || selectedProjectMethod == null || String.IsNullOrWhiteSpace(txtProjectManager) || datepickerPlannedStartDate == null || datepickerPlannedEndDate == null || String.IsNullOrWhiteSpace(txtProjectDocumentsLink) || String.IsNullOrWhiteSpace(txtProjectDescription))
+            var selectedProjectmanager = (Employee)context;
+
+            if (String.IsNullOrWhiteSpace(txtProjectName) || selectedProjectMethod == null || selectedProjectmanager == null || datepickerPlannedStartDate == null || datepickerPlannedEndDate == null || String.IsNullOrWhiteSpace(txtProjectDocumentsLink) || String.IsNullOrWhiteSpace(txtProjectDescription))
             {
-                MessageBox.Show("Um ein Projekt zu erstellen, müssen alle Felder ausgefüllt sein.","Projekt erstellen");
+                MessageBox.Show("Um ein Projekt zu erstellen, müssen alle Felder ausgefüllt und ein/e Projektleiter/in ausgewählt sein.","Projekt erstellen");
             } 
             else if (datepickerPlannedEndDate < datepickerPlannedStartDate) 
             {
@@ -203,7 +246,7 @@ namespace simpleproject_poc.ViewModels
                 else
                 {
                     DBCreate dbCreateObj = new DBCreate();
-                    dbCreateObj.ProjectCreate(txtProjectName, cmbbxPriority, txtProjectManager, datepickerPlannedStartDate, datepickerPlannedEndDate, txtProjectDocumentsLink, txtProjectDescription, selectedProjectMethod.Id);
+                    dbCreateObj.ProjectCreate(txtProjectName, cmbbxPriority, datepickerPlannedStartDate, datepickerPlannedEndDate, txtProjectDocumentsLink, txtProjectDescription, selectedProjectMethod.Id, selectedProjectmanager.Id);
 
                     var dbGetProjects = dbGetObj.GeneralGet("Project", 0);
                     contextProjectOverviewModel.lvProjectOverview = dbGetProjects;

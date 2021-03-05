@@ -23,12 +23,13 @@ namespace simpleproject_poc.Models
         public DateTime PlannedEnddate { get; }
         public Nullable<DateTime> Startdate { get; }
         public Nullable<DateTime> Enddate { get; }
-        public string ProjectManager { get; }
+        //public string ProjectManager { get; }
         public int ProjectProgress { get; }
         public string ProjectDocumentsLink { get; }
         public int ProjectMethodId { get; }
+        public int EmployeeId { get; }
 
-        public Project (int t_Id, string t_ProjectName, string t_ProjectDescription, Nullable<DateTime> t_ApprovalDate, Priority t_Priority, State t_ProjectState, DateTime t_PlannedStartdate, DateTime t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, string t_ProjectManager, int t_ProjectProgress, string t_ProjectDocumentsLink, int t_ProjectMethodId)
+        public Project (int t_Id, string t_ProjectName, string t_ProjectDescription, Nullable<DateTime> t_ApprovalDate, Priority t_Priority, State t_ProjectState, DateTime t_PlannedStartdate, DateTime t_PlannedEnddate, Nullable<DateTime> t_Startdate, Nullable<DateTime> t_Enddate, int t_ProjectProgress, string t_ProjectDocumentsLink, int t_ProjectMethodId, int t_EmployeeId)
         {
             Id = t_Id;
             ProjectName = t_ProjectName;
@@ -40,10 +41,10 @@ namespace simpleproject_poc.Models
             PlannedEnddate = t_PlannedEnddate;
             Startdate = t_Startdate;
             Enddate = t_Enddate;
-            ProjectManager = t_ProjectManager;
             ProjectProgress = t_ProjectProgress;
             ProjectDocumentsLink = t_ProjectDocumentsLink;
             ProjectMethodId = t_ProjectMethodId;
+            EmployeeId = t_EmployeeId;
 
             _dbUpdateObj = new DBUpdate();
         }
@@ -106,8 +107,8 @@ namespace simpleproject_poc.Models
             [Column(CanBeNull = true)]
             public Nullable<DateTime> Enddate;
 
-            [Column]
-            public string Project_manager;
+            //[Column]
+            //public string Project_manager;
 
             [Column]
             public int Project_progress;
@@ -117,6 +118,9 @@ namespace simpleproject_poc.Models
 
             [Column]
             public int Project_method_id;
+
+            [Column]
+            public int Employee_id;
         }
     }
 }

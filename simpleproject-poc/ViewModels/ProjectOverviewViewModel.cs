@@ -157,6 +157,7 @@ namespace simpleproject_poc.ViewModels
             var contextCreateProjectView = (CreateProjectViewViewModel)createProjectView.DataContext;
             contextCreateProjectView.contextProjectOverviewModel = this;
             contextCreateProjectView.cmbbxProjectMethod = dtagrdProjectMethod;
+            contextCreateProjectView.SetEmployeeValues();
             createProjectView.Show();
         }
     }

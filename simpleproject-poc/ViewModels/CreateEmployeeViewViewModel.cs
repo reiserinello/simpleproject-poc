@@ -31,6 +31,21 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Kontext Projekt erstellen
+        private CreateProjectViewViewModel _contextCreateProjectViewViewModel;
+        public CreateProjectViewViewModel contextCreateProjectViewViewModel
+        {
+            get
+            {
+                return _contextCreateProjectViewViewModel;
+            }
+            set
+            {
+                _contextCreateProjectViewViewModel = value;
+                OnPropertyChanged("contextCreateProjectViewViewModel");
+            }
+        }
+
         // Alle Abteilungen anzeigen
         public void SetDepartments()
         {
@@ -183,7 +198,16 @@ namespace simpleproject_poc.ViewModels
                 dbCreateObj.EmployeeCreate(txtName, txtSurname, txtEmployeeNumber, txtWorkload, txtFunctions, selectedDepartment.Id);
 
                 // Mitarbeiterübersicht in Aktivitäterstellen View updaten
-                contextCreateActivityViewViewModel.SetEmployeeValues();
+                if (contextCreateActivityViewViewModel != null)
+                {
+                    contextCreateActivityViewViewModel.SetEmployeeValues();
+                }
+
+                // Mitarbeiterübersicht in Projekterstellen View updaten
+                if (contextCreateProjectViewViewModel != null)
+                {
+                    contextCreateProjectViewViewModel.SetEmployeeValues();
+                }
 
                 Close?.Invoke();
             }

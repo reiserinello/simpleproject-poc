@@ -59,7 +59,7 @@ namespace simpleproject_poc.Helper
                     {
                         State projectState = (State)Enum.Parse(typeof(State), i.Project_state);
                         Priority projectPriority = (Priority)Enum.Parse(typeof(Priority), i.Priority);
-                        Project prj = new Project(i.Id,i.Project_name,i.Project_description,i.Approval_date, projectPriority, projectState, i.Planned_startdate,i.Planned_enddate,i.Startdate,i.Enddate,i.Project_manager,i.Project_progress,i.Project_documents_link,i.Project_method_id);
+                        Project prj = new Project(i.Id,i.Project_name,i.Project_description,i.Approval_date, projectPriority, projectState, i.Planned_startdate,i.Planned_enddate,i.Startdate,i.Enddate,i.Project_progress,i.Project_documents_link,i.Project_method_id,i.Employee_id);
                         obReturnList.Add(prj);
                     }
                     break;

@@ -37,7 +37,7 @@ namespace simpleproject_poc.ViewModels
         public string _lblProjectMethod;
         public State _lblProjectState;
         public int _lblProjectProgress;
-        public string _lblProjectManager;
+        //public string _lblProjectManager;
         public Nullable<DateTime> _lblApprovalDate;
         public DateTime _lblStartdatePlanned;
         public DateTime _lblEnddatePlanned;
@@ -139,6 +139,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        /*
         public string lblProjectManager
         {
             get
@@ -150,7 +151,7 @@ namespace simpleproject_poc.ViewModels
                 _lblProjectManager = value;
                 OnPropertyChanged("lblProjectManager");
             }
-        }
+        }*/
 
         public Nullable<DateTime> lblApprovalDate
         {
@@ -243,6 +244,21 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
+        // Projektleiter/in listview
+        private ObservableCollection<dynamic> _lvProjectmanager;
+        public ObservableCollection<dynamic> lvProjectmanager
+        {
+            get
+            {
+                return _lvProjectmanager;
+            }
+            set
+            {
+                _lvProjectmanager = value;
+                OnPropertyChanged("lvProjectmanager");
+            }
+        }
+
         // Projektwerte setzen
         public void SetProjectValues()
         {
@@ -256,7 +272,7 @@ namespace simpleproject_poc.ViewModels
             lblProjectMethod = dbGetProjectMethod[0].MethodName;
             lblProjectState = _selectedProject.ProjectState;
             lblProjectProgress = _selectedProject.ProjectProgress;
-            lblProjectManager = _selectedProject.ProjectManager;
+            //lblProjectManager = _selectedProject.ProjectManager;
             lblApprovalDate = _selectedProject.ApprovalDate;
             lblStartdatePlanned = _selectedProject.PlannedStartdate;
             lblEnddatePlanned = _selectedProject.PlannedEnddate;
@@ -265,6 +281,7 @@ namespace simpleproject_poc.ViewModels
             txtProjectDocumentsLink = _selectedProject.ProjectDocumentsLink;
             txtbProjectDescription = _selectedProject.ProjectDescription;
 
+            lvProjectmanager = dbGetObj.GeneralGet("v_Employee_Department", selectedProject.EmployeeId);
             lvProjectPhase = dbGetObj.GeneralGet("v_Project_phase_Phase",_selectedProject.Id);
         }
 

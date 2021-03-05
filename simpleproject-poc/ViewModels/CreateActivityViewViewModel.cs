@@ -39,7 +39,7 @@ namespace simpleproject_poc.ViewModels
             }
         }
 
-        // Alle möglichen Mitarbeiter anzeigen
+        // Alle möglichen Mitarbeiter/innen anzeigen
         public void SetEmployeeValues()
         {
             DBGet dbGetObj = new DBGet();

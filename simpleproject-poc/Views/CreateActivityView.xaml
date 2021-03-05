@@ -15,7 +15,7 @@
         <DatePicker x:Name="datepickPlannedStartdate" HorizontalAlignment="Left" Margin="130,36,0,0" VerticalAlignment="Top" Width="200" Height="26" SelectedDate="{Binding datepickPlannedStartdate}"/>
         <DatePicker x:Name="datepickPlannedEnddate" HorizontalAlignment="Left" Margin="130,62,0,0" VerticalAlignment="Top" Width="200" Height="26" SelectedDate="{Binding datepickPlannedEnddate}"/>
         <TextBox x:Name="txtActivityDocumentsLink" HorizontalAlignment="Left" Height="26" Margin="130,88,0,0" TextWrapping="Wrap" Text="{Binding txtActivityDocumentsLink}" VerticalAlignment="Top" Width="200"/>
-        <GroupBox Header="Verantwortlicher Mitarbeiter" HorizontalAlignment="Left" Height="152" Margin="335,10,0,0" VerticalAlignment="Top" Width="447">
+        <GroupBox Header="Verantwortliche/r Mitarbeiter/in" HorizontalAlignment="Left" Height="152" Margin="335,10,0,0" VerticalAlignment="Top" Width="447">
             <Grid HorizontalAlignment="Left" Height="127" VerticalAlignment="Top" Width="437" Margin="0,0,-2,0">
                 <ListView x:Name="lvEmployee" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="437" ItemsSource="{Binding lvEmployee}">
                     <ListView.View>
