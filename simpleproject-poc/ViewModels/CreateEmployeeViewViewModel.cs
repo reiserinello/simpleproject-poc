@@ -194,6 +194,16 @@ namespace simpleproject_poc.ViewModels
             } 
             else
             {
+                if (txtWorkload > 100)
+                {
+                    // Max Pensum auf 100% setzen
+                    txtWorkload = 100;
+                } 
+                else if (txtWorkload < 10)
+                {
+                    // Minimum Pensum auf 10% setzen
+                    txtWorkload = 10;
+                }
                 DBCreate dbCreateObj = new DBCreate();
                 dbCreateObj.EmployeeCreate(txtName, txtSurname, txtEmployeeNumber, txtWorkload, txtFunctions, selectedDepartment.Id);
 

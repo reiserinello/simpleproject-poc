@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleproject_poc.Views"
         mc:Ignorable="d"
-        Title="DefinePhaseView" Height="194.454" Width="519.868">
+        Title="Phasen definieren" Height="194.454" Width="519.868">
     <Grid>
         <Label Content="Startdatum geplant:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Enddatum geplant:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
