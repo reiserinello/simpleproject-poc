@@ -31,20 +31,19 @@ namespace simpleproject_poc.ViewModels
         }
 
         #region Project
-        public int _lblProjectKey;
-        public string _lblProjectName;
-        public Priority _lblPriority;
-        public string _lblProjectMethod;
-        public State _lblProjectState;
-        public int _lblProjectProgress;
-        //public string _lblProjectManager;
-        public Nullable<DateTime> _lblApprovalDate;
-        public DateTime _lblStartdatePlanned;
-        public DateTime _lblEnddatePlanned;
-        public Nullable<DateTime> _lblStartdate;
-        public Nullable<DateTime> _lblEnddate;
-        public string _txtProjectDocumentsLink;
-        public string _txtbProjectDescription;
+        private int _lblProjectKey;
+        private string _lblProjectName;
+        private Priority _lblPriority;
+        private string _lblProjectMethod;
+        private State _lblProjectState;
+        private int _lblProjectProgress;
+        private Nullable<DateTime> _lblApprovalDate;
+        private DateTime _lblStartdatePlanned;
+        private DateTime _lblEnddatePlanned;
+        private Nullable<DateTime> _lblStartdate;
+        private Nullable<DateTime> _lblEnddate;
+        private string _txtProjectDocumentsLink;
+        private string _txtbProjectDescription;
 
         // Ausgewähltes Projekt
         Project _selectedProject;
@@ -138,20 +137,6 @@ namespace simpleproject_poc.ViewModels
                 OnPropertyChanged("lblProjectProgress");
             }
         }
-
-        /*
-        public string lblProjectManager
-        {
-            get
-            {
-                return _lblProjectManager;
-            }
-            set
-            {
-                _lblProjectManager = value;
-                OnPropertyChanged("lblProjectManager");
-            }
-        }*/
 
         public Nullable<DateTime> lblApprovalDate
         {
@@ -272,7 +257,6 @@ namespace simpleproject_poc.ViewModels
             lblProjectMethod = dbGetProjectMethod[0].MethodName;
             lblProjectState = _selectedProject.ProjectState;
             lblProjectProgress = _selectedProject.ProjectProgress;
-            //lblProjectManager = _selectedProject.ProjectManager;
             lblApprovalDate = _selectedProject.ApprovalDate;
             lblStartdatePlanned = _selectedProject.PlannedStartdate;
             lblEnddatePlanned = _selectedProject.PlannedEnddate;
