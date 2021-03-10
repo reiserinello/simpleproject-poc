@@ -1,0 +1,75 @@
+﻿<Window x:Class="simpleproject_poc.Views.ProjectView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:simpleproject_poc.Views"
+        mc:Ignorable="d"
+        Title="SimpleProject - Projektansicht" Height="636.168" Width="810.713">
+    <Grid>
+        <GroupBox x:Name="grpbxProjectInformation" Header="Projektinformationen" HorizontalAlignment="Left" Height="367" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
+            <Grid x:Name="grdProjectInformation" HorizontalAlignment="Left" Height="333" Margin="10,10,-2,0" VerticalAlignment="Top" Width="753">
+                <Label Content="Projektkey:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="lblProjectKey" Content="{Binding lblProjectKey}" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Top" Width="148" Height="26"/>
+                <Label Content="Projekttitel:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,26,0,0"/>
+                <Label x:Name="lblProjectName" Content="{Binding lblProjectName}" HorizontalAlignment="Left" Margin="120,26,0,0" VerticalAlignment="Top" Width="148" Height="26"/>
+                <Label Content="Priorität:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"/>
+                <Label x:Name="lblPriority" Content="{Binding lblPriority}" HorizontalAlignment="Left" Margin="120,52,0,0" VerticalAlignment="Top" Width="148" Height="26"/>
+                <Label Content="Vorgehensmodell:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,78,0,0"/>
+                <Label x:Name="lblProjectMethod" Content="{Binding lblProjectMethod}" HorizontalAlignment="Left" Margin="120,78,0,0" VerticalAlignment="Top" Width="148" Height="26"/>
+                <Label Content="Projektstatus:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,104,0,0"/>
+                <Label Content="Projektfortschritt:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,130,0,0"/>
+                <Label Content="Projektleiter/in:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="273,26,0,0" Width="104"/>
+                <Label x:Name="lblProjectState" Content="{Binding lblProjectState}" HorizontalAlignment="Left" Margin="120,104,0,0" VerticalAlignment="Top" Width="148" Height="26"/>
+                <Label x:Name="lblProjectProgress" Content="{Binding lblProjectProgress}" HorizontalAlignment="Left" Margin="120,130,0,0" VerticalAlignment="Top" Width="148" Height="26"/>
+                <Label Content="Freigabedatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,156,0,0"/>
+                <Label Content="Startdatum geplant:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,182,0,0"/>
+                <Label Content="Enddatum geplant:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,208,0,0"/>
+                <Label Content="Startdatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,234,0,0"/>
+                <Label Content="Enddatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,260,0,0"/>
+                <Label Content="Dokumentablage:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="273,0,0,0"/>
+                <Label Content="Projektbeschrieb:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="273,145,0,0"/>
+                <Label x:Name="lblApprovalDate" Content="{Binding lblApprovalDate}" HorizontalAlignment="Left" Margin="120,156,0,0" VerticalAlignment="Top" Width="148" Height="26" ContentStringFormat="dd.MM.yyyy"/>
+                <Label x:Name="lblStartdatePlanned" Content="{Binding lblStartdatePlanned}" HorizontalAlignment="Left" Margin="120,182,0,0" VerticalAlignment="Top" Width="148" Height="26" ContentStringFormat="dd.MM.yyyy"/>
+                <Label x:Name="lblEnddatePlanned" Content="{Binding lblEnddatePlanned}" HorizontalAlignment="Left" Margin="120,208,0,0" VerticalAlignment="Top" Width="148" Height="26" ContentStringFormat="dd.MM.yyyy"/>
+                <Label x:Name="lblStartdate" Content="{Binding lblStartdate}" HorizontalAlignment="Left" Margin="120,234,0,0" VerticalAlignment="Top" Width="148" Height="26" ContentStringFormat="dd.MM.yyyy"/>
+                <Label x:Name="lblEnddate" Content="{Binding lblEnddate}" HorizontalAlignment="Left" Margin="120,260,0,0" VerticalAlignment="Top" Width="148" Height="26" ContentStringFormat="dd.MM.yyyy"/>
+                <TextBox x:Name="txtProjectDocumentsLink" HorizontalAlignment="Left" Height="23" Margin="411,0,0,0" TextWrapping="Wrap" Text="{Binding txtProjectDocumentsLink}" VerticalAlignment="Top" Width="332" IsReadOnly="True"/>
+                <TextBlock x:Name="txtbProjectDescription" HorizontalAlignment="Left" Margin="293,176,0,0" TextWrapping="Wrap" Text="{Binding txtbProjectDescription}" VerticalAlignment="Top" Width="450" Height="97"/>
+                <ListView x:Name="lvProjectmanager" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="470" ItemsSource="{Binding lvProjectmanager}" Margin="273,52,0,0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="100"/>
+                            <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Surname}" Width="100"/>
+                            <GridViewColumn Header="Mitarbeiternummer" DisplayMemberBinding="{Binding EmployeeNumber}" Width="120"/>
+                            <GridViewColumn Header="Pensum" DisplayMemberBinding="{Binding Workload}" Width="100"/>
+                            <GridViewColumn Header="Funktionen" DisplayMemberBinding="{Binding Functions}" Width="100"/>
+                            <GridViewColumn Header="Abteilung" DisplayMemberBinding="{Binding DepartmentName}" Width="100"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="btnReleaseProject" Content="Freigeben" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnReleaseProject}"/>
+                <Button x:Name="btnSetProjectDates" Content="Datum setzen" HorizontalAlignment="Left" Margin="99,304,0,0" VerticalAlignment="Top" Width="84" Command="{Binding btnSetProjectDates}"/>
+                <Button x:Name="btnSetProjectState" Content="Status setzen" HorizontalAlignment="Left" Margin="198,304,0,0" VerticalAlignment="Top" Width="84" Command="{Binding btnSetProjectState}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="grpbxPhaseView" Header="Phasen" HorizontalAlignment="Left" Height="198" Margin="10,386,0,0" VerticalAlignment="Top" Width="773">
+            <Grid x:Name="grdPhaseView" HorizontalAlignment="Left" Height="172" Margin="10,0,-2,0" VerticalAlignment="Top" Width="753">
+                <ListView x:Name="lvProjectPhase" HorizontalAlignment="Left" Height="117" Margin="10,35,0,0" VerticalAlignment="Top" Width="733" ItemsSource="{Binding lvProjectPhase}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Phase" DisplayMemberBinding="{Binding PhaseName}" Width="150"/>
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding PhaseState}" Width="150"/>
+                            <GridViewColumn Header="Fortschritt" DisplayMemberBinding="{Binding PhaseProgress,StringFormat={}{0}%}" Width="120"/>
+                            <GridViewColumn Header="Startdatum geplant" DisplayMemberBinding="{Binding Path=PlannedStartdate, StringFormat='dd.MM.yyyy'}" Width="145"/>
+                            <GridViewColumn Header="Enddatum geplant" DisplayMemberBinding="{Binding Path=PlannedEnddate, StringFormat='dd.MM.yyyy'}" Width="145"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="btnOpenProjectPhase" Content="Öffnen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnOpenProjectPhase}" CommandParameter="{Binding SelectedItem,ElementName=lvProjectPhase}"/>
+                <Button x:Name="btnDefineProjectPhase"  Content="Definieren" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnDefineProjectPhase}" CommandParameter="{Binding SelectedItem,ElementName=lvProjectPhase}"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

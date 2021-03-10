@@ -1,0 +1,33 @@
+﻿<Window x:Class="simpleproject_poc.Views.ProjectMethodOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:simpleproject_poc.Views"
+        mc:Ignorable="d"
+        Title="Phasen erstellen" Height="227.895" Width="504.947">
+    <Grid>
+        <Label Content="Vorgehensmodell Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="141"/>
+        <Label x:Name="lblProjectMethodName" Content="{Binding lblProjectMethodName}" HorizontalAlignment="Left" Margin="147,10,0,0" VerticalAlignment="Top" Width="327" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.14"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.421"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <ListView x:Name="lvPhaseOverview" HorizontalAlignment="Left" Height="100" Margin="10,41,0,0" VerticalAlignment="Top" Width="465" ItemsSource="{Binding lvPhase}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Phasen Name" DisplayMemberBinding="{Binding PhaseName}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="txtNewPhase" HorizontalAlignment="Left" Height="23" Margin="100,150,0,0" TextWrapping="Wrap" Text="{Binding txtNewPhase}" VerticalAlignment="Top" Width="295"/>
+        <Label Content="Phasen Name:" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnNewPhase" Content="Hinzufügen" HorizontalAlignment="Left" Margin="400,150,0,0" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding btnNewPhase}"/>
+
+    </Grid>
+</Window>

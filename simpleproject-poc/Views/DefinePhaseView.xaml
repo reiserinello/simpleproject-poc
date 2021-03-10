@@ -1,0 +1,21 @@
+﻿<Window x:Class="simpleproject_poc.Views.DefinePhaseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:simpleproject_poc.Views"
+        mc:Ignorable="d"
+        Title="Phasen definieren" Height="194.454" Width="519.868">
+    <Grid>
+        <Label Content="Startdatum geplant:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Enddatum geplant:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <Label Content="Reviewdatum geplant:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <Label Content="Dokumentablage (Link):" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datepickPlannedStartdate" HorizontalAlignment="Left" Margin="151,10,0,0" VerticalAlignment="Top" Height="26" Width="336" SelectedDate="{Binding datepickPlannedStartdate}"/>
+        <DatePicker x:Name="datepickPlannedEnddate"  HorizontalAlignment="Left" Margin="151,36,0,0" VerticalAlignment="Top" Height="26" Width="336" SelectedDate="{Binding datepickPlannedEnddate}"/>
+        <DatePicker x:Name="datepickPlannedReviewdate" HorizontalAlignment="Left" Margin="151,62,0,0" VerticalAlignment="Top" Height="26" Width="336" SelectedDate="{Binding datepickPlannedReviewdate}"/>
+        <TextBox x:Name="txtPhaseDocumentsLink" HorizontalAlignment="Left" Height="26" Margin="151,88,0,0" TextWrapping="Wrap" Text="{Binding txtPhaseDocumentsLink}" VerticalAlignment="Top" Width="336"/>
+        <Button x:Name="btnDefinePhase" Content="Definieren" HorizontalAlignment="Left" Margin="412,119,0,0" VerticalAlignment="Top" Width="75" Command="{Binding btnDefinePhase}"/>
+
+    </Grid>
+</Window>

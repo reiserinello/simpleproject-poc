@@ -1,0 +1,33 @@
+﻿<Window x:Class="simpleproject_poc.Views.EmployeeResourceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:simpleproject_poc.Views"
+        mc:Ignorable="d"
+        Title="Personelle Resourcen" Height="396.337" Width="481.09">
+    <Grid>
+        <GroupBox Header="Funktion auswählen" HorizontalAlignment="Left" Height="163" Margin="10,10,0,0" VerticalAlignment="Top" Width="409">
+            <Grid HorizontalAlignment="Left" Height="130" Margin="10,10,0,0" VerticalAlignment="Top" Width="376">
+                <ListView x:Name="lvFunction" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="376" ItemsSource="{Binding lvFunction}" IsEnabled="{Binding CreateFieldsEnabled}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Funktion" DisplayMemberBinding="{Binding FunctionName}" Width="250"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <TextBox x:Name="txtFunctionToAdd" HorizontalAlignment="Left" Height="23" Margin="0,105,0,0" TextWrapping="Wrap" Text="{Binding txtFunctionToAdd}" VerticalAlignment="Top" Width="296" IsEnabled="{Binding CreateFieldsEnabled}"/>
+                <Button x:Name="btnAddFunction" Content="Hinzufügen" HorizontalAlignment="Left" Margin="301,105,0,0" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding btnAddFunction}"/>
+            </Grid>
+        </GroupBox>
+        <Label Content="Zeit geplant:" HorizontalAlignment="Left" Margin="10,178,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPlannedTime" HorizontalAlignment="Left" Height="26" Margin="107,178,0,0" TextWrapping="Wrap" Text="{Binding txtPlannedTime}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding CreateFieldsEnabled}"/>
+        <Label Content="Std." HorizontalAlignment="Left" Margin="424,178,0,0" VerticalAlignment="Top"/>
+        <Label Content="Zeit effektiv:" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEffectiveTime" HorizontalAlignment="Left" Height="26" Margin="107,204,0,0" TextWrapping="Wrap" Text="{Binding txtEffectiveTime}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding SetFieldsEnabled}"/>
+        <Label Content="Abweichungs-&#xD;&#xA;begründung:" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="91"/>
+        <TextBox x:Name="txtDeviation" HorizontalAlignment="Left" Height="85" Margin="107,230,0,0" TextWrapping="Wrap" Text="{Binding txtDeviation}" VerticalAlignment="Top" Width="312" IsEnabled="{Binding SetFieldsEnabled}"/>
+        <Label Content="Std." HorizontalAlignment="Left" Margin="424,204,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnCreateOrSetEmployeeResource" Content="{Binding btnCreateOrSetEmployeeResourceName}" HorizontalAlignment="Left" Margin="325,320,0,0" VerticalAlignment="Top" Width="94" Command="{Binding btnCreateOrSetEmployeeResource}" Height="20" CommandParameter="{Binding SelectedItem,ElementName=lvFunction}"/>
+    </Grid>
+</Window>
