@@ -23,7 +23,6 @@ namespace simpleproject_poc.Models
         public DateTime PlannedEnddate { get; }
         public Nullable<DateTime> Startdate { get; }
         public Nullable<DateTime> Enddate { get; }
-        //public string ProjectManager { get; }
         public int ProjectProgress { get; }
         public string ProjectDocumentsLink { get; }
         public int ProjectMethodId { get; }
@@ -106,9 +105,6 @@ namespace simpleproject_poc.Models
 
             [Column(CanBeNull = true)]
             public Nullable<DateTime> Enddate;
-
-            //[Column]
-            //public string Project_manager;
 
             [Column]
             public int Project_progress;
