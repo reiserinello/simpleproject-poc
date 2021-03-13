@@ -1,10 +1,16 @@
 # simpleproject-poc
 
+# Tool
+
+simpleproject-poc ist ein Prototyp einer Applikation zu Verwaltung von Projekten. Voraussetzung: Windows OS, .NET Framework 4.7.2 & MS SQL Server Express
+
 ## Datenbank
+
+Die Datenbank ist direkt im Tool integriert (MDF / LDF) und muss grundsätzlich nicht erstellt werden. Besteht jedoch der Bedarf die DB manuell mit den Scripts anzulegen, können diese im Ordner \sql-scripts gefunden werden.
 
 ### Ablauf DB erstellen
 
-Um die Datenbank korrekt zu erstellen, müssen die SQL Scripts in korrekter Reihenfolge ausgeführt werden.
+Um die Datenbank korrekt mit den SQL Scripts zu erstellen, müssen diese in korrekter Reihenfolge ausgeführt werden.
 
 **Step 1:**
 * CREATE_DB_simpleproject-poc.sql
